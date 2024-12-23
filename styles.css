@@ -1,4 +1,4 @@
-﻿/* ===== Font Management ===== */
+/* ===== Font Management ===== */
 
 /* Import New Font Pairings */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Open+Sans:wght@400;600&family=Montserrat:wght@400;700&family=Lora:wght@400;600&family=Raleway:wght@400;700&family=Nunito:wght@400;600&display=swap');
@@ -208,7 +208,7 @@ a:hover {
 /* Main Title */
 .main-title {
     font-family: var(--font-heading);
-    font-size: 6rem;
+    font-size: 4rem;
     font-weight: 800;
     margin-bottom: 1rem;
 }
@@ -216,7 +216,7 @@ a:hover {
 /* Sub Title */
 .sub-title {
     font-family: var(--font-heading);
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 700;
     margin-bottom: 2rem;
 }
