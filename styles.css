@@ -208,7 +208,7 @@ a:hover {
 /* Main Title */
 .main-title {
     font-family: var(--font-heading);
-    font-size: 4rem;
+    font-size: 3rem;
     font-weight: 800;
     margin-bottom: 1rem;
 }
