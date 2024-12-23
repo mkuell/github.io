@@ -208,7 +208,7 @@ a:hover {
 /* Main Title */
 .main-title {
     font-family: var(--font-heading);
-    font-size: 3rem;
+    font-size: 3.25rem;
     font-weight: 800;
     margin-bottom: 1rem;
 }
@@ -271,7 +271,7 @@ a:hover {
     padding: 2rem;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    transition: transform 1s ease, box-shadow 1s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .bio-card:hover {
@@ -298,44 +298,23 @@ a:hover {
     margin-bottom: 1rem;
 }
 
-/* Image Styling */
-.bio-image img {
-    width: 100%;
-    max-width: 400px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    position: relative;
-    z-index: 2; /* Ensures it stays above the overlay */
-}
-
-/* Content Box Styling */
-.bio-content {
-    max-width: 600px;
-    text-align: left;
-    position: relative;
-    z-index: 2; /* Ensures it stays above the overlay */
-}
-
-.bio-content h2 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    color: #fff;
-}
-
-.bio-content p {
-    font-size: 1.2rem;
-    line-height: 1.8;
-    margin-bottom: 1.5rem;
-    color: #eee;
-}
-
-/* Animation for Overlay Fade-In */
-@keyframes fadeInOverlay {
-    from {
-        opacity: 0;
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .bio-cards {
+        grid-template-columns: 1fr; /* Stack cards vertically */
+        gap: 1.5rem;
     }
-    to {
-        opacity: 2;
+
+    .bio-card {
+        padding: 1.5rem;
+    }
+
+    .bio-card h2 {
+        font-size: 1.4rem;
+    }
+
+    .bio-card p, .bio-card ul {
+        font-size: 0.9rem;
     }
 }
 
