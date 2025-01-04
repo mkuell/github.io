@@ -180,12 +180,12 @@ a:hover {
 
 .work-samples-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Flexible grid columns */
-    gap: 2rem; /* Space between items */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjusted for better flexibility */
+    gap: 2rem; /* Consistent spacing */
     max-width: 1200px;
     margin: 0 auto;
-    justify-items: center; /* Centers grid items horizontally */
-    align-items: start; /* Aligns grid items vertically */
+    justify-items: center; /* Aligns items horizontally */
+    align-items: start; /* Aligns items vertically */
 }
 
 /* Individual Work Sample */
@@ -195,6 +195,9 @@ a:hover {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column; /* Ensures proper stacking of content */
+    align-items: stretch; /* Prevents content collapse */
 }
 
 .work-sample:hover {
@@ -220,7 +223,7 @@ a:hover {
     border: none;
 }
 
-/* Ensure responsive alignment of text */
+/* Overlay for Video Play Button */
 .work-sample-overlay {
     position: absolute;
     top: 50%;
@@ -229,13 +232,24 @@ a:hover {
     color: #fff;
     font-size: 1.5rem;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
-    pointer-events: none; /* Ensures it doesn't block iframe clicks */
+    pointer-events: none; /* Ensures overlay doesn’t block clicks */
 }
 
 /* Responsive Design for Small Screens */
 @media (max-width: 768px) {
     .work-samples-grid {
-        grid-template-columns: 1fr; /* Single column for small screens */
+        grid-template-columns: 1fr; /* Single column layout on smaller screens */
+    }
+
+    .work-sample {
+        width: 100%; /* Ensures grid items span full width */
+    }
+}
+
+/* Responsive Design for Very Large Screens */
+@media (min-width: 1200px) {
+    .work-samples-grid {
+        grid-template-columns: repeat(3, 1fr); /* Locks into 3 columns for ultra-wide screens */
     }
 }
 
