@@ -53,6 +53,12 @@ body {
     transition: background-color var(--transition-duration) ease, color var(--transition-duration) ease;
 }
 
+iframe {
+    border: none; /* Removes border by default */
+    border-radius: 8px; /* Adds optional rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
+}
+
 /* Headings */
 h1, h2, h3, h4 {
     font-family: var(--font-heading); /* Reference heading font variable */
