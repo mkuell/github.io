@@ -180,9 +180,9 @@ a:hover {
 
 .work-samples-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjusted for better flexibility */
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Adjusted for better flexibility */
     gap: 2rem; /* Consistent spacing */
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
     justify-items: center; /* Aligns items horizontally */
     align-items: start; /* Aligns items vertically */
@@ -202,7 +202,7 @@ a:hover {
 
 .work-sample:hover {
     transform: translateY(-5px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0.2, 0.2); /* Subtle shadow only on hover */
+    box-shadow: 0 1px 2px rgba(0, 0, 0.9, 0.9); /* Subtle shadow only on hover */
 }
 
 /* Video Wrapper */
@@ -221,7 +221,7 @@ a:hover {
     width: 100%;
     height: 100%;
     border: none; /* Removes iframe border */
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); /* Optional subtle shadow on the iframe itself */
+    box-shadow: 0 1px 2px rgba(0, 0, 0.9, 0.9); /* Optional subtle shadow on the iframe itself */
 }
 
 /* Overlay for Video Play Button */
