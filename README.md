@@ -4,6 +4,8 @@ https://www.linkedin.com/in/mikekuell/
 
 https://vimeo.com/jetpak
 
+https://www.instagram.com/michael_kuell/
+
 Bio: Michael Kuell is a Creative Producer with over 15 years of experience in video production and storytelling.
 He specializes in taking a client’s vision, turning it into a clear plan, and bringing it to life in a way that truly resonates.
 Michael has worked across healthcare, finance, tech, and more, managing everything from live-action documentaries to corporate campaigns. 
