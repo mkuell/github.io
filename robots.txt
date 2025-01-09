@@ -1,4 +1,10 @@
+# Allow all search engines to crawl the entire site
 User-agent: *
 Allow: /
+
+# Disallow access to test environments or sensitive directories
 Disallow: /test/
+Disallow: /private/
+
+# Sitemap URL for better indexing
 Sitemap: https://michaelkuell.com/sitemap.xml
