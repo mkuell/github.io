@@ -435,7 +435,7 @@ a:hover {
 .bio-card h2 {
     font-size: 1.8rem;
     margin-bottom: .8rem;
-    color: var(--color-text); /* Improved contrast */
+    color: #333
 }
 
 .bio-card p, .bio-card ul {
