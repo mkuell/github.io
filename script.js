@@ -10,6 +10,20 @@ document.addEventListener('DOMContentLoaded', () => {
     if (yearSpan) {
         yearSpan.textContent = new Date().getFullYear();
     }
+
+    // Smooth Scroll for Logo
+    const logoLink = document.getElementById('logo-link');
+    if (logoLink) {
+        logoLink.addEventListener('click', (e) => {
+            e.preventDefault(); // Prevent default navigation
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth' // Smooth scroll to the top
+            });
+            // Optionally update the URL without reloading
+            history.pushState(null, null, '/');
+        });
+    }
 });
 
 // Dark Mode Toggle
