@@ -500,7 +500,7 @@ a:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.2); /* Subtle dark overlay */
+    background: rgba(25, 25, 25, 0.2); /* Subtle dark overlay */
     z-index: 1;
     animation: fadeInOverlay 3s ease-in-out forwards; /* Fade-in animation */
 }
@@ -596,9 +596,9 @@ a:hover {
 }
 
 .contact-icon {
-    width: 50px;
+    width: 35px;
     height: auto;
-    margin: 0 6px;
+    margin: 0 4px;
     vertical-align: middle;
 }
 
