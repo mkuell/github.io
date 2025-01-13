@@ -2,7 +2,8 @@ Personal Website and Online Video Portfolio for <strong>Producer and Director Mi
 
 +++++++++++++++++
 
-🙋‍♂️ About Me
+🙋‍♂️ About Me -
+
 I am a Creative Producer with over 15 years of experience in video production and storytelling.
 
 I have worked across <strong>healthcare, finance, education, tech,</strong> and more, managing everything from <strong>live-action documentaries to corporate campaigns.</strong>
