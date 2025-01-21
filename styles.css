@@ -1,0 +1,589 @@
+/* ===== Font Management ===== */
+
+/* Import New Font Pairings */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Open+Sans:wght@400;600&family=Montserrat:wght@400;700&family=Lora:wght@400;600&family=Raleway:wght@400;700&family=Nunito:wght@400;700&display=swap');
+
+/* ===== CSS Variables ===== */
+:root {
+    /* Font Families */
+    --font-heading: 'Raleway', Arial, sans-serif;
+    --font-body: 'Nunito', Arial, sans-serif;
+
+    /* Colors */
+    --color-background-dark: #3b3b3b;
+    --color-background-light: #edf0f2;
+    --color-text-dark: #edf0f2;
+    --color-text-light: #333333;
+    --color-accent: #545454;
+    --color-muted: #9a9a9a;
+
+    /* Transition & Layout */
+    --transition-duration: 0.4s;
+    --nav-height: 50px;
+}
+
+/* ===== Dark Mode Variables ===== */
+[data-theme="dark"] {
+    --color-background: var(--color-background-dark);
+    --color-text: var(--color-text-dark);
+}
+
+[data-theme="light"] {
+    --color-background: var(--color-background-light);
+    --color-text: var(--color-text-light);
+}
+
+/* ===== General Reset ===== */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ===== Accessibility Enhancements ===== */
+a:focus, button:focus {
+    outline: 3px solid var(--color-accent);
+    border-radius: 4px;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 18px; /* Adjust base font size */
+}
+
+body {
+    font-family: var(--font-body); /* Reference body font variable */
+    background-color: var(--color-background);
+    color: var(--color-text);
+    line-height: 1.6;
+    transition: background-color var(--transition-duration) ease, color var(--transition-duration) ease;
+}
+
+iframe {
+    border: none; /* Removes border by default */
+    border-radius: 8px; /* Adds optional rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
+}
+
+/* Headings */
+h1, h2, h3, h4 {
+    font-family: var(--font-heading); /* Reference heading font variable */
+    font-weight: 700; /* Bold weight for headings */
+    color: var(--color-text);
+    text-transform: uppercase; /* Optional for headings */
+    letter-spacing: 0.05em; /* Optional for visual hierarchy */
+}
+
+/* Paragraphs */
+p {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--color-text);
+}
+
+/* ===== Site Header ===== */
+.site-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: var(--color-muted);
+    padding: 0 2rem;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: var(--nav-height);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color var(--transition-duration) ease;
+}
+
+.navbar {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo a {
+    color: var(--color-accent);
+    text-decoration: none;
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+}
+
+.nav-list {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+.nav-list li {
+    margin-left: 2rem;
+}
+
+.nav-list a {
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color var(--transition-duration) ease;
+}
+
+.nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--color-text);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* ===== Responsive Navigation ===== */
+@media (max-width: 768px) {
+    .nav-toggle {
+        display: block;
+    }
+
+    .nav-list {
+        position: absolute;
+        top: var(--nav-height);
+        right: 0;
+        background-color: var(--color-muted);
+        flex-direction: column;
+        width: 200px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height var(--transition-duration) ease;
+    }
+
+    .nav-list.active {
+        max-height: 500px;
+    }
+
+    .nav-list li {
+        margin: 1rem 0;
+        text-align: right;
+        margin-right: 1.5rem;
+    }
+
+    .work-samples-grid {
+        grid-template-columns: 1fr; /* Single-column layout on smaller screens */
+    }
+
+    .work-sample {
+        margin-bottom: 1.5rem; /* Reduce spacing for smaller screens */
+    }
+
+    .video-wrapper {
+        max-width: 85%; /* Expand video width to 85% on smaller screens */
+    }
+
+    .testimonials-grid, .bio-cards {
+        grid-template-columns: 1fr; /* Single-column layout on smaller screens */
+    }
+
+    .testimonial-card, .bio-card {
+        margin: 0 auto; /* Center cards on smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .video-wrapper {
+        max-width: 100%; /* Full width on very small screens */
+    }
+}
+
+/* ===== Work Samples Section ===== */
+.work-samples-section {
+    background-color: var(--color-muted);
+    padding: 4rem 2rem;
+    max-width: 1200px; /* Restrict section width */
+    margin: 0 auto;
+}
+
+.work-samples-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Increased min width for better balance */
+    gap: 2rem; /* Consistent spacing between grid items */
+    justify-items: center; /* Aligns items horizontally */
+    align-items: start; /* Aligns items vertically */
+}
+
+/* Individual Work Sample */
+.work-sample {
+    background-color: var(--color-bg-light, #ababab); /* Default to a light background */
+    border-radius: 8px; /* Slight rounding for cleaner visuals */
+    box-shadow: none; /* No shadow by default */
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column; /* Stacks content vertically */
+    align-items: stretch; /* Prevents collapse */
+    margin-bottom: 2rem; /* Adds vertical spacing between items when stacked */
+}
+
+.work-sample:hover {
+    transform: translateY(-5px); /* Subtle hover effect */
+    box-shadow: 0 8px 16px rgba(0, 0, 50, 0.4); /* Soft shadow on hover */
+}
+
+/* Video Wrapper */
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+    overflow: hidden;
+    width: 100%;
+    max-width: 95%; /* Limit video size to 95% of the container width */
+    margin: 0 auto; /* Center the video horizontally */
+}
+
+/* Styling for Embedded Videos */
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none; /* Removes iframe border */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .work-samples-grid {
+        grid-template-columns: 1fr; /* Single-column layout on smaller screens */
+    }
+
+    .work-sample {
+        margin-bottom: 1.5rem; /* Reduce spacing for smaller screens */
+    }
+
+    .video-wrapper {
+        max-width: 85%; /* Expand video width to 85% on smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .video-wrapper {
+        max-width: 100%; /* Full width on very small screens */
+    }
+}
+
+/* ===== Cover Page Section ===== */
+.cover-page {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Background Video */
+.background-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1;
+    transform: translate(-50%, -50%);
+    background-size: cover;
+}
+
+/* Text Overlay */
+.overlay {
+    padding: 0 2rem;
+    z-index: 2; /* Ensure text is above the background video */
+}
+
+/* Text Gradient Styling */
+.main-title, .sub-title, .cta-text {
+    background: linear-gradient(180deg, #666, #fff); /* Dark-to-light gradient */
+    -webkit-background-clip: text; /* Clip the gradient to the text */
+    -webkit-text-fill-color: transparent; /* Make text transparent to show gradient */
+    text-shadow: none; /* Remove text shadow for clean effect */
+}
+
+/* Main Title */
+.main-title {
+    font-family: var(--font-heading);
+    font-size: 3.25rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+}
+
+/* Sub Title */
+.sub-title {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+}
+
+/* Call-to-Action Text */
+.cta-text {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+/* ===== Testimonials Section ===== */
+.testimonials-section {
+    background-color: var(--color-background);
+    padding: 4rem 2rem;
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjusted for better flexibility */
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    justify-items: center; /* Centers grid items horizontally */
+}
+
+.testimonial-card {
+    background-color: var(--color-muted);
+    padding: 2rem;
+    border-radius: 12px; /* Slightly increased rounding for modern look */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); /* Softer default shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-10px); /* More noticeable hover effect */
+    box-shadow: 0 10px 18px rgba(0, 0, 50, 0.3); /* Increased shadow for hover */
+}
+
+.testimonial-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    border: 3px solid var(--color-background-light); /* Optional border for emphasis */
+}
+
+.testimonial-card p {
+    font-size: 1rem;
+    color: var(--color-text);
+    line-height: 1.6;
+}
+
+/* ===== Bio Section ===== */
+.bio-section {
+    background: url('assets/images/MK_background.jpg') center center / cover no-repeat fixed; /* Parallax effect */
+    padding: 4rem 2rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    overflow: hidden; /* Ensures no extra content spills */
+}
+
+/* Background Overlay */
+.bio-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.25); /* Subtle dark overlay */
+    z-index: 1;
+    animation: fadeInOverlay 2.5s ease-in-out forwards; /* Smooth fade-in effect */
+}
+
+/* Bio Cards Layout */
+.bio-cards {
+    position: relative;
+    z-index: 2; /* Ensures cards are above the overlay */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* More flexible for smaller screens */
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Individual Cards with Transparency and Blur */
+.bio-card {
+    background: rgba(200, 205, 217, 0.6); /* Slightly more opaque for better readability */
+    backdrop-filter: blur(8px); /* Subtle blur effect */
+    padding: 2rem;
+    border-radius: 12px; /* Increased rounding for a more modern look */
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3); /* Enhanced shadow for better depth */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.bio-card:hover {
+    transform: translateY(-10px); /* More balanced hover effect */
+    box-shadow: 0 10px 20px rgba(0, 50, 100, 0.4); /* More prominent shadow on hover */
+}
+
+/* Card Typography */
+.bio-card h2 {
+    font-size: 1.8rem;
+    margin-bottom: .8rem;
+    color: var(--color-text-dark); /* Improved contrast */
+}
+
+.bio-card p, .bio-card ul {
+    font-size: 1rem;
+    color: var(--color-text);
+    line-height: 1.6;
+}
+
+.bio-card ul {
+    list-style: disc;
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .bio-cards {
+        grid-template-columns: 1fr; /* Stack cards vertically */
+        gap: 1.5rem;
+    }
+
+    .bio-card {
+        padding: 1.5rem;
+    }
+
+    .bio-card h2 {
+        font-size: 1.4rem;
+    }
+
+    .bio-card p, .bio-card ul {
+        font-size: 0.9rem;
+    }
+}
+
+/* ===== Contact Section ===== */
+.contact-section {
+    position: relative;
+    height: 100vh; /* Fullscreen height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+.contact-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(25, 25, 25, 0.2); /* Subtle dark overlay */
+    z-index: 1;
+    animation: fadeInOverlay 3s ease-in-out forwards; /* Fade-in animation */
+}
+
+.contact-background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1; /* Keeps video behind content */
+}
+
+.contact-video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Ensures video stays in the background */
+}
+
+.background-contact-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.contact-text-box {
+    position: relative;
+    background-color: rgba(100, 100, 150, 0.5); /* Semi-transparent teal box */
+    padding: 1rem;
+    border-radius: 12px; /* Rounded corners for modern look */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+    z-index: 2; /* Ensures it appears above the video background */
+    max-width: 800px;
+    margin: 0 auto;
+    color: #fff; /* White text for contrast */
+    text-align: center;
+}
+
+.contact-section h2 {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Contact Info Styling */
+.contact-section .contact-info p, 
+.contact-section .contact-info a {
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-decoration: none;
+    margin-bottom: 1rem;
+    color: #fff; /* Fallback for gradient text */
+    transition: color var(--transition-duration) ease;
+}
+
+.contact-section .contact-info a:hover {
+    color: var(--color-accent); /* Accent color on hover */
+}
+
+/* ===== Footer ===== */
+.site-footer {
+    background-color: var(--color-muted);
+    padding: 1rem 2rem;
+    text-align: center;
+    color: var(--color-text);
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.site-footer p {
+    margin: 0;
+}
+
+.site-footer a {
+    margin: 0 0.5rem;
+    display: inline-block;
+}
+
+.contact-icon {
+    width: 35px;
+    height: auto;
+    margin: 0 4px;
+    vertical-align: middle;
+}
+
+/* ===== Animations ===== */
+@keyframes fadeInOverlay {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
