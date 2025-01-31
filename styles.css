@@ -1,13 +1,25 @@
 /* ===== Font Management ===== */
 
 /* Import New Font Pairings */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Open+Sans:wght@400;600&family=Montserrat:wght@400;700&family=Lora:wght@400;600&family=Raleway:wght@400;700&family=Nunito:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&family=Nunito:wght@400;700&display=swap');
 
 /* ===== CSS Variables ===== */
 :root {
     /* Font Families */
     --font-heading: 'Raleway', Arial, sans-serif;
     --font-body: 'Nunito', Arial, sans-serif;
+
+/* Apply font-display: swap for performance */
+body {
+    font-family: var(--font-body);
+    font-display: swap;
+}
+    
+h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    text-transform: uppercase;
+}
 
     /* Colors */
     --color-background-dark: #3b3b3b;
@@ -221,7 +233,7 @@ p {
     border-radius: 8px; /* Slight rounding for cleaner visuals */
     box-shadow: none; /* No shadow by default */
     overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease;
     display: flex;
     flex-direction: column; /* Stacks content vertically */
     align-items: stretch; /* Prevents collapse */
@@ -360,11 +372,6 @@ p {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.testimonial-card:hover {
-    transform: translateY(-10px); /* More noticeable hover effect */
-    box-shadow: 0 10px 18px rgba(0, 0, 50, 0.3); /* Increased shadow for hover */
-}
-
 .testimonial-image {
     width: 80px;
     height: 80px;
@@ -425,11 +432,6 @@ p {
     border-radius: 12px; /* Increased rounding for a more modern look */
     box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3); /* Enhanced shadow for better depth */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.bio-card:hover {
-    transform: translateY(-10px); /* More balanced hover effect */
-    box-shadow: 0 10px 20px rgba(0, 50, 100, 0.4); /* More prominent shadow on hover */
 }
 
 /* Card Typography */
