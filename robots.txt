@@ -5,6 +5,9 @@ Allow: /
 # Disallow access to test environments or sensitive directories
 Disallow: /test/
 Disallow: /private/
+Disallow: /admin/
+Disallow: /login/
+Disallow: /search/
 
 # Sitemap URL for better indexing
 Sitemap: https://michaelkuell.com/sitemap.xml
