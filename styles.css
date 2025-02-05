@@ -256,6 +256,11 @@ p {
     margin: 0 auto; /* Center the video horizontally */
 }
 
+/* Custom styling for vertical YouTube Shorts (9:16 aspect ratio) */
+.video-wrapper.vertical {
+  padding-bottom: 177.78%; /* (16/9) * 100% ≈ 177.78% */
+}
+
 /* Styling for Embedded Videos */
 .video-wrapper iframe {
     position: absolute;
