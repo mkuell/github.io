@@ -214,7 +214,7 @@ p {
 /* ===== Case Studies Section ===== */
 .case-studies-section {
   background-color: var(--color-background-dark);
-  padding: 1rem 1rem;
+  padding: 2rem 1rem;
   max-width: 1200px;
   margin: 2rem auto; /* Separates this section from others */
 }
