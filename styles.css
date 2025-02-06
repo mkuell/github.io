@@ -211,6 +211,63 @@ p {
     }
 }
 
+/* ===== Case Studies Section ===== */
+.case-studies-section {
+  background-color: var(--color-background-light); /* Or choose a background that suits your design */
+  padding: 4rem 2rem;
+  max-width: 1200px;
+  margin: 2rem auto; /* Separates this section from others */
+}
+
+.case-studies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  justify-items: center;
+  align-items: start;
+}
+
+/* Case Studies Navigation (Optional) */
+.case-studies-nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem 0;
+}
+
+.case-studies-nav a {
+  text-decoration: none;
+  color: var(--color-text);
+  font-weight: bold;
+  transition: color var(--transition-duration) ease;
+}
+
+.case-studies-nav a:hover,
+.case-studies-nav a:focus {
+  color: var(--color-accent);
+}
+
+/* Case Study Titles & Descriptions */
+.case-study-title {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  margin: 1rem 0 0.5rem;
+  text-align: center;
+}
+
+.case-study-description {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  text-align: center;
+  margin: 0;
+}
+
+/* Maintain Vertical Video Aspect Ratio */
+.video-wrapper.vertical {
+  padding-bottom: 177.78%; /* 9:16 aspect ratio (calculated as 100 * 16/9) */
+}
+
 /* ===== Work Samples Section ===== */
 .work-samples-section {
     background-color: var(--color-muted);
