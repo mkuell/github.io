@@ -213,8 +213,8 @@ p {
 
 /* ===== Case Studies Section ===== */
 .case-studies-section {
-  background-color: var(--color-background-light); /* Or choose a background that suits your design */
-  padding: 4rem 2rem;
+  background-color: var(--color-background-dark);
+  padding: 1rem 1rem;
   max-width: 1200px;
   margin: 2rem auto; /* Separates this section from others */
 }
