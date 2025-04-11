@@ -57,8 +57,11 @@ const navLinks = document.querySelectorAll('.nav-list a');
 if (navToggle && navList) {
     navToggle.addEventListener('click', () => {
         navList.classList.toggle('active');
-        navToggle.textContent = navList.classList.contains('active') ? '✖️' : '☰';
+        const isActive = navList.classList.contains('active');
+        navToggle.textContent = isActive ? '✖️' : '☰';
+        navToggle.setAttribute('aria-expanded', isActive);
     });
+    navToggle.setAttribute('aria-expanded', 'false');
 
     // Close mobile menu when a navigation link is clicked
     navLinks.forEach(link => {
@@ -66,6 +69,7 @@ if (navToggle && navList) {
             if (navList.classList.contains('active')) {
                 navList.classList.remove('active');
                 navToggle.textContent = '☰';
+                navToggle.setAttribute('aria-expanded', false);
             }
         });
     });

@@ -58,7 +58,6 @@ body {
     color: var(--color-text);
     line-height: 1.6;
     transition: background-color var(--transition-duration) ease, color var(--transition-duration) ease;
-    /* Note: "font-display: swap" is not a standard CSS property; ensure it is supported or remove it */
 }
 
 h1, h2, h3, h4 {
@@ -515,4 +514,38 @@ p {
 @keyframes fadeInOverlay {
     from { opacity: 0; }
     to { opacity: 1; }
+}
+
+/* ===== Socials ===== */
+.social-highlights-section {
+    padding: 40px 20px;
+    background-color: var(--color-background-light);
+}
+
+.social-highlights-section .embed-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.social-highlights-section .embed-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.social-highlights-section .embed-item iframe,
+.social-highlights-section .embed-item embed,
+.social-highlights-section .embed-item object {
+    width: 100%;
+    max-width: 100%;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .social-highlights-section .embed-grid {
+        grid-template-columns: 1fr;
+    }
 }
