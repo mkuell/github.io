@@ -69,6 +69,11 @@ body.loaded {
     opacity: 1;
 }
 
+/* Offset anchor scrolling to account for fixed header */
+section[id] {
+    scroll-margin-top: var(--nav-height);
+}
+
 h1, h2, h3, h4 {
     font-family: var(--font-heading);
     font-weight: 700;
