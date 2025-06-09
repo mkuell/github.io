@@ -138,6 +138,12 @@ p {
     transition: color var(--transition-duration) ease;
 }
 
+/* Active navigation link */
+.nav-list a.active {
+    color: var(--color-accent);
+    font-weight: bold;
+}
+
 .nav-toggle {
     display: none;
     background: none;
