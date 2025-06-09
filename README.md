@@ -16,3 +16,7 @@ https://www.linkedin.com/in/mikekuell/  +
 https://vimeo.com/jetpak  +
 https://www.instagram.com/michael_kuell/  +
 
+
+## Testing
+
+Run `npm test` to lint `index.html` using HTMLHint.
