@@ -2,7 +2,7 @@
 
 // Wait for the DOM to load
 document.addEventListener('DOMContentLoaded', () => {
-    // Add 'loaded' class to body for fade-in effect
+    // Add 'loaded' class so the CSS fade-in effect can start
     document.body.classList.add('loaded');
 
     // Dynamic Year in Footer

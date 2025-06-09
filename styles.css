@@ -57,7 +57,16 @@ body {
     background-color: var(--color-background);
     color: var(--color-text);
     line-height: 1.6;
-    transition: background-color var(--transition-duration) ease, color var(--transition-duration) ease;
+    /* Fade-in effect triggered when the `.loaded` class is added in script.js */
+    opacity: 0;
+    transition: opacity var(--transition-duration) ease,
+                background-color var(--transition-duration) ease,
+                color var(--transition-duration) ease;
+}
+
+/* Final state once the page has loaded */
+body.loaded {
+    opacity: 1;
 }
 
 h1, h2, h3, h4 {
