@@ -191,6 +191,17 @@ p {
         text-align: right;
         margin-right: 1.5rem;
     }
+
+    /* Dark mode toggle inside mobile menu */
+    #theme-toggle {
+        display: none;
+        margin-right: 1.5rem;
+        text-align: right;
+    }
+
+    .nav-list.active #theme-toggle {
+        display: block;
+    }
 }
 
 /* ===== Work Samples Section ===== */

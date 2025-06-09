@@ -66,8 +66,8 @@ const navLinks = document.querySelectorAll('.nav-list a');
 
 if (navToggle && navList) {
     navToggle.addEventListener('click', () => {
-        navList.classList.toggle('active');
-        const isActive = navList.classList.contains('active');
+        const isActive = navList.classList.toggle('active');
+        navToggle.classList.toggle('active', isActive);
         navToggle.textContent = isActive ? '✖️' : '☰';
         navToggle.setAttribute('aria-expanded', isActive);
     });
@@ -78,6 +78,7 @@ if (navToggle && navList) {
         link.addEventListener('click', () => {
             if (navList.classList.contains('active')) {
                 navList.classList.remove('active');
+                navToggle.classList.remove('active');
                 navToggle.textContent = '☰';
                 navToggle.setAttribute('aria-expanded', false);
             }
