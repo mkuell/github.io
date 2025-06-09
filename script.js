@@ -85,3 +85,24 @@ document.querySelectorAll('.bio-toggle').forEach(btn => {
         btn.textContent = expanded ? 'Show Less' : 'Read More';
     });
 });
+
+// Scroll-spy using Intersection Observer
+if (navLinks.length > 0) {
+    const sections = Array.from(navLinks)
+        .map(link => document.querySelector(link.hash))
+        .filter(Boolean);
+
+    const observerOptions = { threshold: 0.6 };
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.id;
+                navLinks.forEach(link => {
+                    link.classList.toggle('active', link.hash === `#${id}`);
+                });
+            }
+        });
+    }, observerOptions);
+
+    sections.forEach(section => observer.observe(section));
+}
