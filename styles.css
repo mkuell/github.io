@@ -83,6 +83,11 @@ p {
     color: var(--color-text);
 }
 
+[data-aos] {
+    opacity: 1;
+    transform: none;
+}
+
 /* ===== Site Header ===== */
 .site-header {
     /* Sticky navigation that remains visible as the page scrolls */
