@@ -562,7 +562,8 @@ p {
 
 .contact-text-box {
     position: relative;
-    background-color: rgba(100, 100, 150, 0.5);
+    /* Deeper blue for better contrast on light and dark backgrounds */
+    background-color: rgba(50, 75, 150, 0.8);
     padding: 1rem;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
