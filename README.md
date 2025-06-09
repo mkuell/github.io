@@ -17,4 +17,5 @@ https://www.instagram.com/michael_kuell/  +
 
 ## Testing
 
-Run `npm test` to lint `index.html` using HTMLHint.
+First run `npm install`.
+Then run `npm test` to lint `index.html` with HTMLHint.
