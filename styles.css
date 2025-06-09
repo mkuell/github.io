@@ -85,10 +85,11 @@ p {
 
 /* ===== Site Header ===== */
 .site-header {
-    position: fixed;
+    /* Sticky navigation that remains visible as the page scrolls */
+    position: sticky;
     top: 0;
     width: 100%;
-    background-color: var(--color-muted);
+    background-color: rgba(154, 154, 154, 0.9); /* slightly opaque */
     padding: 0 2rem;
     z-index: 1000;
     display: flex;
@@ -97,6 +98,7 @@ p {
     height: var(--nav-height);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: background-color var(--transition-duration) ease;
+    backdrop-filter: blur(5px);
 }
 
 .navbar {
