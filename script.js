@@ -74,3 +74,14 @@ if (navToggle && navList) {
         });
     });
 }
+
+// Bio card toggle for mobile
+document.querySelectorAll('.bio-toggle').forEach(btn => {
+    const card = btn.closest('.bio-card');
+    const content = card.querySelector('.bio-content');
+    btn.addEventListener('click', () => {
+        const expanded = card.classList.toggle('expanded');
+        btn.setAttribute('aria-expanded', expanded);
+        btn.textContent = expanded ? 'Show Less' : 'Read More';
+    });
+});
