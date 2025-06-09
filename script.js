@@ -24,6 +24,16 @@ document.addEventListener('DOMContentLoaded', () => {
             history.pushState(null, null, '/');
         });
     }
+
+    // Add or remove 'scrolled' class based on scroll position
+    const siteHeader = document.querySelector('.site-header');
+    if (siteHeader) {
+        const toggleScrolled = () => {
+            siteHeader.classList.toggle('scrolled', window.scrollY > 0);
+        };
+        window.addEventListener('scroll', toggleScrolled);
+        toggleScrolled();
+    }
 });
 
 // Dark Mode Toggle
