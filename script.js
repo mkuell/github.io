@@ -150,9 +150,21 @@ function openModal(wrapper) {
     const modal = document.getElementById('video-modal');
     const container = modal.querySelector('.modal-video-container');
     const src = `${wrapper.dataset.src}?autoplay=1`;
-    const ratio = wrapper.style.getPropertyValue('--ratio') || '16/9';
+    const ratioValue = parseFloat(wrapper.style.getPropertyValue('--ratio')) || (16 / 9);
 
-    container.style.setProperty('--modal-ratio', ratio);
+    // Calculate the largest video size that fits within the viewport
+    const vw = window.innerWidth * 0.9;
+    const vh = window.innerHeight * 0.9;
+    let width = vw;
+    let height = width / ratioValue;
+    if (height > vh) {
+        height = vh;
+        width = height * ratioValue;
+    }
+
+    container.style.width = `${width}px`;
+    container.style.height = `${height}px`;
+    container.style.setProperty('--modal-ratio', ratioValue);
     container.innerHTML = `<iframe src="${src}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen tabindex="0" title="Video player"></iframe>`;
 
     modal.hidden = false;
@@ -163,12 +175,36 @@ function openModal(wrapper) {
     if (iframe) {
         iframe.focus();
     }
+
+    // Adjust video size on viewport resize while modal is open
+    const resizeHandler = () => {
+        const vwR = window.innerWidth * 0.9;
+        const vhR = window.innerHeight * 0.9;
+        let w = vwR;
+        let h = w / ratioValue;
+        if (h > vhR) {
+            h = vhR;
+            w = h * ratioValue;
+        }
+        container.style.width = `${w}px`;
+        container.style.height = `${h}px`;
+    };
+    window.addEventListener('resize', resizeHandler);
+    container._resizeHandler = resizeHandler;
 }
 
 function closeModal() {
     const modal = document.getElementById('video-modal');
+    const container = modal.querySelector('.modal-video-container');
     modal.hidden = true;
-    modal.querySelector('.modal-video-container').innerHTML = '';
+    container.innerHTML = '';
+    container.style.width = '';
+    container.style.height = '';
+    const handler = container._resizeHandler;
+    if (handler) {
+        window.removeEventListener('resize', handler);
+        delete container._resizeHandler;
+    }
     document.body.style.overflow = '';
 }
 
