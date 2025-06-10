@@ -11,10 +11,10 @@
 
     /* Colors */
     --color-background-dark: #3b3b3b;
-    --color-background-light: ##fcfcfc;
+    --color-background-light: #fcfcfc;
     --color-text-dark: #edf0f2;
     --color-text-light: #333333;
-    --color-accent: #545454;
+    --color-accent: #0077b6;
     --color-muted: #9a9a9a;
 
     /* Transition & Layout */
@@ -113,7 +113,7 @@ p {
 }
 
 .site-header.scrolled {
-    background-color: #fff;
+    background-color: var(--color-background);
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
