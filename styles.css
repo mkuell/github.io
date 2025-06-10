@@ -626,8 +626,8 @@ p {
 
 .contact-text-box {
     position: relative;
-    /* Deeper blue for better contrast on light and dark backgrounds */
     background-color: rgba(84, 121, 232, 0.8);
+    backdrop-filter: blur(8px);
     padding: 1rem;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
