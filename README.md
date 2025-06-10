@@ -2,7 +2,7 @@ Personal Website and Online Video Portfolio for <strong>Producer and Director Mi
 
 🙋‍♂️ About Me -
 
-I am a Creative Producer with over 15 years of experience in video production and storytelling.
+I am a Creative Producer with many years of experience in video production and storytelling.
 
 I have worked across <strong>healthcare, finance, education, tech,</strong> and more, managing everything from <strong>live-action documentaries to corporate campaigns.</strong>
 Along the way, I have mastered the art of balancing big-picture strategy with the nitty-gritty details like scheduling and budgets.
@@ -13,9 +13,3 @@ My focus is on making the process as smooth as possible for everyone involved wh
 https://www.linkedin.com/in/mikekuell/  +
 https://vimeo.com/jetpak  +
 https://www.instagram.com/michael_kuell/  +
-
-
-## Testing
-
-First run `npm install`.
-Then run `npm test` to lint `index.html` with HTMLHint.

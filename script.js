@@ -34,6 +34,9 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('scroll', toggleScrolled);
         toggleScrolled();
     }
+
+    // Initialize video placeholders
+    initVideoPlaceholders();
 });
 
 // Dark Mode Toggle
@@ -66,8 +69,8 @@ const navLinks = document.querySelectorAll('.nav-list a');
 
 if (navToggle && navList) {
     navToggle.addEventListener('click', () => {
-        navList.classList.toggle('active');
-        const isActive = navList.classList.contains('active');
+        const isActive = navList.classList.toggle('active');
+        navToggle.classList.toggle('active', isActive);
         navToggle.textContent = isActive ? '✖️' : '☰';
         navToggle.setAttribute('aria-expanded', isActive);
     });
@@ -78,6 +81,7 @@ if (navToggle && navList) {
         link.addEventListener('click', () => {
             if (navList.classList.contains('active')) {
                 navList.classList.remove('active');
+                navToggle.classList.remove('active');
                 navToggle.textContent = '☰';
                 navToggle.setAttribute('aria-expanded', false);
             }
@@ -116,3 +120,106 @@ if (navLinks.length > 0) {
 
     sections.forEach(section => observer.observe(section));
 }
+
+function initVideoPlaceholders() {
+    document.querySelectorAll('.video-wrapper').forEach(wrapper => {
+        const img = wrapper.querySelector('img');
+        const button = wrapper.querySelector('.play-button');
+        if (!img || !button) return;
+
+        const setRatio = () => {
+            const ratio = img.naturalWidth / img.naturalHeight;
+            if (ratio) {
+                wrapper.style.setProperty('--ratio', ratio);
+            }
+        };
+        if (img.complete) {
+            setRatio();
+        } else {
+            img.addEventListener('load', setRatio);
+        }
+
+        button.addEventListener('click', e => {
+            e.preventDefault();
+            openModal(wrapper);
+        });
+    });
+}
+
+function openModal(wrapper) {
+    const modal = document.getElementById('video-modal');
+    const container = modal.querySelector('.modal-video-container');
+    const src = `${wrapper.dataset.src}?autoplay=1`;
+    const ratioValue = parseFloat(wrapper.style.getPropertyValue('--ratio')) || (16 / 9);
+
+    // Calculate the largest video size that fits within the viewport
+    const vw = window.innerWidth * 0.9;
+    const vh = window.innerHeight * 0.9;
+    let width = vw;
+    let height = width / ratioValue;
+    if (height > vh) {
+        height = vh;
+        width = height * ratioValue;
+    }
+
+    container.style.width = `${width}px`;
+    container.style.height = `${height}px`;
+    container.style.setProperty('--modal-ratio', ratioValue);
+    container.innerHTML = `<iframe src="${src}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen tabindex="0" title="Video player"></iframe>`;
+
+    modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+
+    // Try focusing the iframe for accessibility, but fallback gracefully
+    const iframe = container.querySelector('iframe');
+    if (iframe) {
+        iframe.focus();
+    }
+
+    // Adjust video size on viewport resize while modal is open
+    const resizeHandler = () => {
+        const vwR = window.innerWidth * 0.9;
+        const vhR = window.innerHeight * 0.9;
+        let w = vwR;
+        let h = w / ratioValue;
+        if (h > vhR) {
+            h = vhR;
+            w = h * ratioValue;
+        }
+        container.style.width = `${w}px`;
+        container.style.height = `${h}px`;
+    };
+    window.addEventListener('resize', resizeHandler);
+    container._resizeHandler = resizeHandler;
+}
+
+function closeModal() {
+    const modal = document.getElementById('video-modal');
+    const container = modal.querySelector('.modal-video-container');
+    modal.hidden = true;
+    container.innerHTML = '';
+    container.style.width = '';
+    container.style.height = '';
+    const handler = container._resizeHandler;
+    if (handler) {
+        window.removeEventListener('resize', handler);
+        delete container._resizeHandler;
+    }
+    document.body.style.overflow = '';
+}
+
+// Close modal with close button
+document.querySelector('#video-modal .modal-close').addEventListener('click', closeModal);
+
+// Close modal by clicking backdrop (outside .modal-content)
+document.getElementById('video-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+});
+
+// Prevent modal close when clicking inside modal-content
+document.querySelector('#video-modal .modal-content').addEventListener('click', e => e.stopPropagation());
+
+// Keyboard ESC closes modal
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModal();
+});
