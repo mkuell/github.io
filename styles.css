@@ -302,6 +302,28 @@ p {
     outline: 2px solid #fff;
 }
 
+/* Video title overlay */
+.video-title {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 0.5rem;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    font-size: 0.9rem;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+}
+
+.video-wrapper:hover .video-title {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 /* Lightbox Modal */
 .modal {
     position: fixed;
