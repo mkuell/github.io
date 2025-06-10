@@ -102,7 +102,7 @@ if (navLinks.length > 0) {
         .map(link => document.querySelector(link.hash))
         .filter(Boolean);
 
-    const observerOptions = { threshold: 0.6 };
+    const observerOptions = { threshold: 0.25 };
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
