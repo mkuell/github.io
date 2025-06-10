@@ -3,6 +3,12 @@
 /* Import New Font Pairings */
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&family=Nunito:wght@400;700&display=swap');
 
+/* drop this anywhere in styles.css while you fix paths */
+[data-aos] {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
 /* ===== CSS Variables ===== */
 :root {
     /* Font Families */
