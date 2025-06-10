@@ -153,11 +153,16 @@ function openModal(wrapper) {
     const ratio = wrapper.style.getPropertyValue('--ratio') || '16/9';
 
     container.style.setProperty('--modal-ratio', ratio);
-    container.innerHTML = `<iframe src="${src}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
+    container.innerHTML = `<iframe src="${src}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen tabindex="0" title="Video player"></iframe>`;
 
     modal.hidden = false;
     document.body.style.overflow = 'hidden';
-    container.querySelector('iframe').focus();
+
+    // Try focusing the iframe for accessibility, but fallback gracefully
+    const iframe = container.querySelector('iframe');
+    if (iframe) {
+        iframe.focus();
+    }
 }
 
 function closeModal() {
@@ -167,8 +172,18 @@ function closeModal() {
     document.body.style.overflow = '';
 }
 
+// Close modal with close button
 document.querySelector('#video-modal .modal-close').addEventListener('click', closeModal);
-document.querySelector('#video-modal .modal-backdrop').addEventListener('click', closeModal);
+
+// Close modal by clicking backdrop (outside .modal-content)
+document.getElementById('video-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+});
+
+// Prevent modal close when clicking inside modal-content
+document.querySelector('#video-modal .modal-content').addEventListener('click', e => e.stopPropagation());
+
+// Keyboard ESC closes modal
 document.addEventListener('keydown', e => {
     if (e.key === 'Escape') closeModal();
 });
