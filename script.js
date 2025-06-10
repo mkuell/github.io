@@ -147,43 +147,50 @@ function initVideoPlaceholders() {
 }
 
 function openModal(wrapper) {
-    const modal = document.getElementById('video-modal');
+    const modal     = document.getElementById('video-modal');
     const container = modal.querySelector('.modal-video-container');
-    const src = `${wrapper.dataset.src}?autoplay=1`;
-    const ratio = wrapper.style.getPropertyValue('--ratio') || '16/9';
+    const src       = `${wrapper.dataset.src}?autoplay=1`;
+    const title     = wrapper.dataset.title || 'video player';
 
-    container.style.setProperty('--modal-ratio', ratio);
-    container.innerHTML = `<iframe src="${src}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen tabindex="0" title="Video player"></iframe>`;
+    // grab the natural aspect ratio you set on the wrapper
+    const ratio = parseFloat(wrapper.style.getPropertyValue('--ratio')) || (16/9);
 
+    // keep focus so Escape will still work
+    previousActiveElement = document.activeElement;
+
+    // ─── CALCULATE MAX SIZES ────────────────────────────────
+    const maxW = window.innerWidth  * 0.9;  // 90% of viewport width
+    const maxH = window.innerHeight * 0.9;  // 90% of viewport height
+
+    // start by sizing to the width cap
+    let width  = maxW;
+    let height = width / ratio;
+
+    // if that makes it too tall, switch to height cap
+    if (height > maxH) {
+        height = maxH;
+        width  = height * ratio;
+    }
+
+    // ─── APPLY PIXEL SIZING ─────────────────────────────────
+    container.style.width  = `${width}px`;
+    container.style.height = `${height}px`;
+
+    // ─── INJECT THE IFRAME ─────────────────────────────────
+    container.innerHTML = `
+      <iframe
+        src="${src}"
+        title="${title}"
+        aria-label="${title}"
+        frameborder="0"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowfullscreen
+        loading="lazy"
+      ></iframe>
+    `;
+
+    // ─── SHOW THE MODAL ────────────────────────────────────
     modal.hidden = false;
     document.body.style.overflow = 'hidden';
-
-    // Try focusing the iframe for accessibility, but fallback gracefully
-    const iframe = container.querySelector('iframe');
-    if (iframe) {
-        iframe.focus();
-    }
+    container.querySelector('iframe').focus();
 }
-
-function closeModal() {
-    const modal = document.getElementById('video-modal');
-    modal.hidden = true;
-    modal.querySelector('.modal-video-container').innerHTML = '';
-    document.body.style.overflow = '';
-}
-
-// Close modal with close button
-document.querySelector('#video-modal .modal-close').addEventListener('click', closeModal);
-
-// Close modal by clicking backdrop (outside .modal-content)
-document.getElementById('video-modal').addEventListener('click', function(e) {
-    if (e.target === this) closeModal();
-});
-
-// Prevent modal close when clicking inside modal-content
-document.querySelector('#video-modal .modal-content').addEventListener('click', e => e.stopPropagation());
-
-// Keyboard ESC closes modal
-document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeModal();
-});
