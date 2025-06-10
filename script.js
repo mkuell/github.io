@@ -141,18 +141,42 @@ function initVideoPlaceholders() {
 
         button.addEventListener('click', e => {
             e.preventDefault();
-            const src = `${wrapper.dataset.src}?autoplay=1`;
-            const title = wrapper.dataset.title || 'video player';
-            const iframe = document.createElement('iframe');
-            iframe.src = src;
-            iframe.title = title;
-            iframe.setAttribute('aria-label', title);
-            iframe.setAttribute('allow', 'autoplay; fullscreen; picture-in-picture');
-            iframe.setAttribute('allowfullscreen', '');
-            iframe.setAttribute('loading', 'lazy');
-            iframe.frameBorder = '0';
-            wrapper.innerHTML = '';
-            wrapper.appendChild(iframe);
+            openModal(wrapper);
         });
     });
 }
+
+let previousActiveElement = null;
+
+function openModal(wrapper) {
+    const modal = document.getElementById('video-modal');
+    const container = modal.querySelector('.modal-video-container');
+    const src = `${wrapper.dataset.src}?autoplay=1`;
+    const title = wrapper.dataset.title || 'video player';
+    const ratio = wrapper.style.getPropertyValue('--ratio') || '16/9';
+
+    previousActiveElement = document.activeElement;
+    container.style.setProperty('--modal-ratio', ratio);
+    container.innerHTML = `<iframe src="${src}" title="${title}" aria-label="${title}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>`;
+
+    modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+    container.querySelector('iframe').focus();
+}
+
+function closeModal() {
+    const modal = document.getElementById('video-modal');
+    modal.hidden = true;
+    modal.querySelector('.modal-video-container').innerHTML = '';
+    document.body.style.overflow = '';
+    if (previousActiveElement) {
+        previousActiveElement.focus();
+        previousActiveElement = null;
+    }
+}
+
+document.querySelector('#video-modal .modal-close').addEventListener('click', closeModal);
+document.querySelector('#video-modal .modal-backdrop').addEventListener('click', closeModal);
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModal();
+});

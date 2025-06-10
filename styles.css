@@ -302,6 +302,54 @@ p {
     outline: 2px solid #fff;
 }
 
+/* Lightbox Modal */
+.modal {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+}
+
+.modal-backdrop {
+    position: absolute;
+    inset: 0;
+    cursor: pointer;
+}
+
+.modal[hidden] {
+    display: none;
+}
+
+.modal-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+}
+
+.modal-video-container {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: var(--modal-ratio, 16/9);
+}
+
+.modal-video-container iframe {
+    width: 100%;
+    height: 100%;
+}
+
+.modal-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
 /* Responsive Adjustments for Work Samples */
 @media (max-width: 768px) {
     .work-samples-grid {
