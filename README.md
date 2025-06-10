@@ -19,3 +19,15 @@ https://www.instagram.com/michael_kuell/  +
 
 First run `npm install`.
 Then run `npm test` to lint `index.html` with HTMLHint.
+
+## Work Samples
+
+Video entries are defined in `index.html` using lightweight placeholders. Each
+`div.video-wrapper` stores the embed URL in a `data-src` attribute and displays a
+thumbnail image with a play button. To add a new video:
+
+1. Copy an existing block inside the Work Samples grid.
+2. Set `data-src` to the Vimeo or YouTube embed URL.
+3. Update the `<img>` source to a suitable thumbnail (`https://vumbnail.com/ID.jpg`
+   for Vimeo or `https://img.youtube.com/vi/ID/hqdefault.jpg` for YouTube).
+4. Update the `data-title`, `alt`, and `aria-label` attributes for accessibility.
