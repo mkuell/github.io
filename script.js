@@ -127,6 +127,15 @@ function initVideoPlaceholders() {
         const button = wrapper.querySelector('.play-button');
         if (!img || !button) return;
 
+        const titleText = wrapper.dataset.title;
+        if (titleText) {
+            const titleDiv = document.createElement('div');
+            titleDiv.className = 'video-title';
+            titleDiv.textContent = titleText;
+            titleDiv.setAttribute('aria-hidden', 'true');
+            wrapper.appendChild(titleDiv);
+        }
+
         const setRatio = () => {
             const ratio = img.naturalWidth / img.naturalHeight;
             if (ratio) {
