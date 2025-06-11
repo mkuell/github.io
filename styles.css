@@ -280,6 +280,21 @@ p {
     display: block;
 }
 
+.preview-iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: none;
+    pointer-events: none;
+    display: none;
+}
+
+.video-wrapper:hover .preview-iframe {
+    display: block;
+}
+
 .play-button {
     position: absolute;
     top: 50%;
