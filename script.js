@@ -132,7 +132,6 @@ function initVideoPlaceholders() {
             const titleDiv = document.createElement('div');
             titleDiv.className = 'video-title';
             titleDiv.textContent = titleText;
-            titleDiv.setAttribute('aria-hidden', 'true');
             wrapper.appendChild(titleDiv);
         }
 
@@ -152,10 +151,14 @@ function initVideoPlaceholders() {
             e.preventDefault();
             openModal(wrapper);
         });
+
+        wrapper.addEventListener('mouseenter', () => showPreview(wrapper));
+        wrapper.addEventListener('mouseleave', () => hidePreview(wrapper));
     });
 }
 
 function openModal(wrapper) {
+    hidePreview(wrapper);
     const modal = document.getElementById('video-modal');
     const container = modal.querySelector('.modal-video-container');
     const src = `${wrapper.dataset.src}?autoplay=1`;
@@ -232,3 +235,38 @@ document.querySelector('#video-modal .modal-content').addEventListener('click', 
 document.addEventListener('keydown', e => {
     if (e.key === 'Escape') closeModal();
 });
+
+function getPreviewSrc(src) {
+    if (!src) return '';
+    if (src.includes('youtube')) {
+        const idMatch = src.match(/embed\/(.*?)(\?|$)/);
+        const id = idMatch ? idMatch[1] : '';
+        return id ? `https://www.youtube.com/embed/${id}?autoplay=1&mute=1&controls=0&loop=1&start=0&end=2&playlist=${id}` : '';
+    }
+    if (src.includes('vimeo')) {
+        return `${src}?autoplay=1&muted=1&loop=1#t=0,2`;
+    }
+    return '';
+}
+
+function showPreview(wrapper) {
+    const previewSrc = getPreviewSrc(wrapper.dataset.src);
+    if (!previewSrc) return;
+    let iframe = wrapper.querySelector('.preview-iframe');
+    if (!iframe) {
+        iframe = document.createElement('iframe');
+        iframe.className = 'preview-iframe';
+        iframe.setAttribute('aria-hidden', 'true');
+        iframe.setAttribute('tabindex', '-1');
+        iframe.allow = 'autoplay; muted';
+        wrapper.appendChild(iframe);
+    }
+    iframe.src = previewSrc;
+}
+
+function hidePreview(wrapper) {
+    const iframe = wrapper.querySelector('.preview-iframe');
+    if (iframe) {
+        iframe.remove();
+    }
+}
