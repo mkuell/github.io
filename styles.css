@@ -859,3 +859,31 @@ p {
 .divider-diagonal {
     color: var(--color-accent);
 }
+
+/* ===== About & Experience Sections ===== */
+/* Improve paragraph readability while keeping global text unaffected */
+#about p,
+#experience p {
+    font-size: 18px;
+    line-height: 1.6;
+    letter-spacing: 0.5px;
+}
+
+/* Adjust typography for small screens (under 600px) */
+@media (max-width: 599px) {
+    #about p,
+    #experience p {
+        font-size: 16px;
+        line-height: 1.5;
+    }
+}
+
+/* Increase readability on very large screens (over 1200px) */
+@media (min-width: 1201px) {
+    #about p,
+    #experience p {
+        font-size: 20px;
+        line-height: 1.75;
+    }
+}
+
