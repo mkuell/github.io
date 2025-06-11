@@ -709,6 +709,45 @@ p {
     vertical-align: middle;
 }
 
+/* Interactive social icon links */
+.social-icon-link {
+    position: relative;
+}
+
+.social-icon-link img {
+    transition: transform var(--transition-duration) ease,
+                filter var(--transition-duration) ease;
+}
+
+.social-icon-link:hover img,
+.social-icon-link:focus img {
+    transform: translateY(-2px) scale(1.05);
+    filter: brightness(1.2);
+}
+
+.social-icon-link::after {
+    content: attr(aria-label);
+    position: absolute;
+    bottom: calc(100% + 0.25rem);
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--color-background);
+    color: var(--color-text);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-duration) ease;
+    z-index: 10;
+}
+
+.social-icon-link:hover::after,
+.social-icon-link:focus::after {
+    opacity: 1;
+}
+
 /* ===== Animations ===== */
 @keyframes fadeInOverlay {
     from { opacity: 0; }
