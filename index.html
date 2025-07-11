@@ -321,26 +321,6 @@
     </div>
 </section>
 
-<!-- Contact Section -->
-<section id="contact" class="contact-section" role="region" aria-labelledby="contact-heading">
-    <!-- Background Video -->
-    <div class="contact-video-container">
-        <video autoplay muted loop playsinline class="background-contact-video" aria-label="Montage of Michael Kuell's video work">
-            <source src="assets/videos/contact-video.webm" type="video/webm">
-            <source src="assets/videos/contact-video.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-    </div>
-
-    <!-- Contact Content with Text Box -->
-    <div class="contact-text-box">
-        <h2 id="contact-heading">MICHAEL KUELL</h2>
-        <div class="contact-info">
-            <p><strong>Creative Producer | Director | Visual Storyteller</strong></p>
-            <p>👇 Contact Info Below 👇</p>
-        </div>
-    </div>
-</section>
 
 <!-- Video Modal -->
 <div class="modal" id="video-modal" hidden aria-modal="true" role="dialog">
@@ -352,21 +332,24 @@
 
 <!-- Footer -->
 <footer class="site-footer" role="contentinfo">
-    <p>&copy; <span id="current-year"></span> Michael Kuell</p>
-    <p class="social-links">
-        <a href="https://www.linkedin.com/in/mikekuell" target="_blank" rel="noopener noreferrer" title="Visit Michael Kuell's LinkedIn profile" aria-label="LinkedIn" class="social-icon-link">
-            <img src="assets/images/LI-In-Bug.png" alt="LinkedIn" class="contact-icon">
-        </a>
-        <a href="https://www.instagram.com/michael_kuell/" target="_blank" rel="noopener noreferrer" title="Visit Michael Kuell's Professional Instagram profile" aria-label="Instagram" class="social-icon-link">
-            <img src="assets/images/insta.ico" alt="Instagram" class="contact-icon">
-        </a>
-        <a href="https://github.com/mkuell" target="_blank" rel="noopener noreferrer" title="Visit Michael Kuell's GitHub profile" aria-label="GitHub" class="social-icon-link">
-            <img src="assets/images/GitHub_Logo.png" alt="GitHub" class="contact-icon">
-        </a>
-        <a href="mailto:michael@michaelkuell.com" title="Email Michael Kuell">
+    <p class="footer-text">&copy; <span id="current-year"></span> Michael Kuell</p>
+    <nav class="footer-links" aria-label="Contact links">
+        <a href="mailto:michael@michaelkuell.com" class="footer-icon-link" aria-label="Email Michael Kuell">
             <img src="assets/images/email-svgrepo-com.svg" alt="Email" class="contact-icon">
         </a>
-    </p>
+        <a href="tel:+1234567890" class="footer-icon-link" aria-label="Call Michael Kuell">
+            <span class="phone-icon" aria-hidden="true">&#9742;</span>
+        </a>
+        <a href="https://www.linkedin.com/in/mikekuell" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="footer-icon-link">
+            <img src="assets/images/LI-In-Bug.png" alt="LinkedIn" class="contact-icon">
+        </a>
+        <a href="https://www.instagram.com/michael_kuell/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="footer-icon-link">
+            <img src="assets/images/insta.ico" alt="Instagram" class="contact-icon">
+        </a>
+        <a href="https://github.com/mkuell" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="footer-icon-link">
+            <img src="assets/images/GitHub_Logo.png" alt="GitHub" class="contact-icon">
+        </a>
+    </nav>
 </footer>
 
 <!-- Swiper JS -->
