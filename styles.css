@@ -24,7 +24,7 @@
     /* Hero Panel */
     --hero-panel-padding: 2rem;
     --hero-panel-max-width: 80%;
-    --hero-panel-bg: rgba(0, 0, 0, 0.35);
+    --hero-panel-bg: rgba(0, 0, 0, 0.4);
 }
 
 /* ===== Dark Mode Variables ===== */
@@ -456,6 +456,8 @@ p {
     max-width: var(--hero-panel-max-width);
     margin: 0 auto;
     background: var(--hero-panel-bg);
+    backdrop-filter: blur(3px);
+    color: var(--color-text-dark);
     border-radius: 8px;
     z-index: 2;
     opacity: 0;
@@ -469,6 +471,28 @@ p {
     color: var(--color-text-dark);
     font-size: 1.8rem;
     margin-bottom: 1rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.intro-panel {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.hero-intro {
+    color: var(--color-text-dark);
+    margin-bottom: 1rem;
+    line-height: 1.5;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+@media (max-width: 768px) {
+    .tagline {
+        font-size: 1.4rem;
+    }
+    .hero-intro {
+        font-size: 0.95rem;
+    }
 }
 
 .intro-panel {
