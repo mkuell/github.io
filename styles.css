@@ -427,8 +427,38 @@ p {
 }
 
 .overlay {
-    padding: 0 2rem;
+    padding: 2rem;
+    max-width: 80%;
+    margin: 0 auto;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
     z-index: 2;
+    opacity: 0;
+}
+
+.overlay.show {
+    animation: fadeInOverlay 1.5s ease forwards;
+}
+
+.tagline {
+    color: var(--color-text-dark);
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: var(--color-accent);
+    color: var(--color-text-dark);
+    padding: 0.5rem 1.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color var(--transition-duration) ease;
+}
+
+.cta-button:hover,
+.cta-button:focus {
+    background-color: #005f92;
 }
 
 .main-title, .sub-title, .cta-text {
