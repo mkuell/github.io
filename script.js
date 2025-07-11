@@ -10,6 +10,17 @@ document.addEventListener('DOMContentLoaded', () => {
         heroOverlay.classList.add('show');
     }
 
+    // Smooth scroll for hero CTA
+    document.querySelectorAll('.cta-scroll').forEach(btn => {
+        btn.addEventListener('click', e => {
+            const target = document.querySelector(btn.getAttribute('href'));
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+
     // Dynamic Year in Footer
     const yearSpan = document.getElementById('current-year');
     if (yearSpan) {
