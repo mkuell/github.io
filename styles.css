@@ -495,6 +495,26 @@ p {
     }
 }
 
+.intro-panel {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.hero-intro {
+    color: var(--color-text-dark);
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+    .tagline {
+        font-size: 1.4rem;
+    }
+    .hero-intro {
+        font-size: 0.95rem;
+    }
+}
+
 .cta-button {
     display: inline-block;
     background-color: var(--color-accent);
