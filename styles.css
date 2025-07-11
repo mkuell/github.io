@@ -24,7 +24,7 @@
     /* Hero Panel */
     --hero-panel-padding: 2rem;
     --hero-panel-max-width: 80%;
-    --hero-panel-bg: rgba(0, 0, 0, 0.6);
+    --hero-panel-bg: rgba(0, 0, 0, 0.4);
 }
 
 /* ===== Dark Mode Variables ===== */
