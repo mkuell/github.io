@@ -5,6 +5,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add 'loaded' class so the CSS fade-in effect can start
     document.body.classList.add('loaded');
 
+    const heroOverlay = document.querySelector('.overlay');
+    if (heroOverlay) {
+        heroOverlay.classList.add('show');
+    }
+
     // Dynamic Year in Footer
     const yearSpan = document.getElementById('current-year');
     if (yearSpan) {
