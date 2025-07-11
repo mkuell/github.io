@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 clickable: true
             },
             autoplay: {
-                delay: 5000,
+                delay: 6000,
                 disableOnInteraction: false
             },
             breakpoints: {
@@ -136,6 +136,23 @@ document.querySelectorAll('.bio-toggle').forEach(btn => {
         const expanded = card.classList.toggle('expanded');
         btn.setAttribute('aria-expanded', expanded);
         btn.textContent = expanded ? 'Show Less' : 'Read More';
+    });
+});
+
+// Testimonial "Read More" toggle
+document.querySelectorAll('.testimonial-toggle').forEach(btn => {
+    const card = btn.closest('.testimonial-card');
+    const full = card.querySelector('.testimonial-full');
+    btn.addEventListener('click', () => {
+        const expanded = card.classList.toggle('expanded');
+        btn.setAttribute('aria-expanded', expanded);
+        btn.textContent = expanded ? 'Show Less' : 'Read More';
+        if (full) {
+            full.hidden = !expanded;
+            if (expanded) {
+                full.focus();
+            }
+        }
     });
 });
 
