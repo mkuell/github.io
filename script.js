@@ -142,11 +142,14 @@ if (navToggle && navList) {
 // Bio card toggle for mobile
 document.querySelectorAll('.bio-toggle').forEach(btn => {
     const card = btn.closest('.bio-card');
-    const content = card.querySelector('.bio-content');
+    const details = card.querySelector('.bio-details');
     btn.addEventListener('click', () => {
         const expanded = card.classList.toggle('expanded');
         btn.setAttribute('aria-expanded', expanded);
-        btn.textContent = expanded ? 'Show Less' : 'Read More';
+        btn.textContent = expanded ? 'Read Less' : 'Read More';
+        if (details) {
+            details.hidden = !expanded;
+        }
     });
 });
 
