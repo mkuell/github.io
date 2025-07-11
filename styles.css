@@ -20,6 +20,11 @@
     /* Transition & Layout */
     --transition-duration: 0.4s;
     --nav-height: 50px;
+
+    /* Hero Panel */
+    --hero-panel-padding: 2rem;
+    --hero-panel-max-width: 80%;
+    --hero-panel-bg: rgba(0, 0, 0, 0.35);
 }
 
 /* ===== Dark Mode Variables ===== */
@@ -447,10 +452,10 @@ p {
 }
 
 .overlay {
-    padding: 2rem;
-    max-width: 80%;
+    padding: var(--hero-panel-padding);
+    max-width: var(--hero-panel-max-width);
     margin: 0 auto;
-    background: rgba(0, 0, 0, 0.3);
+    background: var(--hero-panel-bg);
     border-radius: 8px;
     z-index: 2;
     opacity: 0;
@@ -464,6 +469,26 @@ p {
     color: var(--color-text-dark);
     font-size: 1.8rem;
     margin-bottom: 1rem;
+}
+
+.intro-panel {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.hero-intro {
+    color: var(--color-text-dark);
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+    .tagline {
+        font-size: 1.4rem;
+    }
+    .hero-intro {
+        font-size: 0.95rem;
+    }
 }
 
 .cta-button {
