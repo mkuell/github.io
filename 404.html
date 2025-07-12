@@ -12,7 +12,11 @@
         <p>    💾💾💾💾💾 💾   Bummer.  💾💾💾💾💾💾 Please check the <strong>URL</strong> or go back to the <a href="/">home page</a>.</p>
     </header>
     <footer>
-        <p>&copy; 2025 Michael Kuell. All rights reserved.</p>
+        <p>&copy; <span id="current-year"></span> Michael Kuell. All rights reserved.</p>
     </footer>
+    <script>
+        // Insert the current year dynamically, mirroring index.html logic
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>
