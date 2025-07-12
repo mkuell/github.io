@@ -1,8 +1,5 @@
 // script.js
 
-// Global hero variant flag - switch between 'A' and 'B'
-// Example: window.HERO_VARIANT = 'B';
-window.HERO_VARIANT = window.HERO_VARIANT || 'A';
 
 // Preserve native scrollTo and extend it so strings scroll to selectors
 const nativeScrollTo = window.scrollTo.bind(window);
@@ -22,30 +19,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add 'loaded' class so the CSS fade-in effect can start
     document.body.classList.add('loaded');
 
-    const heroA = document.getElementById('hero-variant-a');
-    const quickPitch = document.getElementById('quick-pitch');
-    if (window.HERO_VARIANT === 'A') {
-        if (heroA) {
-            heroA.classList.remove('hidden');
-            heroA.classList.add('active', 'show');
-        }
-    } else if (window.HERO_VARIANT === 'B') {
-        if (quickPitch) {
-            quickPitch.classList.remove('hidden');
-            quickPitch.classList.add('active');
-        }
+    const overlay = document.querySelector('.hero__overlay');
+    if (overlay) {
+        overlay.style.visibility = 'visible';
+        overlay.classList.add('show');
     }
 
-    // Smooth scroll for hero CTA
-    document.querySelectorAll('.cta-scroll').forEach(btn => {
-        btn.addEventListener('click', e => {
-            const target = document.querySelector(btn.getAttribute('href'));
-            if (target) {
-                e.preventDefault();
-                target.scrollIntoView({ behavior: 'smooth' });
-            }
-        });
-    });
 
     // Dynamic Year in Footer
     const yearSpan = document.getElementById('current-year');
