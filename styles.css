@@ -838,18 +838,27 @@ p {
 
 .footer-icon-link,
 .footer__icon-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    display: inline-block;
+    margin: 0 8px;
     position: relative;
 }
 
 .contact-icon,
-.footer__icon,
 .phone-icon {
     width: 24px;
     height: 24px;
     margin: 0 4px;
+    vertical-align: middle;
+    filter: brightness(0) invert(1);
+    fill: currentColor;
+    color: #fff;
+}
+
+.footer__icon {
+    display: block;
+    width: 24px;
+    height: 24px;
+    margin: 0;
     vertical-align: middle;
     filter: brightness(0) invert(1);
     fill: currentColor;
