@@ -1,4 +1,5 @@
 const fs = require('fs');
+const { JSDOM } = require('jsdom');
 
 function escapeXml(str) {
   return str.replace(/[<>&'"]/g, ch => {
@@ -13,7 +14,29 @@ function escapeXml(str) {
   });
 }
 
-const videos = JSON.parse(fs.readFileSync('videos.json', 'utf8'));
+function extractFromFile(filePath, baseUrl) {
+  const html = fs.readFileSync(filePath, 'utf8');
+  const dom = new JSDOM(html);
+  const document = dom.window.document;
+
+  const wrappers = Array.from(document.querySelectorAll('[data-src^="https://player.vimeo.com/video/"]'));
+  return wrappers.map(wrapper => {
+    const playerUrl = wrapper.getAttribute('data-src');
+    const img = wrapper.querySelector('img');
+    const button = wrapper.querySelector('button');
+    return {
+      pageUrl: baseUrl,
+      playerUrl,
+      thumbnailUrl: img ? img.getAttribute('src') : '',
+      title: wrapper.getAttribute('data-title') || (button && button.getAttribute('aria-label')) || '',
+      description: wrapper.getAttribute('data-description') || '',
+      uploadDate: wrapper.getAttribute('data-upload-date') || '',
+      duration: wrapper.getAttribute('data-duration') ? parseInt(wrapper.getAttribute('data-duration'), 10) : null
+    };
+  });
+}
+
+const videos = extractFromFile('index.html', 'https://michaelkuell.com/');
 
 let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
 xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n`;
