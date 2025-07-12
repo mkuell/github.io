@@ -123,12 +123,12 @@ p {
     backdrop-filter: blur(5px);
 }
 
-.site-header.scrolled {
+.site-header.header--scrolled {
     background-color: var(--color-background);
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-.navbar {
+.nav {
     width: 100%;
     max-width: 1200px;
     display: flex;
@@ -148,17 +148,20 @@ p {
     text-shadow: 0px 3px 6px rgba(0, 0, 0, 0.5);
 }
 
-.nav-list {
+
+.nav__list {
     list-style: none;
     display: flex;
     align-items: center;
 }
 
-.nav-list li {
+
+.nav__item {
     margin-left: 2rem;
 }
 
-.nav-list a {
+
+.nav__link {
     position: relative;
     color: var(--color-text);
     text-decoration: none;
@@ -166,11 +169,13 @@ p {
     transition: color var(--transition-duration) ease;
 }
 
-.nav-list a:hover {
+
+.nav__link:hover {
     color: var(--color-accent);
 }
 
-.nav-list a::after {
+
+.nav__link::after {
     content: "";
     position: absolute;
     left: 0;
@@ -183,13 +188,14 @@ p {
     transition: transform var(--transition-duration) ease;
 }
 
+
 /* Active navigation link */
-.nav-list a.active {
+.nav__link--active {
     color: var(--color-accent);
     font-weight: bold;
 }
 
-.nav-list a.active::after {
+.nav__link--active::after {
     transform: scaleX(1);
 }
 
@@ -202,6 +208,10 @@ p {
     cursor: pointer;
 }
 
+.nav__mobile-menu {
+    display: block;
+}
+
 /* ===== Responsive Navigation ===== */
 @media (max-width: 768px) {
     .swiper-button-prev,
@@ -212,23 +222,22 @@ p {
         display: block;
     }
 
-    .nav-list {
+    .nav__list {
+        display: none;
         position: absolute;
         top: var(--nav-height);
         right: 0;
         background-color: var(--color-muted);
         flex-direction: column;
         width: 200px;
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height var(--transition-duration) ease;
+        padding: 0;
     }
 
-    .nav-list.active {
-        max-height: 500px;
+    .nav__list.active {
+        display: flex;
     }
 
-    .nav-list li {
+    .nav__item {
         margin: 1rem 0;
         text-align: right;
         margin-right: 1.5rem;
@@ -241,9 +250,15 @@ p {
         text-align: right;
     }
 
-    .nav-list.active #theme-toggle {
+    .nav__list.active #theme-toggle {
         display: block;
     }
+}
+
+@media (min-width: 768px) {
+    .nav-toggle { display: none; }
+    .nav__list { display: flex; }
+    .nav__mobile-menu { display: none; }
 }
 
 /* ===== Work Samples Section ===== */
