@@ -676,19 +676,17 @@ p {
     }
 }
 
-/* ===== Bio Section ===== */
-.bio-section {
+/* ===== About Section ===== */
+.about {
     background: url('assets/images/MK_background.jpg') center center / cover no-repeat fixed;
     padding: 4rem 2rem;
     position: relative;
     display: flex;
-    align-items: center;
     justify-content: center;
-    min-height: 100vh;
     overflow: hidden;
 }
 
-.bio-section::before {
+.about::before {
     content: '';
     position: absolute;
     top: 0;
@@ -700,108 +698,63 @@ p {
     animation: fadeInOverlay 2.5s ease-in-out forwards;
 }
 
-.bio-cards {
+.about__container {
     position: relative;
     z-index: 2;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-    max-width: 1200px;
+    max-width: 800px;
     margin: 0 auto;
-    padding: 2rem;
 }
 
-.bio-card {
+.about__accordion {
+    margin-top: 1rem;
+}
+
+.about__header {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+}
+
+.about__item + .about__item {
+    margin-top: 1rem;
+}
+
+.about__toggle {
+    width: 100%;
+    background-color: var(--color-accent);
+    color: var(--color-text-dark);
+    border: none;
+    padding: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: left;
+    font-weight: 700;
+    position: relative;
+}
+
+.about__toggle::after {
+    content: '\25BC';
+    position: absolute;
+    right: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.about__panel {
     background: rgba(200, 205, 217, 0.6);
     backdrop-filter: blur(8px);
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.bio-card h2 {
-    font-size: 1.8rem;
-    margin-bottom: 0.8rem;
-    color: var(--color-text-dark);
-}
-
-.bio-card p, .bio-card ul {
-    font-size: 1rem;
-    color: var(--color-text);
-    line-height: 1.6;
-}
-
-.bio-summary {
-    margin-bottom: 0.5rem;
-}
-
-.bio-details {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease;
 }
 
-.bio-card ul {
-    list-style: disc;
-    padding-left: 1.5rem;
-    margin-bottom: 1rem;
+.about__toggle[aria-expanded="true"] + .about__panel {
+    max-height: 100vh;
 }
 
-.bio-toggle {
-    margin-top: 1rem;
-    background-color: var(--color-accent);
-    color: var(--color-text-dark);
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.bio-toggle:hover {
-    background-color: #005f92;
-}
-
-.bio-toggle:focus {
-    outline: 2px solid var(--color-accent);
-}
-
-@media (min-width: 769px) {
-    .bio-toggle {
-        display: none;
-    }
-}
-
-@media (max-width: 768px) {
-    .swiper-button-prev,
-    .swiper-button-next {
-        display: none;
-    }
-    .bio-details {
-        max-height: 0;
-    }
-    .bio-card.expanded .bio-details {
-        max-height: 100vh;
-    }
-}
-
-@media (max-width: 768px) {
-    .swiper-button-prev,
-    .swiper-button-next {
-        display: none;
-    }
-    .bio-cards {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-    .bio-card {
-        padding: 1.5rem;
-    }
-    .bio-card h2 {
-        font-size: 1.4rem;
-    }
-    .bio-card p, .bio-card ul {
-        font-size: 0.9rem;
-    }
+.about__toggle[aria-expanded="true"]::after {
+    transform: rotate(180deg);
 }
 
 
