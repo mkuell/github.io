@@ -7,7 +7,8 @@
     "test": "node test/validate-html.js",
     "generate-video-sitemap": "node scripts/generateVideoSitemap.js",
     "update-robots": "node scripts/updateRobots.js",
-    "ping-indexnow": "node scripts/pingIndexNow.js"
+    "ping-indexnow": "node scripts/pingIndexNow.js",
+    "video-sitemap": "npm run generate-video-sitemap && npm run update-robots && npm run ping-indexnow"
   },
   "keywords": [],
   "author": "",
@@ -15,5 +16,8 @@
   "devDependencies": {
     "htmlhint": "^0.16.2",
     "jsdom": "^26.1.0"
+  },
+  "dependencies": {
+    "xmlbuilder2": "^3.1.1"
   }
 }

@@ -1,0 +1,33 @@
+name: Update Video Sitemap
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Install dependencies
+        run: npm install xmlbuilder2
+      - name: Generate video sitemap
+        run: node scripts/generateVideoSitemap.js
+      - name: Update robots.txt
+        run: node scripts/updateRobots.js
+      - name: Ping IndexNow
+        run: node scripts/pingIndexNow.js
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          commit-message: Update video sitemap and robots
+          title: Update video sitemap and robots
+          body: Automated update of video sitemap and robots.txt
+          branch: video-sitemap-update
+          base: main
+
