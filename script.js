@@ -238,7 +238,9 @@ function initVideoPlaceholders() {
 function openModal(wrapper) {
     hidePreview(wrapper);
     const modal = document.getElementById('video-modal');
+    if (!modal) return;
     const container = modal.querySelector('.modal-video-container');
+    if (!container) return;
     const src = `${wrapper.dataset.src}?autoplay=1`;
     const ratioValue = parseFloat(wrapper.style.getPropertyValue('--ratio')) || (16 / 9);
 
@@ -285,7 +287,9 @@ function openModal(wrapper) {
 
 function closeModal() {
     const modal = document.getElementById('video-modal');
+    if (!modal) return;
     const container = modal.querySelector('.modal-video-container');
+    if (!container) return;
     modal.hidden = true;
     container.innerHTML = '';
     container.style.width = '';
@@ -299,15 +303,24 @@ function closeModal() {
 }
 
 // Close modal with close button
-document.querySelector('#video-modal .modal-close').addEventListener('click', closeModal);
+const modalCloseBtn = document.querySelector('#video-modal .modal-close');
+if (modalCloseBtn) {
+    modalCloseBtn.addEventListener('click', closeModal);
+}
 
 // Close modal by clicking backdrop (outside .modal-content)
-document.getElementById('video-modal').addEventListener('click', function(e) {
-    if (e.target === this) closeModal();
-});
+const modalBackdrop = document.getElementById('video-modal');
+if (modalBackdrop) {
+    modalBackdrop.addEventListener('click', function(e) {
+        if (e.target === this) closeModal();
+    });
+}
 
 // Prevent modal close when clicking inside modal-content
-document.querySelector('#video-modal .modal-content').addEventListener('click', e => e.stopPropagation());
+const modalContent = document.querySelector('#video-modal .modal-content');
+if (modalContent) {
+    modalContent.addEventListener('click', e => e.stopPropagation());
+}
 
 // Keyboard ESC closes modal
 document.addEventListener('keydown', e => {
