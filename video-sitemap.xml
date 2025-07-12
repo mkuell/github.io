@@ -65,4 +65,12 @@
       <video:title>Pfizer Update - Sally Sussman</video:title>
     </video:video>
   </url>
+  <url>
+    <loc>https://michaelkuell.com/</loc>
+    <video:video>
+      <video:player_loc>https://player.vimeo.com/video/231087681</video:player_loc>
+      <video:thumbnail_loc>https://vumbnail.com/231087681.jpg</video:thumbnail_loc>
+      <video:title>Nashoba Brook Bakery</video:title>
+    </video:video>
+  </url>
 </urlset>
