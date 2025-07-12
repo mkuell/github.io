@@ -11,3 +11,5 @@ Disallow: /search/
 
 # Sitemap URL for better indexing
 Sitemap: https://michaelkuell.com/sitemap.xml
+
+Sitemap: https://michaelkuell.com/video-sitemap.xml

@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "node test/validate-html.js",
-    "generate-video-sitemap": "node scripts/generateVideoSitemap.js"
+    "generate-video-sitemap": "node scripts/generateVideoSitemap.js",
+    "update-robots": "node scripts/updateRobots.js"
   },
   "keywords": [],
   "author": "",
