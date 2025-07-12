@@ -866,43 +866,6 @@ p {
     to { opacity: 1; }
 }
 
-/* ===== Socials ===== */
-.social-highlights-section {
-    padding: 40px 20px;
-    background-color: var(--color-background-light);
-}
-
-.social-highlights-section .embed-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.social-highlights-section .embed-item {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.social-highlights-section .embed-item iframe,
-.social-highlights-section .embed-item embed,
-.social-highlights-section .embed-item object {
-    width: 100%;
-    max-width: 100%;
-    display: block;
-}
-
-@media (max-width: 768px) {
-    .swiper-button-prev,
-    .swiper-button-next {
-        display: none;
-    }
-    .social-highlights-section .embed-grid {
-        grid-template-columns: 1fr;
-    }
-}
 
 /* ===== Section Dividers ===== */
 .section-divider {
@@ -930,8 +893,7 @@ p {
 
 /* ===== About & Experience Sections ===== */
 /* Improve paragraph readability while keeping global text unaffected */
-#about p,
-#experience p {
+#about p {
     font-size: 18px;
     line-height: 1.6;
     letter-spacing: 0.5px;
@@ -939,8 +901,7 @@ p {
 
 /* Adjust typography for small screens (under 600px) */
 @media (max-width: 599px) {
-    #about p,
-    #experience p {
+    #about p {
         font-size: 16px;
         line-height: 1.5;
     }
@@ -956,8 +917,7 @@ p {
 
 /* Increase readability on very large screens (over 1200px) */
 @media (min-width: 1201px) {
-    #about p,
-    #experience p {
+    #about p {
         font-size: 20px;
         line-height: 1.75;
     }
