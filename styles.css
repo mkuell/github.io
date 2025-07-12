@@ -494,7 +494,7 @@ p {
 }
 
 .hero__cta--primary {
-    background-color: var(--accent-color, var(--color-accent));
+    background-color: var(--color-accent);
     color: #fff;
 }
 
@@ -642,7 +642,7 @@ p {
 .testimonials__toggle {
     background: none;
     border: none;
-    color: var(--accent-color);
+    color: var(--color-accent);
     cursor: pointer;
     font-weight: 700;
 }
