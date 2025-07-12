@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node test/validate-html.js"
+    "test": "node test/validate-html.js",
+    "generate-video-sitemap": "node scripts/generateVideoSitemap.js"
   },
   "keywords": [],
   "author": "",
