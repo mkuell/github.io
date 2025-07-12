@@ -114,8 +114,8 @@
         <div class="hero__overlay" aria-label="Introductory tagline">
           <h1 class="hero__tagline">I craft video that connects brands &amp; audiences.</h1>
           <div class="hero__buttons">
-            <button class="hero__cta hero__cta--primary" onclick="scrollTo('#work-samples')" aria-label="See my reel">See My Reel</button>
-            <button class="hero__cta hero__cta--secondary" onclick="scrollTo('#contact')" aria-label="Let’s Collaborate">Let’s Collaborate</button>
+            <a href="#work-samples" class="hero__cta hero__cta--primary" aria-label="See my reel">See My Reel</a>
+            <a href="#contact" class="hero__cta hero__cta--secondary" aria-label="Let’s Collaborate">Let’s Collaborate</a>
           </div>
         </div>
     </section>
@@ -319,18 +319,11 @@
     </div>
 </section>
 
-<!-- Video Modal -->
-<div class="modal" id="video-modal" hidden aria-modal="true" role="dialog">
-  <div class="modal-content">
-    <div class="modal-video-container"></div>
-    <button class="modal-close" aria-label="Close modal">×</button>
-  </div>
-</div>
-
-<!-- Footer -->
-<footer class="site-footer" role="contentinfo">
-    <p class="footer-text">&copy; <span id="current-year"></span> Michael Kuell</p>
-    <nav class="footer-links" aria-label="Contact links">
+<!-- Contact Section -->
+<section id="contact" class="contact-section" role="region" aria-labelledby="contact-heading">
+    <h2 id="contact-heading" class="section-title">CONTACT</h2>
+    <p>Let's collaborate on your next project.</p>
+    <nav class="contact-links" aria-label="Contact links">
         <a href="mailto:michael@michaelkuell.com" class="footer-icon-link" aria-label="Email Michael Kuell">
             <img src="assets/images/email-svgrepo-com.svg" alt="Email" class="contact-icon">
         </a>
@@ -343,23 +336,24 @@
         <a href="https://www.instagram.com/michael_kuell/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="footer-icon-link">
             <img src="assets/images/insta.ico" alt="Instagram" class="contact-icon">
         </a>
-        <a
-          href="https://github.com/mkuell"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Visit my GitHub profile"
-          class="footer__icon-link"
-        >
-          <img
-            src="assets/images/github-mark.svg"
-            alt="GitHub logo"
-            width="24"
-            height="24"
-            class="footer__icon"
-            loading="lazy"
-          />
+        <a href="https://github.com/mkuell" target="_blank" rel="noopener noreferrer" aria-label="Visit my GitHub profile" class="footer__icon-link">
+          <img src="assets/images/github-mark.svg" alt="GitHub logo" width="24" height="24" class="footer__icon" loading="lazy" />
         </a>
     </nav>
+</section>
+
+<!-- Video Modal -->
+<div class="modal" id="video-modal" hidden aria-modal="true" role="dialog">
+  <div class="modal-content">
+    <div class="modal-video-container"></div>
+    <button class="modal-close" aria-label="Close modal">×</button>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="site-footer" role="contentinfo">
+    <p class="footer-text">&copy; <span id="current-year"></span> Michael Kuell</p>
+    <nav class="footer-links" aria-label="Contact links" hidden></nav>
 </footer>
 
 <!-- Swiper JS -->
