@@ -6,7 +6,8 @@
   "scripts": {
     "test": "node test/validate-html.js",
     "generate-video-sitemap": "node scripts/generateVideoSitemap.js",
-    "update-robots": "node scripts/updateRobots.js"
+    "update-robots": "node scripts/updateRobots.js",
+    "ping-indexnow": "node scripts/pingIndexNow.js"
   },
   "keywords": [],
   "author": "",
