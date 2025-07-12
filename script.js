@@ -144,16 +144,19 @@ if (navToggle && navList) {
     });
 }
 
-// Bio card toggle for mobile
-document.querySelectorAll('.bio-toggle').forEach(btn => {
-    const card = btn.closest('.bio-card');
-    const details = card.querySelector('.bio-details');
+// About accordion toggle
+const toggles = document.querySelectorAll('.about__toggle');
+toggles.forEach(btn => {
     btn.addEventListener('click', () => {
-        const expanded = card.classList.toggle('expanded');
-        btn.setAttribute('aria-expanded', expanded);
-        btn.textContent = expanded ? 'Read Less' : 'Read More';
-        if (details) {
-            details.hidden = !expanded;
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        toggles.forEach(t => t.setAttribute('aria-expanded', 'false'));
+        document.querySelectorAll('.about__panel').forEach(p => p.style.maxHeight = null);
+        if (!expanded) {
+            btn.setAttribute('aria-expanded', 'true');
+            const panel = document.getElementById(btn.getAttribute('aria-controls'));
+            if (panel) {
+                panel.style.maxHeight = panel.scrollHeight + 'px';
+            }
         }
     });
 });
