@@ -836,7 +836,8 @@ p {
     gap: 1rem;
 }
 
-.footer-icon-link {
+.footer-icon-link,
+.footer__icon-link {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -844,6 +845,7 @@ p {
 }
 
 .contact-icon,
+.footer__icon,
 .phone-icon {
     width: 24px;
     height: 24px;
@@ -857,18 +859,29 @@ p {
 /* Interactive social icon links */
 
 
-.footer-icon-link img {
+.footer-icon-link img,
+.footer-icon-link svg,
+.footer__icon-link img,
+.footer__icon-link svg,
+.footer__icon {
     transition: transform var(--transition-duration) ease,
                 filter var(--transition-duration) ease;
 }
 
 .footer-icon-link:hover img,
-.footer-icon-link:focus img {
+.footer-icon-link:focus img,
+.footer-icon-link:hover svg,
+.footer-icon-link:focus svg,
+.footer__icon-link:hover img,
+.footer__icon-link:focus img,
+.footer__icon-link:hover svg,
+.footer__icon-link:focus svg {
     transform: translateY(-2px) scale(1.05);
     filter: brightness(1.2);
 }
 
-.footer-icon-link::after {
+.footer-icon-link::after,
+.footer__icon-link::after {
     content: attr(aria-label);
     position: absolute;
     bottom: calc(100% + 0.25rem);
@@ -887,7 +900,9 @@ p {
 }
 
 .footer-icon-link:hover::after,
-.footer-icon-link:focus::after {
+.footer-icon-link:focus::after,
+.footer__icon-link:hover::after,
+.footer__icon-link:focus::after {
     opacity: 1;
 }
 
