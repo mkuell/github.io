@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "htmlhint": "^0.16.2"
+    "htmlhint": "^0.16.2",
+    "jsdom": "^26.1.0"
   }
 }
