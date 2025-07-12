@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initVideoPlaceholders();
 
     // Initialize testimonials carousel
-    const carouselEl = document.querySelector('.testimonial-carousel');
+    const carouselEl = document.querySelector('.testimonials__carousel');
     if (carouselEl && window.Swiper) {
         const swiper = new Swiper(carouselEl, {
             loop: true,
@@ -162,9 +162,9 @@ toggles.forEach(btn => {
 });
 
 // Testimonial "Read More" toggle
-document.querySelectorAll('.testimonial-toggle').forEach(btn => {
-    const card = btn.closest('.testimonial-card');
-    const full = card.querySelector('.testimonial-full');
+document.querySelectorAll('.testimonials__toggle').forEach(btn => {
+    const card = btn.closest('.testimonials__item');
+    const full = card.querySelector('.testimonials__full');
     btn.addEventListener('click', () => {
         const expanded = card.classList.toggle('expanded');
         btn.setAttribute('aria-expanded', expanded);

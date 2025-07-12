@@ -558,13 +558,13 @@ p {
     padding: 4rem 2rem;
 }
 
-.testimonial-carousel {
+.testimonials__carousel {
     max-width: 1200px;
     margin: 0 auto;
     position: relative;
 }
 
-.testimonial-carousel .swiper-slide {
+.testimonials__carousel .swiper-slide {
     display: flex;
     justify-content: center;
     padding: 1rem;
@@ -600,7 +600,7 @@ p {
     opacity: 1;
 }
 
-.testimonial-card {
+.testimonials__item {
     background-color: var(--color-muted);
     padding: 2rem;
     border-radius: 12px;
@@ -608,7 +608,7 @@ p {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.testimonial-image {
+.testimonials__image {
     width: 80px;
     height: 80px;
     object-fit: cover;
@@ -617,37 +617,41 @@ p {
     border: 3px solid var(--color-background-light);
 }
 
-.testimonial-card p {
+.testimonials__item p {
     font-size: 1rem;
     color: var(--color-text);
     line-height: 1.6;
 }
 
-.testimonial-excerpt {
+.testimonials__excerpt {
     margin-bottom: 0.5rem;
 }
 
-.testimonial-full {
+.testimonials__full {
     display: none;
 }
 
-.testimonial-card.expanded .testimonial-full {
+.testimonials__full[hidden] {
+    display: none;
+}
+
+.testimonials__item.expanded .testimonials__full {
     display: block;
 }
 
-.testimonial-toggle {
+.testimonials__toggle {
     background: none;
     border: none;
-    color: var(--color-accent);
+    color: var(--accent-color);
     cursor: pointer;
     font-weight: 700;
 }
 
-.testimonial-toggle:hover {
+.testimonials__toggle:hover {
     text-decoration: underline;
 }
 
-.testimonial-toggle:focus {
+.testimonials__toggle:focus {
     outline: 2px solid var(--color-accent);
 }
 
@@ -656,22 +660,22 @@ p {
     .swiper-button-next {
         display: none;
     }
-    .testimonial-card {
+    .testimonials__item {
         text-align: center;
         padding: 1.5rem;
     }
-    .testimonial-image {
+    .testimonials__image {
         width: 60px;
         height: 60px;
         margin: 0 auto 1rem;
     }
-    .testimonial-card p {
+    .testimonials__item p {
         font-size: 0.95rem;
     }
 }
 
 @media (max-width: 480px) {
-    .testimonial-card p {
+    .testimonials__item p {
         font-size: 0.85rem;
     }
 }
