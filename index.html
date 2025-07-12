@@ -76,33 +76,37 @@
 <body>
     <!-- Site Header with Navigation -->
     <header class="site-header">
-        <nav class="navbar" role="navigation" aria-label="Main Navigation">
-            <!-- Logo -->
-            <div class="logo">
-                <a href="/" id="logo-link" title="Go to the top of the site">Home</a>
-            </div>
+        <!-- Logo -->
+        <div class="logo">
+            <a href="/" id="logo-link" title="Go to the top of the site">Home</a>
+        </div>
 
-            <!-- Mobile Navigation Toggle -->
-            <button class="nav-toggle" aria-label="Toggle Navigation Menu">
+        <!-- Mobile Navigation Toggle -->
+        <div class="nav__mobile-menu">
+            <button class="nav-toggle" aria-label="Toggle Navigation Menu" aria-controls="nav-menu" aria-expanded="false">
                 ☰
             </button>
+        </div>
 
-            <!-- Navigation Links -->
-            <ul class="nav-list">
-                <li><a href="#testimonials" title="Read testimonials for Michael Kuell">Testimonials</a></li>
-                <li><a href="#about" title="Learn more about Michael Kuell">About</a></li>
-                <li>
-                    <!-- Dark Mode Toggle -->
-                    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark Mode">
-                        🌙
-                    </button>
-                </li>
+        <!-- Primary Navigation -->
+        <nav class="nav" id="nav-menu" role="navigation" aria-label="Main Navigation">
+            <ul class="nav__list">
+              <li class="nav__item"><a href="#home" class="nav__link">Home</a></li>
+              <li class="nav__item"><a href="#work-samples" class="nav__link">Work Samples</a></li>
+              <li class="nav__item"><a href="#about" class="nav__link">About</a></li>
+              <li class="nav__item"><a href="#testimonials" class="nav__link">Testimonials</a></li>
+              <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
             </ul>
         </nav>
+
+        <!-- Dark Mode Toggle -->
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark Mode">
+            🌙
+        </button>
     </header>
     
     <!-- Cover Page Section -->
-    <section id="cover-page" class="cover-page" role="banner" aria-labelledby="cover-title">
+    <section id="home" class="cover-page" role="banner" aria-labelledby="cover-title">
         <!-- Background Video -->
         <video autoplay muted loop playsinline class="background-video" aria-label="Showreel of Michael Kuell's creative work">
             <source src="assets/videos/cover-video.webm" type="video/webm">

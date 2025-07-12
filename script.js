@@ -46,11 +46,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Add or remove 'scrolled' class based on scroll position
+    // Add or remove background on scroll
     const siteHeader = document.querySelector('.site-header');
     if (siteHeader) {
         const toggleScrolled = () => {
-            siteHeader.classList.toggle('scrolled', window.scrollY > 0);
+            const offset = siteHeader.offsetHeight;
+            siteHeader.classList.toggle('header--scrolled', window.scrollY > offset);
         };
         window.addEventListener('scroll', toggleScrolled);
         toggleScrolled();
@@ -119,8 +120,8 @@ if (toggleButton) {
 
 // Navigation Toggle for Mobile
 const navToggle = document.querySelector('.nav-toggle');
-const navList = document.querySelector('.nav-list');
-const navLinks = document.querySelectorAll('.nav-list a');
+const navList = document.querySelector('.nav__list');
+const navLinks = document.querySelectorAll('.nav__link');
 
 if (navToggle && navList) {
     navToggle.addEventListener('click', () => {
@@ -184,13 +185,19 @@ if (navLinks.length > 0) {
         .map(link => document.querySelector(link.hash))
         .filter(Boolean);
 
-    const observerOptions = { threshold: 0.25 };
+    const observerOptions = { threshold: 0.5 };
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const id = entry.target.id;
                 navLinks.forEach(link => {
-                    link.classList.toggle('active', link.hash === `#${id}`);
+                    const active = link.hash === `#${id}`;
+                    link.classList.toggle('nav__link--active', active);
+                    if (active) {
+                        link.setAttribute('aria-current', 'page');
+                    } else {
+                        link.removeAttribute('aria-current');
+                    }
                 });
             }
         });
