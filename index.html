@@ -110,13 +110,20 @@
             Your browser does not support the video tag. Please update your browser.
         </video>
 
-        <!-- Overlay Content -->
-        <div class="overlay hero-panel">
-            <h1 class="tagline">Video that Connects | Michael Kuell</h1>
-            <div class="intro-panel">
-                <p class="hero-intro">As a Content Producer &amp; Director, I turn complex ideas into stories that resonate with audiences, elevate brands, and flex to meet new challenges as projects evolve.</p>
-                <a href="#work-samples" class="cta-button cta-scroll">See My Work</a>
-            </div>
+        <!-- Hero Variant A -->
+        <div id="hero-variant-a" class="hero hero--variant-a hidden" aria-label="Introductory tagline">
+            <h1 class="hero__tagline">I craft video that connects brands &amp; audiences.</h1>
+            <button class="hero__cta hero__cta--primary" onclick="scrollTo('#work-samples')">See My Reel</button>
+            <button class="hero__cta hero__cta--secondary" onclick="scrollTo('#contact')">Let’s Collaborate</button>
+        </div>
+    </section>
+
+    <!-- Hero Variant B: Quick Pitch -->
+    <section id="quick-pitch" class="quick-pitch hidden" aria-label="Quick Pitch">
+        <div class="quick-pitch__content">
+            “I’m a Content Producer &amp; Director who turns complex ideas into compelling stories that resonate with audiences and elevate brand messaging. My process begins with clear goals—and stays flexible to adapt and solve challenges as projects evolve.”
+            <button class="quick-pitch__cta quick-pitch__cta--primary" onclick="scrollTo('#work-samples')">See My Reel</button>
+            <button class="quick-pitch__cta quick-pitch__cta--secondary" onclick="scrollTo('#contact')">Let’s Collaborate</button>
         </div>
     </section>
 

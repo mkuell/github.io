@@ -1,13 +1,39 @@
 // script.js
 
+// Global hero variant flag - switch between 'A' and 'B'
+// Example: window.HERO_VARIANT = 'B';
+window.HERO_VARIANT = window.HERO_VARIANT || 'A';
+
+// Preserve native scrollTo and extend it so strings scroll to selectors
+const nativeScrollTo = window.scrollTo.bind(window);
+window.scrollTo = function(arg1, arg2) {
+    if (typeof arg1 === 'string') {
+        const el = document.querySelector(arg1);
+        if (el) {
+            el.scrollIntoView({ behavior: 'smooth' });
+        }
+        return;
+    }
+    nativeScrollTo(arg1, arg2);
+};
+
 // Wait for the DOM to load
 document.addEventListener('DOMContentLoaded', () => {
     // Add 'loaded' class so the CSS fade-in effect can start
     document.body.classList.add('loaded');
 
-    const heroOverlay = document.querySelector('.overlay');
-    if (heroOverlay) {
-        heroOverlay.classList.add('show');
+    const heroA = document.getElementById('hero-variant-a');
+    const quickPitch = document.getElementById('quick-pitch');
+    if (window.HERO_VARIANT === 'A') {
+        if (heroA) {
+            heroA.classList.remove('hidden');
+            heroA.classList.add('active', 'show');
+        }
+    } else if (window.HERO_VARIANT === 'B') {
+        if (quickPitch) {
+            quickPitch.classList.remove('hidden');
+            quickPitch.classList.add('active');
+        }
     }
 
     // Smooth scroll for hero CTA
