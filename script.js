@@ -62,39 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize video placeholders
     initVideoPlaceholders();
 
-    // Initialize testimonials carousel
-    const carouselEl = document.querySelector('.testimonials__carousel');
-    if (carouselEl && window.Swiper) {
-        const swiper = new Swiper(carouselEl, {
-            loop: true,
-            slidesPerView: 1,
-            spaceBetween: 20,
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev'
-            },
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true
-            },
-            autoplay: {
-                delay: 6000,
-                disableOnInteraction: false
-            },
-            breakpoints: {
-                768: { slidesPerView: 2 },
-                1024: { slidesPerView: 3 }
-            },
-            a11y: true
-        });
-
-        const pause = () => swiper.autoplay.stop();
-        const play = () => swiper.autoplay.start();
-        carouselEl.addEventListener('mouseenter', pause);
-        carouselEl.addEventListener('mouseleave', play);
-        carouselEl.addEventListener('focusin', pause);
-        carouselEl.addEventListener('focusout', play);
-    }
+    initTestimonials();
 });
 
 // Dark Mode Toggle
@@ -165,22 +133,6 @@ bioButtons.forEach(btn => {
     });
 });
 
-// Testimonial "Read More" toggle
-document.querySelectorAll('.testimonials__toggle').forEach(btn => {
-    const card = btn.closest('.testimonials__item');
-    const full = card.querySelector('.testimonials__full');
-    btn.addEventListener('click', () => {
-        const expanded = card.classList.toggle('expanded');
-        btn.setAttribute('aria-expanded', expanded);
-        btn.textContent = expanded ? 'Show Less' : 'Read More';
-        if (full) {
-            full.hidden = !expanded;
-            if (expanded) {
-                full.focus();
-            }
-        }
-    });
-});
 
 // Scroll-spy using Intersection Observer
 // Each section becomes "active" when at least 50% visible
@@ -373,4 +325,54 @@ function hidePreview(wrapper) {
     if (iframe) {
         iframe.remove();
     }
+}
+function initTestimonials() {
+    const testimonials = [
+        {
+            text: "I have worked with Michael and his team on several occasions, and from start to finish, the experience was always fantastic. Great creative thinking, detailed preparation, and highly professional execution, made this part of my projects run like clockwork. Michael and his team define 'service oriented' and the results have always been outstanding.",
+            author: "- Jonas Bromberg, Psy.D., Principal Consultant @ Crossroads Health"
+        },
+        {
+            text: "I had the pleasure of being in several projects produced by Michael in my last role. Being in front of the camera can be very intimidating, especially when having little experience, but Michael always made the process easy to understand and fun. He is professional, approachable, and down to earth in a way that made anyone working with him want to be their best. From that perspective, I would highly recommend Michael in any client/customer facing roles.",
+            author: "- Sonya Ponder, Diversity, Equity and Inclusion Talent Acquisition Manager at Princeton University"
+        },
+        {
+            text: "The last time I worked with Mike, we were under every kind of pressure possible: political, financial, creative, temporal and trying to shoot in English and French simultaneously. We wrapped half an hour early. I recommend Mike without reservation. As a director, cinematographer, collaborator and leader, he’s nigh on peerless. You might think trusting an airline pilot is a big deal, but for people in my business, choosing a director is much, much hairier. As far as I’m concerned, it’s Mike Kuell or we find a way to do it in print.",
+            author: "- Dave Greeley, Partner @ McKenna and Partners"
+        },
+        {
+            text: "Michael is an exceptional Executive Producer, Director and Filmmaker. His level of professionalism and focus is remarkable. As a mentor, Michael has helped me redirect my skill set towards all aspects of video production. His innate ability to communicate effectively is one of his many great strengths. During a rigorous shoot that spanned 5 cities, I was privileged to witness Michael conduct over 40 interviews with some of the nation's top psychologists.",
+            author: "- Cathleen Carr, Creative Social Impact Leader"
+        },
+        {
+            text: "Mike is one of the most versatile, professional, and driven filmmakers I've ever worked with. I've seen him do great jobs with both scripted and improv comedy, drama, and commercials as well as straight-ahead corporate. He makes the most of the actors and craftspeople he works with (and has introduced me to some excellent ones), and delivers more than expected for the budget. Even more impressive: when not working for clients, he creates interesting projects on his own. That's love.",
+            author: "- Jay Rose, Sound Designer, Digital Playroom"
+        }
+    ];
+
+    const textEl = document.getElementById('testimonial-text');
+    const authorEl = document.getElementById('testimonial-author');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+
+    if (!textEl || !authorEl || !prevBtn || !nextBtn) return;
+
+    let index = 0;
+    function render() {
+        const t = testimonials[index];
+        textEl.textContent = t.text;
+        authorEl.textContent = t.author;
+    }
+
+    prevBtn.addEventListener('click', () => {
+        index = (index - 1 + testimonials.length) % testimonials.length;
+        render();
+    });
+
+    nextBtn.addEventListener('click', () => {
+        index = (index + 1) % testimonials.length;
+        render();
+    });
+
+    render();
 }
