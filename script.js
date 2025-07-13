@@ -65,28 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initTestimonials();
 });
 
-// Dark Mode Toggle
-const toggleButton = document.getElementById('theme-toggle');
-if (toggleButton) {
-    const currentTheme = localStorage.getItem('theme') || 'light';
-    document.documentElement.setAttribute('data-theme', currentTheme);
-
-    // Update toggle button icon based on current theme
-    toggleButton.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
-
-    toggleButton.addEventListener('click', () => {
-        let theme = document.documentElement.getAttribute('data-theme');
-        if (theme === 'dark') {
-            document.documentElement.setAttribute('data-theme', 'light');
-            localStorage.setItem('theme', 'light');
-            toggleButton.textContent = '🌙';
-        } else {
-            document.documentElement.setAttribute('data-theme', 'dark');
-            localStorage.setItem('theme', 'dark');
-            toggleButton.textContent = '☀️';
-        }
-    });
-}
+// Dark mode toggle removed: site operates in light-only theme.
 
 // Navigation Toggle for Mobile
 const navToggle = document.querySelector('.nav-toggle');
