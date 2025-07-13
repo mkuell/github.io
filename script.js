@@ -46,7 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Add or remove background on scroll
+    // Add or remove background on scroll.
+    // When the page is scrolled beyond the header's height,
+    // we add `.header--scrolled` for a solid background.
     const siteHeader = document.querySelector('.site-header');
     if (siteHeader) {
         const toggleScrolled = () => {
@@ -180,11 +182,13 @@ document.querySelectorAll('.testimonials__toggle').forEach(btn => {
 });
 
 // Scroll-spy using Intersection Observer
+// Each section becomes "active" when at least 50% visible
 if (navLinks.length > 0) {
     const sections = Array.from(navLinks)
         .map(link => document.querySelector(link.hash))
         .filter(Boolean);
 
+    // Trigger when half of a section is visible
     const observerOptions = { threshold: 0.5 };
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {

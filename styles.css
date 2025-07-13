@@ -124,7 +124,8 @@ p {
 }
 
 .site-header.header--scrolled {
-    background-color: var(--color-background);
+    /* Solid background once scrolled past the header height */
+    background-color: rgba(0,0,0,0.8);
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
@@ -213,6 +214,7 @@ p {
 }
 
 /* ===== Responsive Navigation ===== */
+/* Screens narrower than 768px use a hamburger menu */
 @media (max-width: 768px) {
     .swiper-button-prev,
     .swiper-button-next {
@@ -255,6 +257,7 @@ p {
     }
 }
 
+/* Desktop layout at widths 768px and above */
 @media (min-width: 768px) {
     .nav-toggle { display: none; }
     .nav__list { display: flex; }
