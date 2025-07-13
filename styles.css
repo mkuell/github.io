@@ -14,7 +14,7 @@
     --color-background-light: #fcfcfc;
     --color-text-dark: #edf0f2;
     --color-text-light: #333333;
-    --accent-color: #0077b6;
+    --accent-color: #94d2bd; /* soft mint */
     --color-accent: var(--accent-color);
     --color-muted: #c4c4c4;
     --color-white: #ffffff;
@@ -38,14 +38,7 @@
     --space-lg: 3rem;
 }
 
-/* ===== Dark Mode Variables ===== */
-[data-theme="dark"] {
-    --color-background: var(--color-background-dark);
-    --color-text: var(--color-text-dark);
-    /* Brighter accent color for elements on dark backgrounds */
-    --accent-color-dark: #1e90ff;
-}
-
+/* ===== Light Theme Variables ===== */
 [data-theme="light"] {
     --color-background: var(--color-background-light);
     --color-text: var(--color-text-light);
