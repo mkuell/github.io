@@ -755,8 +755,8 @@ section + section {
     }
 }
 
-/* ===== About Section ===== */
-.about {
+/* ===== Bio Section ===== */
+.bio-section {
     background: url('assets/images/MK_background.jpg') center center / cover no-repeat fixed;
     padding: 4rem 2rem;
     position: relative;
@@ -767,7 +767,7 @@ section + section {
     overflow: hidden;
 }
 
-.about::before {
+.bio-overlay {
     content: '';
     position: absolute;
     top: 0;
@@ -779,18 +779,36 @@ section + section {
     animation: fadeInOverlay 2.5s ease-in-out forwards;
 }
 
-.about__accordion {
+.bio-container {
     position: relative;
     z-index: 2;
     max-width: 800px;
     width: 100%;
 }
 
-.about__item + .about__item {
+.bio-cards {
+    display: flex;
+    flex-direction: column;
+}
+
+.bio-card + .bio-card {
     margin-top: 1rem;
 }
 
-.about__toggle {
+.bio-card {
+    background: rgba(200, 205, 217, 0.85);
+    backdrop-filter: blur(8px);
+    padding: 1rem;
+    border-radius: 4px;
+}
+
+.bio-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.bio-toggle {
     width: 100%;
     background-color: var(--accent-color-dark);
     color: var(--color-text-dark);
@@ -799,21 +817,13 @@ section + section {
     border-radius: 4px;
     cursor: pointer;
     text-align: left;
+    margin-top: 0.5rem;
 }
 
-.about__panel {
-    background: rgba(200, 205, 217, 0.85);
-    backdrop-filter: blur(8px);
-    padding: 1rem;
-    margin-bottom: 1rem;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-}
-
-.about__toggle[aria-expanded="true"] + .about__panel {
+.bio-card.expanded .bio-content {
     max-height: 100vh;
 }
+
 
 /* ===== Footer ===== */
 .site-footer {
