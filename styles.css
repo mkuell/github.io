@@ -15,6 +15,7 @@
     --color-text-dark: #edf0f2;
     --color-text-light: #333333;
     --color-accent: #0077b6;
+    --accent-color: var(--color-accent);
     --color-muted: #c4c4c4;
     --color-white: #ffffff;
 
@@ -886,26 +887,28 @@ p {
 
 
 /* ===== Section Dividers ===== */
-.section-divider {
+.divider {
     position: relative;
     width: 100%;
     overflow: hidden;
     line-height: 0;
 }
-
-.section-divider svg,
-.section-divider img {
+.divider svg {
     display: block;
     width: 100%;
     height: auto;
     max-height: 80px;
+    fill: var(--accent-color);
 }
-
-.divider-wave {
+.divider--wave {
     color: var(--color-background);
 }
 
-.divider-diagonal {
+.divider--diagonal {
+    color: var(--color-accent);
+}
+
+.divider--zigzag {
     color: var(--color-accent);
 }
 
