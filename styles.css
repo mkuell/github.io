@@ -14,7 +14,8 @@
     --color-background-light: #fcfcfc;
     --color-text-dark: #edf0f2;
     --color-text-light: #333333;
-    --color-accent: #0077b6;
+    --accent-color: #0077b6;
+    --color-accent: var(--accent-color);
     --color-muted: #c4c4c4;
     --color-white: #ffffff;
 
@@ -48,7 +49,7 @@
 
 /* ===== Accessibility Enhancements ===== */
 a:focus, button:focus {
-    outline: 2px solid var(--color-accent);
+    outline: 2px solid var(--accent-color);
     border-radius: 5px;
 }
 
@@ -140,7 +141,7 @@ p {
 #logo-link {
     font-size: 2rem;
     font-weight: bold;
-    color: var(--color-accent);
+    color: var(--accent-color);
     text-transform: uppercase;
 }
 
@@ -172,7 +173,7 @@ p {
 
 
 .nav__link:hover {
-    color: var(--color-accent);
+    color: var(--accent-color);
 }
 
 
@@ -183,7 +184,7 @@ p {
     bottom: -3px;
     width: 100%;
     height: 2px;
-    background-color: var(--color-accent);
+    background-color: var(--accent-color);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform var(--transition-duration) ease;
@@ -192,7 +193,7 @@ p {
 
 /* Active navigation link */
 .nav__link--active {
-    color: var(--color-accent);
+    color: var(--accent-color);
     font-weight: bold;
 }
 
@@ -425,7 +426,7 @@ p {
 }
 
 .modal-close:hover {
-    color: var(--color-accent);
+    color: var(--accent-color);
 }
 
 /* Responsive Adjustments for Work Samples */
@@ -512,7 +513,7 @@ p {
 }
 
 .hero__cta--primary {
-    background-color: var(--color-accent);
+    background-color: var(--accent-color);
     color: #fff;
 }
 
@@ -530,7 +531,7 @@ p {
 
 .cta-button {
     display: inline-block;
-    background-color: var(--color-accent);
+    background-color: var(--accent-color);
     color: var(--color-text-dark);
     padding: 0.5rem 1.5rem;
     border-radius: 4px;
@@ -540,7 +541,7 @@ p {
 
 .cta-button:hover,
 .cta-button:focus {
-    background-color: #005f92;
+    background-color: var(--accent-color);
 }
 
 .main-title, .sub-title, .cta-text {
@@ -590,7 +591,7 @@ p {
 
 .swiper-button-prev,
 .swiper-button-next {
-    background: var(--color-accent);
+    background: var(--accent-color);
     color: var(--color-text-dark);
     border: none;
     width: 2rem;
@@ -610,7 +611,7 @@ p {
 .swiper-button-next { right: 0.5rem; }
 
 .swiper-pagination-bullet {
-    background: var(--color-accent);
+    background: var(--accent-color);
     opacity: 0.5;
 }
 
@@ -660,7 +661,7 @@ p {
 .testimonials__toggle {
     background: none;
     border: none;
-    color: var(--color-accent);
+    color: var(--accent-color);
     cursor: pointer;
     font-weight: 700;
 }
@@ -670,7 +671,7 @@ p {
 }
 
 .testimonials__toggle:focus {
-    outline: 2px solid var(--color-accent);
+    outline: 2px solid var(--accent-color);
 }
 
 @media (max-width: 768px) {
@@ -735,7 +736,7 @@ p {
 
 .about__toggle {
     width: 100%;
-    background-color: var(--color-accent);
+    background-color: var(--accent-color);
     color: var(--color-text-dark);
     border: none;
     padding: 1rem;
@@ -906,7 +907,7 @@ p {
 }
 
 .divider-diagonal {
-    color: var(--color-accent);
+    color: var(--accent-color);
 }
 
 /* ===== About & Experience Sections ===== */
