@@ -350,29 +350,39 @@ function initTestimonials() {
         }
     ];
 
-    const textEl = document.getElementById('testimonial-text');
-    const authorEl = document.getElementById('testimonial-author');
+    const slidesContainer = document.getElementById('testimonial-slides');
     const prevBtn = document.querySelector('.prev-btn');
     const nextBtn = document.querySelector('.next-btn');
 
-    if (!textEl || !authorEl || !prevBtn || !nextBtn) return;
+    if (!slidesContainer || !prevBtn || !nextBtn) return;
+
+    testimonials.forEach((t, i) => {
+        const card = document.createElement('div');
+        card.className = 'testimonial-card';
+        card.innerHTML = `<blockquote class="testimonial-quote">${t.text}</blockquote>` +
+                         `<cite class="testimonial-author">${t.author}</cite>`;
+        if (i !== 0) card.hidden = true;
+        slidesContainer.appendChild(card);
+    });
 
     let index = 0;
-    function render() {
-        const t = testimonials[index];
-        textEl.textContent = t.text;
-        authorEl.textContent = t.author;
-    }
+    const slides = slidesContainer.children;
+
+    const showSlide = idx => {
+        Array.from(slides).forEach((slide, i) => {
+            slide.hidden = i !== idx;
+        });
+    };
 
     prevBtn.addEventListener('click', () => {
-        index = (index - 1 + testimonials.length) % testimonials.length;
-        render();
+        index = (index - 1 + slides.length) % slides.length;
+        showSlide(index);
     });
 
     nextBtn.addEventListener('click', () => {
-        index = (index + 1) % testimonials.length;
-        render();
+        index = (index + 1) % slides.length;
+        showSlide(index);
     });
 
-    render();
+    showSlide(index);
 }
