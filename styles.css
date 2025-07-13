@@ -900,17 +900,9 @@ p {
     max-height: 80px;
     fill: var(--accent-color);
 }
-.divider--wave {
-    color: var(--color-background);
-}
-
-.divider--diagonal {
-    color: var(--color-accent);
-}
-
-.divider--zigzag {
-    color: var(--color-accent);
-}
+.divider--wave {}
+.divider--diagonal {}
+.divider--zigzag {}
 
 /* ===== About & Experience Sections ===== */
 /* Improve paragraph readability while keeping global text unaffected */
