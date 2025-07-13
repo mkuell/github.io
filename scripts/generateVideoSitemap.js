@@ -15,7 +15,13 @@ function escapeXml(str) {
 }
 
 function extractFromFile(filePath, baseUrl) {
-  const html = fs.readFileSync(filePath, 'utf8');
+  let html;
+  try {
+    html = fs.readFileSync(filePath, 'utf8');
+  } catch (err) {
+    console.error(`Failed to read ${filePath}:`, err.message);
+    process.exit(1);
+  }
   const dom = new JSDOM(html);
   const document = dom.window.document;
 
@@ -64,6 +70,11 @@ videos.forEach(video => {
 
 xml += `</urlset>\n`;
 
-fs.writeFileSync('video-sitemap.xml', xml, 'utf8');
-console.log(`Generated video-sitemap.xml with ${videos.length} entries.`);
+try {
+  fs.writeFileSync('video-sitemap.xml', xml, 'utf8');
+  console.log(`Generated video-sitemap.xml with ${videos.length} entries.`);
+} catch (err) {
+  console.error('Failed to write video-sitemap.xml:', err.message);
+  process.exit(1);
+}
 

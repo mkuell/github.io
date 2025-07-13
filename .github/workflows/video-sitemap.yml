@@ -5,17 +5,26 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Show Git diagnostics
+        run: |
+          git status
+          git remote -v
+          git branch
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 16
       - name: Install dependencies
-        run: npm install xmlbuilder2
+        run: npm ci
       - name: Generate video sitemap
         run: node scripts/generateVideoSitemap.js
       - name: Update robots.txt
