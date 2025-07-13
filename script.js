@@ -147,18 +147,19 @@ if (navToggle && navList) {
     });
 }
 
-// About accordion toggle
-const toggles = document.querySelectorAll('.about__toggle');
-toggles.forEach(btn => {
+// Bio card toggle
+const bioButtons = document.querySelectorAll('.bio-toggle');
+bioButtons.forEach(btn => {
     btn.addEventListener('click', () => {
+        const card = btn.closest('.bio-card');
         const expanded = btn.getAttribute('aria-expanded') === 'true';
-        toggles.forEach(t => t.setAttribute('aria-expanded', 'false'));
-        document.querySelectorAll('.about__panel').forEach(p => p.style.maxHeight = null);
-        if (!expanded) {
-            btn.setAttribute('aria-expanded', 'true');
-            const panel = document.getElementById(btn.getAttribute('aria-controls'));
+        btn.setAttribute('aria-expanded', (!expanded).toString());
+        btn.textContent = expanded ? 'Read More' : 'Show Less';
+        if (card) {
+            card.classList.toggle('expanded', !expanded);
+            const panel = card.querySelector('.bio-content');
             if (panel) {
-                panel.style.maxHeight = panel.scrollHeight + 'px';
+                panel.style.maxHeight = expanded ? null : panel.scrollHeight + 'px';
             }
         }
     });
