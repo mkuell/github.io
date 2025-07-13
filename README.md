@@ -13,3 +13,7 @@ My focus is on making the process as smooth as possible for everyone involved wh
 https://www.linkedin.com/in/mikekuell/
 https://vimeo.com/jetpak
 https://www.instagram.com/michael_kuell/
+
+## Development
+
+Run `npm run build` to generate minified assets used in production. To check performance and accessibility metrics locally ensure Chrome is installed and start a server then run `npm run audit`.

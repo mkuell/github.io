@@ -8,7 +8,9 @@
     "generate-video-sitemap": "node scripts/generateVideoSitemap.js",
     "update-robots": "node scripts/updateRobots.js",
     "ping-indexnow": "node scripts/pingIndexNow.js",
-    "video-sitemap": "npm run generate-video-sitemap && npm run update-robots && npm run ping-indexnow"
+    "video-sitemap": "npm run generate-video-sitemap && npm run update-robots && npm run ping-indexnow",
+    "build": "npx clean-css-cli -o styles.min.css styles.css && npx terser script.js -c -m -o script.min.js",
+    "audit": "npx lighthouse http://localhost:8080/index.html --quiet --chrome-flags='--headless --no-sandbox' --output=json --output-path=lh-report.json && npx @axe-core/cli http://localhost:8080/index.html --save axe-report.json"
   },
   "keywords": [],
   "author": "",
