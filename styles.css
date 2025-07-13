@@ -102,11 +102,12 @@ h2 { font-size: calc(var(--font-base) * var(--font-scale-ratio)); }
 h3 { font-size: calc(var(--font-base) * 1.25); }
 h4 { font-size: var(--font-base); }
 
-.section-title {
-    font-size: calc(var(--font-base) * var(--font-scale-ratio));
-    margin: var(--space-lg) 0 var(--space-md);
-    color: var(--accent-color);
-    text-align: center;
+.testimonials-section .section-title {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: var(--color-accent) !important; /* force light-mode accent */
+  position: relative;
+  z-index: 2;
 }
 
 p {
@@ -621,10 +622,17 @@ section + section {
 
 /* ===== Testimonials Section ===== */
 .testimonials-section {
-    background-color: var(--color-background);
-    padding: 4rem 2rem;
-    text-align: center;
+  padding: 6rem 2rem 4rem; /* extra top padding to clear sticky header */
+  background-color: #fff;
+  text-align: center;
+  position: relative;
+  z-index: 1;
 }
+/* Ensure anchored scroll offset clears header */
+#testimonials {
+  scroll-margin-top: 80px; /* adjust to your header height */
+}
+
 
 .testimonials-container {
     max-width: 800px;
