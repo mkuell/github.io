@@ -14,6 +14,11 @@ https://www.linkedin.com/in/mikekuell/
 https://vimeo.com/jetpak
 https://www.instagram.com/michael_kuell/
 
+## Setup
+
+Install dependencies with `npm install` before running tests or building the site.
+After installation, use `npm run build` to generate production assets and run `npm test` to validate HTML.
+
 ## Development
 
 Run `npm run build` to generate minified assets used in production. To check performance and accessibility metrics locally ensure Chrome is installed and start a server then run `npm run audit`.
