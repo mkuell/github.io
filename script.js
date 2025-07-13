@@ -268,7 +268,7 @@ function openModal(wrapper) {
     container.style.width = `${width}px`;
     container.style.height = `${height}px`;
     container.style.setProperty('--modal-ratio', ratioValue);
-    container.innerHTML = `<iframe src="${src}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen tabindex="0" title="Video player"></iframe>`;
+    container.innerHTML = `<iframe src="${src}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen tabindex="0" title="Video player" loading="lazy"></iframe>`;
 
     modal.hidden = false;
     document.body.style.overflow = 'hidden';
@@ -361,6 +361,7 @@ function showPreview(wrapper) {
         iframe.setAttribute('aria-hidden', 'true');
         iframe.setAttribute('tabindex', '-1');
         iframe.allow = 'autoplay; muted';
+        iframe.loading = 'lazy';
         wrapper.appendChild(iframe);
     }
     iframe.src = previewSrc;
