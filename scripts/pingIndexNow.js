@@ -1,7 +1,13 @@
 const fs = require('fs');
 const https = require('https');
 
-const key = fs.readFileSync('indexnow.txt', 'utf8').trim();
+let key;
+try {
+  key = fs.readFileSync('indexnow.txt', 'utf8').trim();
+} catch (err) {
+  console.error('Failed to read indexnow.txt:', err.message);
+  process.exit(1);
+}
 
 const urlList = [
   'https://michaelkuell.com/video-sitemap.xml',
@@ -29,12 +35,12 @@ const req = https.request(options, res => {
   let body = '';
   res.on('data', chunk => { body += chunk; });
   res.on('end', () => {
-    console.log('Response:', res.statusCode, body);
+    console.log('IndexNow response:', res.statusCode, body);
   });
 });
 
 req.on('error', err => {
-  console.error('Error:', err.message);
+  console.error('IndexNow request error:', err.message);
 });
 
 req.write(data);
