@@ -109,6 +109,13 @@ h2 { font-size: calc(var(--font-base) * var(--font-scale-ratio)); }
 h3 { font-size: calc(var(--font-base) * 1.25); }
 h4 { font-size: var(--font-base); }
 
+.section-title {
+    font-size: calc(var(--font-base) * var(--font-scale-ratio));
+    margin: var(--space-lg) 0 var(--space-md);
+    color: var(--accent-color);
+    text-align: center;
+}
+
 p {
     font-family: var(--font-body);
     font-size: var(--font-base);
