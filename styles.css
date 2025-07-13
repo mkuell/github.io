@@ -111,7 +111,7 @@ h4 { font-size: var(--font-base); }
 
 p {
     font-family: var(--font-body);
-    font-size: 1rem;
+    font-size: var(--font-base);
     line-height: var(--line-height-base);
     color: var(--color-text);
     margin-bottom: var(--space-md);
