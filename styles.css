@@ -27,6 +27,15 @@
     --hero-padding: 2rem;
     --hero-max-width: 80%;
     --hero-overlay-opacity: 0.3;
+
+    /* Typography & Spacing */
+    --font-base: 18px;
+    --line-height-base: 1.6;
+    --font-scale-ratio: 1.25;
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-md: 2rem;
+    --space-lg: 3rem;
 }
 
 /* ===== Dark Mode Variables ===== */
@@ -59,7 +68,7 @@ a:focus, button:focus {
 
 html {
     scroll-behavior: smooth;
-    font-size: 18px; /* Adjust base font size */
+    font-size: var(--font-base);
 }
 
 /* ===== Base Styles ===== */
@@ -67,7 +76,8 @@ body {
     font-family: var(--font-body);
     background-color: var(--color-background);
     color: var(--color-text);
-    line-height: 1.6;
+    font-size: var(--font-base);
+    line-height: var(--line-height-base);
     /* Fade-in effect triggered when the `.loaded` class is added in script.js */
     opacity: 0;
     transition: opacity var(--transition-duration) ease,
@@ -90,13 +100,43 @@ h1, h2, h3, h4 {
     font-weight: 700;
     text-transform: uppercase;
     color: var(--color-text);
+    margin-top: var(--space-lg);
+    margin-bottom: var(--space-sm);
 }
+
+h1 { font-size: calc(var(--font-base) * var(--font-scale-ratio) * var(--font-scale-ratio)); }
+h2 { font-size: calc(var(--font-base) * var(--font-scale-ratio)); }
+h3 { font-size: calc(var(--font-base) * 1.25); }
+h4 { font-size: var(--font-base); }
 
 p {
     font-family: var(--font-body);
     font-size: 1rem;
-    line-height: 1.8;
+    line-height: var(--line-height-base);
     color: var(--color-text);
+    margin-bottom: var(--space-md);
+}
+
+ul,
+ol {
+    margin-bottom: var(--space-md);
+    padding-left: var(--space-lg);
+}
+
+li { margin-bottom: var(--space-xs); }
+
+blockquote {
+    margin: var(--space-md) var(--space-lg);
+    padding: var(--space-sm) var(--space-md);
+    border-left: 4px solid var(--accent-color);
+}
+
+section {
+    padding: var(--space-lg) 0;
+}
+
+section + section {
+    margin-top: var(--space-lg);
 }
 
 .hidden {
@@ -924,6 +964,13 @@ p {
 
 /* Adjust typography for small screens (under 600px) */
 @media (max-width: 599px) {
+    :root {
+        --font-base: 16px;
+        --space-xs: calc(0.5rem * 0.875);
+        --space-sm: calc(1rem * 0.875);
+        --space-md: calc(2rem * 0.875);
+        --space-lg: calc(3rem * 0.875);
+    }
     #about p {
         font-size: 16px;
         line-height: 1.5;
@@ -940,6 +987,13 @@ p {
 
 /* Increase readability on very large screens (over 1200px) */
 @media (min-width: 1201px) {
+    :root {
+        --font-base: 20px;
+        --space-xs: calc(0.5rem * 1.125);
+        --space-sm: calc(1rem * 1.125);
+        --space-md: calc(2rem * 1.125);
+        --space-lg: calc(3rem * 1.125);
+    }
     #about p {
         font-size: 20px;
         line-height: 1.75;
