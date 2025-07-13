@@ -32,11 +32,15 @@
 [data-theme="dark"] {
     --color-background: var(--color-background-dark);
     --color-text: var(--color-text-dark);
+    /* Brighter accent color for elements on dark backgrounds */
+    --accent-color-dark: #1e90ff;
 }
 
 [data-theme="light"] {
     --color-background: var(--color-background-light);
     --color-text: var(--color-text-light);
+    /* Use default accent for elements on dark backgrounds */
+    --accent-color-dark: var(--color-accent);
 }
 
 /* ===== General Reset ===== */
@@ -183,7 +187,7 @@ p {
     bottom: -3px;
     width: 100%;
     height: 2px;
-    background-color: var(--color-accent);
+    background-color: var(--accent-color-dark);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform var(--transition-duration) ease;
@@ -512,7 +516,7 @@ p {
 }
 
 .hero__cta--primary {
-    background-color: var(--color-accent);
+    background-color: var(--accent-color-dark);
     color: #fff;
 }
 
@@ -530,7 +534,7 @@ p {
 
 .cta-button {
     display: inline-block;
-    background-color: var(--color-accent);
+    background-color: var(--accent-color-dark);
     color: var(--color-text-dark);
     padding: 0.5rem 1.5rem;
     border-radius: 4px;
@@ -590,7 +594,7 @@ p {
 
 .swiper-button-prev,
 .swiper-button-next {
-    background: var(--color-accent);
+    background: var(--accent-color-dark);
     color: var(--color-text-dark);
     border: none;
     width: 2rem;
@@ -610,7 +614,7 @@ p {
 .swiper-button-next { right: 0.5rem; }
 
 .swiper-pagination-bullet {
-    background: var(--color-accent);
+    background: var(--accent-color-dark);
     opacity: 0.5;
 }
 
@@ -735,7 +739,7 @@ p {
 
 .about__toggle {
     width: 100%;
-    background-color: var(--color-accent);
+    background-color: var(--accent-color-dark);
     color: var(--color-text-dark);
     border: none;
     padding: 1rem;
