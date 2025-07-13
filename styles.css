@@ -280,10 +280,6 @@ section + section {
 /* ===== Responsive Navigation ===== */
 /* Screens narrower than 768px use a hamburger menu */
 @media (max-width: 768px) {
-    .swiper-button-prev,
-    .swiper-button-next {
-        display: none;
-    }
     .nav-toggle {
         display: block;
     }
@@ -494,10 +490,6 @@ section + section {
 
 /* Responsive Adjustments for Work Samples */
 @media (max-width: 768px) {
-    .swiper-button-prev,
-    .swiper-button-next {
-        display: none;
-    }
     .work-samples-grid {
         grid-template-columns: 1fr;
     }
