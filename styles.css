@@ -245,6 +245,18 @@ section + section {
     transform: scaleX(1);
 }
 
+/* Switch header and nav links to light color when overlayed or scrolled */
+.site-header,
+.site-header .nav__link,
+.site-header #logo-link {
+    color: var(--color-text-dark);
+}
+
+.site-header .nav__link:hover,
+.site-header #logo-link:hover {
+    color: var(--accent-color-dark);
+}
+
 .nav-toggle {
     display: none;
     background: none;
