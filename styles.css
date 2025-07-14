@@ -409,11 +409,23 @@ p {
     z-index: 2;
 }
 
+.hero-overlay {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 2rem;
+    border-radius: .5rem;
+}
+
+.btn-primary {
+    background: var(--color-accent);
+    color: #fff;
+    padding: .75rem 1.5rem;
+    border-radius: .25rem;
+    text-decoration: none;
+    display: inline-block;
+}
+
 .main-title, .sub-title, .cta-text {
-    background: linear-gradient(180deg, #666, #fff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: none;
+    color: var(--color-text);
 }
 
 
