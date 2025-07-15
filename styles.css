@@ -394,7 +394,7 @@ body.nav-open {
 /* ===== Cover Page Section ===== */
 .cover-page {
     position: relative;
-    height: 100vh;
+    min-height: calc(100vh - var(--nav-height));
     overflow: hidden;
     display: flex;
     justify-content: center;
@@ -495,6 +495,28 @@ body.nav-open {
     font-size: 1rem;
     font-weight: 400;
     color: var(--color-text);
+}
+
+@media (max-width: 480px) {
+    .main-title {
+        font-size: 2rem;
+    }
+    .sub-title {
+        font-size: 1.25rem;
+    }
+    .hero-cta {
+        font-size: 1rem;
+        padding: 0.75rem 1.25rem;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+    .main-title {
+        font-size: 2.5rem;
+    }
+    .sub-title {
+        font-size: 1.375rem;
+    }
 }
 
 /* ===== Testimonials Section ===== */
