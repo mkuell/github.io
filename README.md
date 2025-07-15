@@ -17,6 +17,7 @@ https://www.instagram.com/michael_kuell/
 ## Setup
 
 1. Run `npm install` to install dependencies.
-2. Use `npm run build` to purge unused CSS and generate `styles.min.css` and `script.min.js`.
-3. Run `npm test` to validate HTML.
-4. Run `npm run test:axe` to scan the homepage with axe-core.
+2. Run `npm run lint` to check for unused variables and functions.
+3. Use `npm run build` to purge unused CSS and generate `styles.min.css` and `script.min.js`.
+4. Run `npm test` to validate HTML.
+5. Run `npm run test:axe` to scan the homepage with axe-core.
