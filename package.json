@@ -4,12 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node test/validate-html.js"
+    "test": "node test/validate-html.js",
+    "build": "node_modules/.bin/cleancss -o styles.min.css styles.css && node_modules/.bin/terser script.js -c -m -o script.min.js",
+    "audit": "npx lighthouse http://localhost:8080/index.html --quiet --chrome-flags='--headless --no-sandbox' --output=json --output-path=lh-report.json && npx @axe-core/cli http://localhost:8080/index.html --save axe-report.json"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "htmlhint": "^0.16.2"
+    "htmlhint": "^0.16.2",
+    "jsdom": "^26.1.0",
+    "clean-css-cli": "^5.6.3",
+    "terser": "^5.43.1"
   }
 }
