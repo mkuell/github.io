@@ -463,6 +463,45 @@ p {
     padding: 3rem 1rem;
 }
 
+.accordion {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+@media (min-width: 768px) {
+    .accordion {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.toggle {
+    width: 100%;
+    text-align: left;
+    padding: 0.75rem 1rem;
+    background-color: var(--color-accent);
+    color: var(--color-text);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.content {
+    overflow: hidden;
+    background-color: var(--color-muted);
+    border-radius: 0 0 4px 4px;
+    padding: 0 1rem;
+    max-height: 0;
+    transition: max-height 0.3s ease;
+}
+
+.content:not([hidden]) {
+    padding: 1rem;
+    max-height: 100vh;
+}
+
 .testimonial-carousel {
     max-width: 1200px;
     margin: 0 auto;

@@ -38,39 +38,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize video placeholders
     initVideoPlaceholders();
 
-    // Initialize testimonials carousel
-    const carouselEl = document.querySelector('.testimonial-carousel');
-    if (carouselEl && window.Swiper) {
-        const swiper = new Swiper(carouselEl, {
-            loop: true,
-            slidesPerView: 1,
-            spaceBetween: 20,
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev'
-            },
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true
-            },
-            autoplay: {
-                delay: 5000,
-                disableOnInteraction: false
-            },
-            breakpoints: {
-                768: { slidesPerView: 2 },
-                1024: { slidesPerView: 3 }
-            },
-            a11y: true
+    // Initialize testimonial accordion
+    document.querySelectorAll('.toggle').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const open = btn.getAttribute('aria-expanded') === 'true';
+            btn.setAttribute('aria-expanded', String(!open));
+            btn.nextElementSibling.hidden = open;
         });
-
-        const pause = () => swiper.autoplay.stop();
-        const play = () => swiper.autoplay.start();
-        carouselEl.addEventListener('mouseenter', pause);
-        carouselEl.addEventListener('mouseleave', play);
-        carouselEl.addEventListener('focusin', pause);
-        carouselEl.addEventListener('focusout', play);
-    }
+    });
 });
 
 
