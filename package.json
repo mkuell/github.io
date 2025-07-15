@@ -12,9 +12,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "clean-css-cli": "^5.6.3",
     "htmlhint": "^0.16.2",
     "jsdom": "^26.1.0",
-    "clean-css-cli": "^5.6.3",
+    "playwright": "^1.54.1",
     "terser": "^5.43.1"
   }
 }
