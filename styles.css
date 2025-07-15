@@ -450,6 +450,15 @@ body.nav-open {
     text-decoration: none;
     display: inline-block;
 }
+.hero-cta {
+    background: var(--color-accent);
+    color: var(--color-bg);
+    padding: .75rem 1.5rem;
+    border-radius: .25rem;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 1rem;
+}
 
 
 /* High-contrast colors for headings */
