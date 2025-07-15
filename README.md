@@ -13,3 +13,9 @@ My focus is on making the process as smooth as possible for everyone involved wh
 https://www.linkedin.com/in/mikekuell/
 https://vimeo.com/jetpak
 https://www.instagram.com/michael_kuell/
+
+## Setup
+
+1. Run `npm install` to install dependencies.
+2. Use `npm run build` to generate `styles.min.css` and `script.min.js`.
+3. Run `npm test` to validate HTML.
