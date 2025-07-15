@@ -306,24 +306,17 @@
 </section>
 
 <!-- Contact Section -->
-<section id="contact" class="contact-section" role="region" aria-labelledby="contact-heading">
-    <!-- Background Video -->
-    <div class="contact-video-container">
-        <video autoplay muted loop playsinline class="background-contact-video" aria-label="Montage of Michael Kuell's video work">
-            <source src="assets/videos/contact-video.webm" type="video/webm">
-            <source src="assets/videos/contact-video.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-    </div>
-
-    <!-- Contact Content with Text Box -->
-    <div class="contact-text-box">
-        <h2 id="contact-heading">Michael Kuell</h2>
-        <div class="contact-info">
-            <p><strong>Creative Producer | Director | Visual Storyteller</strong></p>
-            <p>👇 Contact Info Below 👇</p>
-        </div>
-    </div>
+<section id="contact">
+  <div class="contact-card">
+    <h2>Let’s Make Something Great</h2>
+    <form id="contact-form">
+      <label>Name*</label><input name="name" required>
+      <label>Email*</label><input type="email" name="email" required>
+      <label>Project Brief*</label><textarea name="message" required></textarea>
+      <button type="submit">Submit →</button>
+    </form>
+    <div id="success-msg" hidden>Thanks! I’ll be in touch soon.</div>
+  </div>
 </section>
 
 <!-- Video Modal -->

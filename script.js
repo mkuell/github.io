@@ -46,6 +46,20 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.nextElementSibling.hidden = open;
         });
     });
+
+    const form = document.getElementById('contact-form');
+    const success = document.getElementById('success-msg');
+    if (form) {
+        form.addEventListener('submit', async e => {
+            e.preventDefault();
+            const data = new FormData(form);
+            try {
+                await fetch(form.action || '/', { method: 'POST', body: data });
+            } catch (err) {}
+            form.reset();
+            if (success) success.hidden = false;
+        });
+    }
 });
 
 
