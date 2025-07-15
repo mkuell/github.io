@@ -175,6 +175,11 @@ p {
     cursor: pointer;
 }
 
+/* Prevent background scrolling when mobile nav is open */
+body.nav-open {
+    overflow: hidden;
+}
+
 /* ===== Responsive Navigation ===== */
 @media (max-width: 768px) {
     .nav-toggle {
@@ -207,7 +212,7 @@ p {
 
 /* ===== Work Samples Section ===== */
 .work-samples-section {
-    background-color: #fff;
+    background-color: var(--color-bg);
     padding: 3rem 1rem;
     max-width: 1200px;
     margin: 0 auto;
@@ -222,7 +227,7 @@ p {
 }
 
 .work-card {
-    background: #fff;
+    background: var(--color-bg);
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     border-radius: .5rem;
     overflow: hidden;
@@ -289,7 +294,7 @@ p {
     border: none;
     border-radius: 50%;
     background: rgba(0, 0, 0, 0.6);
-    color: #fff;
+    color: var(--color-bg);
     font-size: 24px;
     display: flex;
     align-items: center;
@@ -299,7 +304,7 @@ p {
 }
 
 .play-button:focus {
-    outline: 2px solid #fff;
+    outline: 2px solid var(--color-bg);
 }
 
 /* Video title overlay */
@@ -310,7 +315,7 @@ p {
     width: 100%;
     padding: 0.5rem;
     background: rgba(0, 0, 0, 0.6);
-    color: #fff;
+    color: var(--color-bg);
     font-size: 0.9rem;
     text-align: center;
     opacity: 0;
@@ -362,7 +367,7 @@ p {
     right: 0.5rem;
     background: transparent;
     border: none;
-    color: #fff;
+    color: var(--color-bg);
     font-size: 1.5rem;
     cursor: pointer;
 }
@@ -423,7 +428,7 @@ p {
 
 .btn-primary {
     background: var(--color-accent);
-    color: #fff;
+    color: var(--color-bg);
     padding: .75rem 1.5rem;
     border-radius: .25rem;
     text-decoration: none;
@@ -502,47 +507,6 @@ p {
     max-height: 100vh;
 }
 
-.testimonial-carousel {
-    max-width: 1200px;
-    margin: 0 auto;
-    position: relative;
-}
-
-.testimonial-carousel .swiper-slide {
-    display: flex;
-    justify-content: center;
-    padding: 1rem;
-}
-
-.swiper-button-prev,
-.swiper-button-next {
-    background: var(--color-accent);
-    color: var(--color-text);
-    border: none;
-    width: 2rem;
-    height: 2rem;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
-    cursor: pointer;
-}
-
-.swiper-button-prev { left: 0.5rem; }
-.swiper-button-next { right: 0.5rem; }
-
-.swiper-pagination-bullet {
-    background: var(--color-accent);
-    opacity: 0.5;
-}
-
-.swiper-pagination-bullet-active {
-    opacity: 1;
-}
 
 .testimonial-card {
     background-color: var(--color-muted);
@@ -695,81 +659,10 @@ p {
     }
 }
 
-/* ===== Contact Section ===== */
-.contact-section {
-    position: relative;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    overflow: hidden;
-}
-
-.contact-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(25, 25, 25, 0.2);
-    z-index: 1;
-    animation: fadeInOverlay 3s ease-in-out forwards;
-}
-
-.contact-video-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-}
-
-.background-contact-video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.contact-text-box {
-    position: relative;
-    background-color: rgba(84, 121, 232, 0.8);
-    backdrop-filter: blur(8px);
-    padding: 1rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    z-index: 2;
-    max-width: 800px;
-    margin: 0 auto;
-    color: #fff;
-    text-align: center;
-}
-
-.contact-section h2 {
-    font-size: 3rem;
-    margin-bottom: 1.5rem;
-}
-
-.contact-section .contact-info p, 
-.contact-section .contact-info a {
-    font-size: 1.25rem;
-    font-weight: 600;
-    text-decoration: none;
-    margin-bottom: 1rem;
-    color: #fff;
-    transition: color var(--transition-duration) ease;
-}
-
-.contact-section .contact-info a:hover {
-    color: var(--color-accent);
-}
 
 /* Simple card styling for the contact form */
 .contact-card {
-    background: #fff;
+    background: var(--color-bg);
     padding: 2rem;
     border-radius: .5rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -852,48 +745,14 @@ p {
     to { opacity: 1; }
 }
 
-/* ===== Socials ===== */
-.social-highlights-section {
-    padding: 3rem 1rem;
-    background-color: var(--color-bg);
-}
-
-.social-highlights-section .embed-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.social-highlights-section .embed-item {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.social-highlights-section .embed-item iframe,
-.social-highlights-section .embed-item embed,
-.social-highlights-section .embed-item object {
-    width: 100%;
-    max-width: 100%;
-    display: block;
-}
-
-@media (max-width: 768px) {
-    .social-highlights-section .embed-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
 @media (min-width: 768px) {
     .work-samples-section,
     .testimonials-section,
-    .bio-section,
-    .social-highlights-section {
+    .bio-section {
         padding: 6rem 2rem;
     }
 }
+
 
 /* ===== Section Dividers ===== */
 .section-divider {
