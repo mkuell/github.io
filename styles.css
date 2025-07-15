@@ -451,13 +451,18 @@ body.nav-open {
     display: inline-block;
 }
 .hero-cta {
-    background: var(--color-accent);
-    color: var(--color-bg);
-    padding: .75rem 1.5rem;
-    border-radius: .25rem;
-    text-decoration: none;
     display: inline-block;
-    margin-top: 1rem;
+    margin-top: 1.5rem;
+    padding: 1rem 2rem;
+    background-color: #0055FF;
+    color: #ffffff;
+    font-size: 1.125rem;
+    text-decoration: none;
+    border-radius: 0.25rem;
+}
+.hero-cta:focus {
+    outline: 2px dashed #ffffff;
+    outline-offset: 2px;
 }
 
 
