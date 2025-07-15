@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Smooth Scroll for Logo
-    const logoLink = document.getElementById('logo-link');
+    const logoLink = document.querySelector('.logo');
     if (logoLink) {
         logoLink.addEventListener('click', (e) => {
             e.preventDefault(); // Prevent default navigation
@@ -58,6 +58,7 @@ if (navToggle && navList) {
     navToggle.addEventListener('click', () => {
         const isActive = navList.classList.toggle('active');
         navToggle.classList.toggle('active', isActive);
+        document.body.classList.toggle('nav-open', isActive);
         navToggle.textContent = isActive ? '✖️' : '☰';
         navToggle.setAttribute('aria-expanded', isActive);
     });
@@ -69,6 +70,7 @@ if (navToggle && navList) {
             if (navList.classList.contains('active')) {
                 navList.classList.remove('active');
                 navToggle.classList.remove('active');
+                document.body.classList.remove('nav-open');
                 navToggle.textContent = '☰';
                 navToggle.setAttribute('aria-expanded', false);
             }
