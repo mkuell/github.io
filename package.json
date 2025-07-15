@@ -6,7 +6,8 @@
   "scripts": {
     "test": "node test/validate-html.js",
     "build": "node_modules/.bin/cleancss -o styles.min.css styles.css && node_modules/.bin/terser script.js -c -m -o script.min.js",
-    "audit": "npx lighthouse http://localhost:8080/index.html --quiet --chrome-flags='--headless --no-sandbox' --output=json --output-path=lh-report.json && npx @axe-core/cli http://localhost:8080/index.html --save axe-report.json"
+    "audit": "npx lighthouse http://localhost:8080/index.html --quiet --chrome-flags='--headless --no-sandbox' --output=json --output-path=lh-report.json && npx @axe-core/cli http://localhost:8080/index.html --save axe-report.json",
+    "test:puppeteer": "node test/puppeteer.test.js"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +17,7 @@
     "htmlhint": "^0.16.2",
     "jsdom": "^26.1.0",
     "playwright": "^1.54.1",
+    "puppeteer": "^24.13.0",
     "terser": "^5.43.1"
   }
 }
