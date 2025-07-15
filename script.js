@@ -1,3 +1,5 @@
+const MODAL_VIEWPORT_RATIO = 0.9;
+
 document.addEventListener("DOMContentLoaded", () => {
   document.body.classList.add("loaded");
   const yearEl = document.getElementById("current-year");
@@ -130,9 +132,10 @@ function openModal(wrapper) {
   const container = modal.querySelector(".modal-video-container");
   const src = `${wrapper.dataset.src}?autoplay=1`;
   const ratio = parseFloat(wrapper.style.getPropertyValue("--ratio")) || 16 / 9;
-  let w = 0.9 * window.innerWidth, h = w / ratio;
-  if (h > 0.9 * window.innerHeight) {
-    h = 0.9 * window.innerHeight;
+  let w = MODAL_VIEWPORT_RATIO * window.innerWidth,
+      h = w / ratio;
+  if (h > MODAL_VIEWPORT_RATIO * window.innerHeight) {
+    h = MODAL_VIEWPORT_RATIO * window.innerHeight;
     w = h * ratio;
   }
   container.style.width = `${w}px`;
@@ -144,9 +147,10 @@ function openModal(wrapper) {
   const iframe = container.querySelector("iframe");
   if (iframe) iframe.focus();
   const resizeHandler = () => {
-    let nw = 0.9 * window.innerWidth, nh = nw / ratio;
-    if (nh > 0.9 * window.innerHeight) {
-      nh = 0.9 * window.innerHeight;
+    let nw = MODAL_VIEWPORT_RATIO * window.innerWidth,
+        nh = nw / ratio;
+    if (nh > MODAL_VIEWPORT_RATIO * window.innerHeight) {
+      nh = MODAL_VIEWPORT_RATIO * window.innerHeight;
       nw = nh * ratio;
     }
     container.style.width = `${nw}px`;
