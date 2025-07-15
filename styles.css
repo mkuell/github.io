@@ -663,19 +663,16 @@ body.nav-open {
     outline: 2px solid var(--color-accent);
 }
 
-@media (min-width: 769px) {
-    .bio-toggle {
-        display: none;
-    }
+.bio-full {
+    display: none;
 }
 
-@media (max-width: 768px) {
-    .bio-card .bio-content {
-        display: none;
-    }
-    .bio-card.expanded .bio-content {
-        display: block;
-    }
+.bio-card.expanded .bio-full {
+    display: inline;
+}
+
+.bio-card.expanded li.bio-full {
+    display: list-item;
 }
 
 @media (max-width: 768px) {
