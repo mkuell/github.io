@@ -540,6 +540,30 @@ body.nav-open {
     display: none;
 }
 
+.teaser-excerpt {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+}
+
+.teaser-toggle {
+    background: none;
+    border: none;
+    color: #0055FF;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0;
+}
+
+.teaser-toggle:focus {
+    outline: 2px dashed #0055FF;
+    outline-offset: 2px;
+}
+
+.teaser-full {
+    margin-top: 0.75rem;
+}
+
 .accordion {
     max-width: 1200px;
     margin: 0 auto;

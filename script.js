@@ -26,19 +26,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   initVideoPlaceholders();
 
-  document.querySelectorAll(".testimonial").forEach(testimonial => {
-    const readMore = testimonial.querySelector(".read-more");
-    const readLess = testimonial.querySelector(".read-less");
-    const detail = testimonial.querySelector(".detail");
-    if (!readMore || !readLess || !detail) return;
-    readMore.addEventListener("click", () => {
-      detail.classList.toggle("hidden");
-      const expanded = !detail.classList.contains("hidden");
-      readMore.setAttribute("aria-expanded", expanded);
-    });
-    readLess.addEventListener("click", () => {
-      detail.classList.add("hidden");
-      readMore.setAttribute("aria-expanded", "false");
+  document.querySelectorAll(".teaser-toggle").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const section = btn.closest("section, .testimonial, .bio-card");
+      const full = section.querySelector(".teaser-full");
+      const expanded = btn.getAttribute("aria-expanded") === "true";
+      full.classList.toggle("hidden");
+      btn.textContent = expanded ? "Read More" : "Show Less";
+      btn.setAttribute("aria-expanded", String(!expanded));
     });
   });
 
@@ -84,18 +79,6 @@ if (navToggle && navList) {
   });
 }
 
-document.querySelectorAll(".bio-toggle").forEach(toggle => {
-  const bioCard = toggle.closest(".bio-card");
-  const summary = bioCard.querySelector(".bio-summary");
-  const content = bioCard.querySelector(".bio-content");
-  toggle.addEventListener("click", () => {
-    const expanded = bioCard.classList.toggle("expanded");
-    toggle.setAttribute("aria-expanded", expanded);
-    toggle.textContent = expanded ? "Show Less" : "Read More";
-    if (summary) summary.hidden = expanded;
-    if (content) content.hidden = !expanded;
-  });
-});
 
 if (navLinks.length > 0) {
   const sections = Array.from(navLinks).map(link => document.querySelector(link.hash)).filter(Boolean);
