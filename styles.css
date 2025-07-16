@@ -417,15 +417,13 @@ body.nav-open {
 
 .hero {
     position: relative;
+    background: url('assets/images/MK_background.jpg') center/cover no-repeat;
 }
 
 .hero::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1;
 }
@@ -436,10 +434,15 @@ body.nav-open {
     padding: 0 2rem;
 }
 
+.hero-content h1,
+.hero-content h2,
+.hero-content p {
+    color: #FFFFFF;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
 .hero-overlay {
-    background: rgba(255, 255, 255, 0.8);
     padding: 2rem;
-    border-radius: .5rem;
 }
 
 .btn-primary {
@@ -453,15 +456,19 @@ body.nav-open {
 .hero-cta {
     display: inline-block;
     margin-top: 1.5rem;
-    padding: 1rem 2rem;
+    padding: 0.75rem 1.5rem;
     background-color: #0055FF;
-    color: #ffffff;
+    color: #FFFFFF;
     font-size: 1.125rem;
-    text-decoration: none;
     border-radius: 0.25rem;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+}
+.hero-cta:hover {
+    background-color: #0041CC;
 }
 .hero-cta:focus {
-    outline: 2px dashed #ffffff;
+    outline: 3px dashed #FFFFFF;
     outline-offset: 2px;
 }
 
