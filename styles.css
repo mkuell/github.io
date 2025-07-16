@@ -819,20 +819,50 @@ body.nav-open {
 }
 
 
+
 #contact {
-    padding: calc(var(--space-unit) * 5) 0;
+    background: var(--color-bg);
+    padding: 100px 0;
 }
 
-/* Simple card styling for the contact form */
-.contact-card {
-    background: var(--color-bg);
-    padding: calc(var(--space-unit) * 2);
-    border-radius: .5rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
+#contact-form {
+    display: grid;
+    gap: 1rem;
+    max-width: 600px;
     margin: 0 auto;
 }
 
+.contact-row {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+@media (min-width: 768px) {
+    .contact-row {
+        flex-direction: row;
+    }
+    .contact-row .form-group {
+        flex: 1;
+    }
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    border: 2px solid navy;
+    padding: 12px;
+    font-size: 1.125rem;
+}
+
+#contact-form button {
+    background-color: var(--color-accent);
+    color: var(--color-bg);
+    padding: 16px 32px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+}
 /* ===== Footer ===== */
 .site-footer {
     background-color: var(--color-muted-bg);
