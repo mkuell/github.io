@@ -86,10 +86,14 @@ if (navToggle && navList) {
 
 document.querySelectorAll(".bio-toggle").forEach(toggle => {
   const bioCard = toggle.closest(".bio-card");
+  const summary = bioCard.querySelector(".bio-summary");
+  const content = bioCard.querySelector(".bio-content");
   toggle.addEventListener("click", () => {
     const expanded = bioCard.classList.toggle("expanded");
     toggle.setAttribute("aria-expanded", expanded);
     toggle.textContent = expanded ? "Show Less" : "Read More";
+    if (summary) summary.hidden = expanded;
+    if (content) content.hidden = !expanded;
   });
 });
 

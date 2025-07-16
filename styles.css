@@ -693,19 +693,20 @@ body.nav-open {
     outline: 2px solid var(--color-accent);
 }
 
-@media (min-width: 769px) {
-    .bio-toggle {
-        display: none;
-    }
+.bio-summary {
+    margin-bottom: 0.5rem;
 }
 
-@media (max-width: 768px) {
-    .bio-card .bio-content {
-        display: none;
-    }
-    .bio-card.expanded .bio-content {
-        display: block;
-    }
+.bio-content {
+    display: none;
+}
+
+.bio-card.expanded .bio-content {
+    display: block;
+}
+
+.bio-card.expanded .bio-summary {
+    display: none;
 }
 
 @media (max-width: 768px) {
