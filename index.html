@@ -250,17 +250,33 @@
 
 <!-- Contact Section -->
 <section id="contact">
-  <div class="contact-card">
-    <h2>Let’s Make Something Great</h2>
-    <form id="contact-form">
-      <label>Name*</label><input name="name" required>
-      <label>Email*</label><input type="email" name="email" required>
-      <label>Project Brief*</label><textarea name="message" required></textarea>
-      <button type="submit">Submit →</button>
-    </form>
-    <div id="success-msg" hidden>Thanks! I’ll be in touch soon.</div>
-  </div>
+  <h2>Contact Me</h2>
+  <p class="contact-subhead">Let’s bring your next project to life.</p>
+  <form id="contact-form">
+    <div class="contact-row">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input id="name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input id="email" type="email" name="email" required>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="phone">Phone #</label>
+      <input id="phone" type="tel" name="phone">
+    </div>
+    <div class="form-group">
+      <label for="message">What can I help you with?</label>
+      <textarea id="message" name="message" required></textarea>
+    </div>
+    <button type="submit">Send Message →</button>
+  </form>
+  <p class="response-time">I’ll reply within 24 hours.</p>
+  <div id="success-msg" hidden>Thanks! I’ll be in touch soon.</div>
 </section>
+
 
 <!-- Video Modal -->
 <div class="modal" id="video-modal" hidden aria-modal="true" role="dialog">
