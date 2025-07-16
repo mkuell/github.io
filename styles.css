@@ -5,19 +5,30 @@
 
 /* ===== CSS Variables ===== */
 :root {
+    /* Typography */
+    --font-base: 1.125rem;           /* 18px */
+    --line-height: 1.6;
+    --scale-step: 1.25;
+    --h1-size: calc(var(--font-base) * var(--scale-step) * var(--scale-step));
+    --h2-size: calc(var(--font-base) * var(--scale-step));
+    --h3-size: var(--font-base);
+
     /* Font Families */
     --font-heading: 'Raleway', Arial, sans-serif;
     --font-body: 'Nunito', Arial, sans-serif;
 
-    /* Colors */
-    --color-bg: #fff;
-    --color-text: #222;
-    --color-accent: #5479E8;
-    --color-muted: #c4c4c4;
+    /* Color Palette */
+    --color-text: #111111;
+    --color-bg: #FFFFFF;
+    --color-accent: #0055FF;
+    --color-muted-bg: #F5F5F5;
 
     /* Transition & Layout */
     --transition-duration: 0.4s;
     --nav-height: 50px;
+
+    /* Spacing */
+    --space-unit: 1rem;             /* 16px */
 }
 
 /* ===== General Reset ===== */
@@ -44,7 +55,8 @@ body {
     background-color: var(--color-bg);
     color: var(--color-text);
     font-weight: 400;
-    line-height: 1.5;
+    font-size: var(--font-base);
+    line-height: var(--line-height);
     /* Fade-in effect triggered when the `.loaded` class is added in script.js */
     opacity: 0;
     transition: opacity var(--transition-duration) ease,
@@ -62,24 +74,43 @@ section[id] {
     scroll-margin-top: var(--nav-height);
 }
 
-h1, h2, h3, h4 {
+h1, h2, h3 {
     font-family: var(--font-heading);
     font-weight: 600;
     text-transform: none;
     color: var(--color-text);
+    margin-top: 0;
+    margin-bottom: calc(var(--space-unit) * 1);
 }
+h1 { font-size: var(--h1-size); }
+h2 { font-size: var(--h2-size); }
+h3 { font-size: var(--h3-size); }
 
 p {
     font-family: var(--font-body);
-    font-size: 1rem;
     line-height: 1.8;
     color: var(--color-text);
+    margin-bottom: calc(var(--space-unit) * 1.25);
+}
+ul, ol {
+    margin-bottom: calc(var(--space-unit) * 1.25);
 }
 
 [data-aos] {
     opacity: 1;
     transform: none;
 }
+
+.section {
+    padding: calc(var(--space-unit) * 5) 0;
+}
+
+.section--odd { background-color: var(--color-bg); }
+.section--even { background-color: var(--color-muted-bg); }
+
+.mt-lg { margin-top: calc(var(--space-unit) * 3); }
+.mb-lg { margin-bottom: calc(var(--space-unit) * 3); }
+.gap-grid { gap: var(--space-unit); }
 
 /* ===== Site Header ===== */
 .site-header {
@@ -132,7 +163,7 @@ p {
 }
 
 .nav-list li {
-    margin-left: 2rem;
+    margin-left: calc(var(--space-unit) * 2);
 }
 
 .nav-list a {
@@ -190,7 +221,7 @@ body.nav-open {
         position: absolute;
         top: var(--nav-height);
         right: 0;
-        background-color: var(--color-muted);
+        background-color: var(--color-muted-bg);
         flex-direction: column;
         width: 200px;
         max-height: 0;
@@ -213,7 +244,7 @@ body.nav-open {
 /* ===== Work Samples Section ===== */
 .work-samples-section {
     background-color: var(--color-bg);
-    padding: 3rem 1rem;
+    padding: calc(var(--space-unit) * 5) 0;
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -221,7 +252,7 @@ body.nav-open {
 .work-samples-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
+    gap: calc(var(--space-unit) * 2);
     justify-items: center;
     align-items: start;
 }
@@ -235,7 +266,6 @@ body.nav-open {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    margin-bottom: 2rem;
 }
 
 .work-card:hover {
@@ -529,11 +559,11 @@ body.nav-open {
 /* ===== Testimonials Section ===== */
 .testimonials-section {
     background-color: var(--color-bg);
-    padding: 3rem 1rem;
+    padding: calc(var(--space-unit) * 5) 0;
 }
 
 .testimonial .detail {
-    margin-top: 16px;
+    margin-top: var(--space-unit);
 }
 
 .hidden {
@@ -569,7 +599,7 @@ body.nav-open {
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: var(--space-unit);
 }
 
 @media (min-width: 768px) {
@@ -591,7 +621,7 @@ body.nav-open {
 
 .content {
     overflow: hidden;
-    background-color: var(--color-muted);
+    background-color: var(--color-muted-bg);
     border-radius: 0 0 4px 4px;
     padding: 0 1rem;
     max-height: 0;
@@ -599,13 +629,13 @@ body.nav-open {
 }
 
 .content:not([hidden]) {
-    padding: 1rem;
+    padding: var(--space-unit);
     max-height: 100vh;
 }
 
 
 .testimonial-card {
-    background-color: var(--color-muted);
+    background-color: var(--color-muted-bg);
     padding: 2rem;
     border-radius: 12px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
@@ -651,7 +681,7 @@ body.nav-open {
 /* ===== Bio Section ===== */
 .bio-section {
     background: url('assets/images/MK_background.jpg') center center / cover no-repeat fixed;
-    padding: 3rem 1rem;
+    padding: calc(var(--space-unit) * 5) 0;
     position: relative;
     display: flex;
     align-items: center;
@@ -677,7 +707,7 @@ body.nav-open {
     z-index: 2;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
+    gap: calc(var(--space-unit) * 2);
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem;
@@ -743,7 +773,7 @@ body.nav-open {
 @media (max-width: 768px) {
     .bio-cards {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
+        gap: calc(var(--space-unit) * 1.5);
     }
     .bio-card {
         padding: 1.5rem;
@@ -757,10 +787,14 @@ body.nav-open {
 }
 
 
+#contact {
+    padding: calc(var(--space-unit) * 5) 0;
+}
+
 /* Simple card styling for the contact form */
 .contact-card {
     background: var(--color-bg);
-    padding: 2rem;
+    padding: calc(var(--space-unit) * 2);
     border-radius: .5rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     max-width: 400px;
@@ -769,8 +803,8 @@ body.nav-open {
 
 /* ===== Footer ===== */
 .site-footer {
-    background-color: var(--color-muted);
-    padding: 1rem 2rem;
+    background-color: var(--color-muted-bg);
+    padding: var(--space-unit) calc(var(--space-unit) * 2);
     text-align: center;
     color: var(--color-text);
     font-size: 1rem;
@@ -778,7 +812,7 @@ body.nav-open {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
+    gap: calc(var(--space-unit) * 0.5);
 }
 
 .site-footer p {
@@ -786,14 +820,14 @@ body.nav-open {
 }
 
 .site-footer a {
-    margin: 0 0.5rem;
+    margin: 0 calc(var(--space-unit) * 0.5);
     display: inline-block;
 }
 
 .contact-icon {
     width: 35px;
     height: auto;
-    margin: 0 4px;
+    margin: 0 calc(var(--space-unit) * 0.25);
     vertical-align: middle;
 }
 
