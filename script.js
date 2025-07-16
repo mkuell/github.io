@@ -209,25 +209,3 @@ document.addEventListener("keydown", e => {
   if (e.key === "Escape") closeModal();
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-  const lightbox = document.getElementById('lightbox');
-  const lbImg = lightbox.querySelector('img');
-  const closeBtn = lightbox.querySelector('.lightbox-close');
-
-  document.querySelectorAll('.portfolio-item img').forEach(img => {
-    img.addEventListener('click', () => {
-      lbImg.src = img.dataset.full;
-      lbImg.alt = img.alt;
-      lightbox.classList.remove('hidden');
-    });
-  });
-
-  closeBtn.addEventListener('click', () => {
-    lightbox.classList.add('hidden');
-    lbImg.src = '';
-  });
-
-  lightbox.addEventListener('click', e => {
-    if (e.target === lightbox) closeBtn.click();
-  });
-});
