@@ -241,20 +241,23 @@ body.nav-open {
 
 }
 
-/* ===== Work Samples Section ===== */
-.work-samples-section {
-    background-color: var(--color-bg);
-    padding: calc(var(--space-unit) * 5) 0;
-    max-width: 1200px;
-    margin: 0 auto;
+/* ===== Portfolio Section ===== */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: calc(var(--space-unit) * 1.5);
 }
 
-.work-samples-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: calc(var(--space-unit) * 2);
-    justify-items: center;
-    align-items: start;
+.portfolio-item img {
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: transform 0.2s ease;
+}
+
+.portfolio-item img:hover {
+    transform: scale(1.02);
 }
 
 .work-card {
@@ -402,24 +405,53 @@ body.nav-open {
     cursor: pointer;
 }
 
-/* Responsive Adjustments for Work Samples */
+/* ===== Image Lightbox ===== */
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+.lightbox.hidden { display: none; }
+
+.lightbox-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+}
+
+.lightbox-content img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: -1rem;
+    right: -1rem;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+/* Responsive Adjustments for Portfolio */
 @media (max-width: 768px) {
-    .work-samples-grid {
+    .portfolio-grid {
         grid-template-columns: 1fr;
-    }
-    .work-card {
-        margin-bottom: 1.5rem;
-    }
-    .video-wrapper {
-        max-width: 85%;
     }
 }
 
-@media (max-width: 480px) {
-    .video-wrapper {
-        max-width: 100%;
-    }
-}
+
 
 /* ===== Cover Page Section ===== */
 .cover-page {
