@@ -525,6 +525,14 @@ body.nav-open {
     padding: 3rem 1rem;
 }
 
+.testimonial .detail {
+    margin-top: 16px;
+}
+
+.hidden {
+    display: none;
+}
+
 .accordion {
     max-width: 1200px;
     margin: 0 auto;

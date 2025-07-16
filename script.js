@@ -26,11 +26,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
   initVideoPlaceholders();
 
-  document.querySelectorAll(".toggle").forEach(toggle => {
-    toggle.addEventListener("click", () => {
-      const expanded = toggle.getAttribute("aria-expanded") === "true";
-      toggle.setAttribute("aria-expanded", String(!expanded));
-      toggle.nextElementSibling.hidden = expanded;
+  document.querySelectorAll(".testimonial").forEach(testimonial => {
+    const readMore = testimonial.querySelector(".read-more");
+    const readLess = testimonial.querySelector(".read-less");
+    const detail = testimonial.querySelector(".detail");
+    if (!readMore || !readLess || !detail) return;
+    readMore.addEventListener("click", () => {
+      detail.classList.toggle("hidden");
+      const expanded = !detail.classList.contains("hidden");
+      readMore.setAttribute("aria-expanded", expanded);
+    });
+    readLess.addEventListener("click", () => {
+      detail.classList.add("hidden");
+      readMore.setAttribute("aria-expanded", "false");
     });
   });
 
