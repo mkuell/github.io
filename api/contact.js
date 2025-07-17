@@ -56,7 +56,7 @@ module.exports = async function handler(req, res) {
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify({ success: true }));
   } catch (err) {
-    console.error(err);
+    console.error('Contact API email error:', err);
     res.statusCode = 500;
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify({ success: false }));
