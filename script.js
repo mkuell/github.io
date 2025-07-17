@@ -1,6 +1,6 @@
 const MODAL_VIEWPORT_RATIO = 0.9;
 
-document.addEventListener("DOMContentLoaded", () => {
+function init() {
   document.body.classList.add("loaded");
   const yearEl = document.getElementById("current-year");
   if (yearEl) yearEl.textContent = (new Date).getFullYear();
@@ -54,13 +54,21 @@ document.addEventListener("DOMContentLoaded", () => {
         if (resp.ok && json && json.success) {
           contactForm.reset();
           if (successMsg) successMsg.hidden = false;
+        } else {
+          alert("Sorry, there was a problem sending your message. Please try again later.");
         }
       } catch (err) {
-        /* ignore network errors */
+        alert("Sorry, there was a problem sending your message. Please try again later.");
       }
     });
   }
-});
+}
+
+if (document.readyState !== "loading") {
+  init();
+} else {
+  document.addEventListener("DOMContentLoaded", init);
+}
 
 const navToggle = document.querySelector(".nav-toggle");
 const navList = document.querySelector(".nav-list");
