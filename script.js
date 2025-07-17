@@ -54,9 +54,11 @@ document.addEventListener("DOMContentLoaded", () => {
         if (resp.ok && json && json.success) {
           contactForm.reset();
           if (successMsg) successMsg.hidden = false;
+        } else {
+          alert("Sorry, there was a problem sending your message. Please try again later.");
         }
       } catch (err) {
-        /* ignore network errors */
+        alert("Sorry, there was a problem sending your message. Please try again later.");
       }
     });
   }
