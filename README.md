@@ -21,3 +21,14 @@ https://www.instagram.com/michael_kuell/
 3. Use `npm run build` to purge unused CSS and generate `styles.min.css` and `script.min.js`.
 4. Run `npm test` to validate HTML.
 5. Run `npm run test:axe` to scan the homepage with axe-core.
+
+## Environment Variables
+
+The `/api/contact` function uses Nodemailer to send form submissions. Configure the following variables in your hosting provider:
+
+* `SMTP_HOST` – SMTP server host
+* `SMTP_PORT` – SMTP server port
+* `SMTP_USER` – SMTP username
+* `SMTP_PASS` – SMTP password
+* `SMTP_SECURE` – set to `true` if the server requires TLS (optional)
+* `FROM_EMAIL` – email address to use in the `from` field (optional, defaults to `SMTP_USER`)

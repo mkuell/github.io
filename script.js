@@ -43,12 +43,21 @@ document.addEventListener("DOMContentLoaded", () => {
   if (contactForm) {
     contactForm.addEventListener("submit", async e => {
       e.preventDefault();
-      const formData = new FormData(contactForm);
+      const data = Object.fromEntries(new FormData(contactForm).entries());
       try {
-        await fetch(contactForm.action || "/", { method: "POST", body: formData });
-      } catch (err) { }
-      contactForm.reset();
-      if (successMsg) successMsg.hidden = false;
+        const resp = await fetch(contactForm.action, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
+        const json = await resp.json();
+        if (resp.ok && json && json.success) {
+          contactForm.reset();
+          if (successMsg) successMsg.hidden = false;
+        }
+      } catch (err) {
+        /* ignore network errors */
+      }
     });
   }
 });
