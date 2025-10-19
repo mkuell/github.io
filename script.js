@@ -111,12 +111,23 @@ function initVideoPlaceholders() {
     const img = wrapper.querySelector("img");
     const playBtn = wrapper.querySelector(".play-button");
     if (!img || !playBtn) return;
-    const title = wrapper.dataset.title;
-    if (title) {
-      const titleDiv = document.createElement("div");
-      titleDiv.className = "video-title";
-      titleDiv.textContent = title;
-      wrapper.appendChild(titleDiv);
+    const title = (wrapper.dataset.title || "").trim();
+    const card = wrapper.closest(".work-card");
+    if (card) {
+      const captionTitle = card.querySelector(".work-card__title");
+      if (title && captionTitle && !captionTitle.textContent.trim()) {
+        captionTitle.textContent = title;
+      }
+      const cardButton = card.querySelector(".work-card__cta");
+      if (cardButton) {
+        const buttonLabel = title ? `Play ${title}` : "Play video";
+        cardButton.setAttribute("aria-label", buttonLabel);
+        cardButton.textContent = title ? `Watch “${title}”` : "Watch video";
+        cardButton.addEventListener("click", e => {
+          e.preventDefault();
+          openModal(wrapper);
+        });
+      }
     }
     const setRatio = () => {
       const ratio = img.naturalWidth / img.naturalHeight;
