@@ -369,24 +369,33 @@ body.nav-open {
 /* Video title overlay */
 .video-title {
     position: absolute;
-    top: 0;
     left: 0;
+    right: 0;
+    bottom: 0;
     width: 100%;
-    padding: 0.5rem;
-    background: rgba(0, 0, 0, 0.6);
+    padding: 0.75rem 1rem;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.75) 100%);
     color: var(--color-bg);
-    font-size: 0.9rem;
-    text-align: center;
-    opacity: 0;
-    transform: translateY(-100%);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    pointer-events: none;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    font-weight: 600;
+    text-align: left;
+    transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    pointer-events: auto;
     z-index: 1;
 }
 
-.video-wrapper:hover .video-title {
-    opacity: 1;
-    transform: translateY(0);
+.video-wrapper:hover .video-title,
+.video-wrapper:focus-within .video-title {
+    background: rgba(0, 0, 0, 0.8);
+    color: var(--color-bg);
+}
+
+.video-title:focus {
+    background: rgba(0, 0, 0, 0.85);
+    color: var(--color-bg);
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
 }
 
 /* Lightbox Modal */
