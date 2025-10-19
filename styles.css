@@ -248,6 +248,24 @@ body.nav-open {
     gap: calc(var(--space-unit) * 2.25) calc(var(--space-unit) * 1.5);
 }
 
+@media (min-width: 1024px) {
+    .portfolio-grid {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        grid-template-areas:
+            "feature feature . . . .";
+        grid-auto-flow: row dense;
+    }
+
+    .portfolio-grid > .work-card {
+        grid-column: span 2;
+    }
+
+    .portfolio-grid > .work-card--featured:first-of-type {
+        grid-area: feature;
+        grid-column: auto;
+    }
+}
+
 .portfolio-item img {
     width: 100%;
     height: auto;
@@ -286,7 +304,7 @@ body.nav-open {
 
 @media (min-width: 768px) {
     .work-card--featured {
-        grid-column: span 2;
+        grid-column: auto;
     }
 }
 
