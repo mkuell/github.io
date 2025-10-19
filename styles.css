@@ -244,8 +244,8 @@ body.nav-open {
 /* ===== Portfolio Section ===== */
 .portfolio-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: calc(var(--space-unit) * 1.5);
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: calc(var(--space-unit) * 2.25) calc(var(--space-unit) * 1.5);
 }
 
 .portfolio-item img {
@@ -445,7 +445,13 @@ body.nav-open {
 }
 
 /* Responsive Adjustments for Portfolio */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
+    .portfolio-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+}
+
+@media (max-width: 620px) {
     .portfolio-grid {
         grid-template-columns: 1fr;
     }
@@ -738,7 +744,7 @@ body.nav-open {
     position: relative;
     z-index: 2;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: calc(var(--space-unit) * 2);
     max-width: 1200px;
     margin: 0 auto;
@@ -802,7 +808,13 @@ body.nav-open {
     display: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
+    .bio-cards {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+}
+
+@media (max-width: 620px) {
     .bio-cards {
         grid-template-columns: 1fr;
         gap: calc(var(--space-unit) * 1.5);
