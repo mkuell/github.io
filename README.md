@@ -21,6 +21,9 @@ https://www.instagram.com/michael_kuell/
 3. Use `npm run build` to purge unused CSS and generate `styles.min.css` and `script.min.js`.
 4. Run `npm test` to validate HTML.
 5. Run `npm run test:axe` to scan the homepage with axe-core.
+6. Run `npm run audit:technical` to generate Core Web Vitals, indexing, and crawl budget reports. Pass a production URL with `AUDIT_URL="https://example.com" npm run audit:technical` when auditing a deployed site.
+
+Audit reports are written to `/reports/technical-audit.json` and `/reports/technical-audit.md` with prioritized fixes and impact scores.
 
 ## Environment Variables
 
