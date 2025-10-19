@@ -261,14 +261,22 @@ body.nav-open {
 }
 
 .work-card {
+    --card-padding: 1rem;
     background: var(--color-bg);
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     border-radius: .5rem;
     overflow: hidden;
+    padding: var(--card-padding);
     transition: transform 0.3s ease;
     display: flex;
     flex-direction: column;
     align-items: stretch;
+}
+
+.work-card .video-wrapper {
+    border-radius: inherit;
+    margin: calc(var(--card-padding) * -1);
+    overflow: hidden;
 }
 
 .work-card:hover {
@@ -286,8 +294,7 @@ body.nav-open {
 .video-wrapper {
     position: relative;
     width: 100%;
-    max-width: 95%;
-    margin: 0 auto;
+    margin: 0;
     --ratio: 16/9;
     aspect-ratio: var(--ratio);
     overflow: hidden;
@@ -300,6 +307,7 @@ body.nav-open {
     height: 100%;
     object-fit: cover;
     display: block;
+    border-radius: inherit;
 }
 
 .preview-iframe {
