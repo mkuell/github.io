@@ -9,18 +9,23 @@
     "build": "node_modules/.bin/purgecss --css styles.css --content index.html 404.html script.js --output styles.purged.css && node_modules/.bin/cleancss -o styles.min.css styles.purged.css && rm styles.purged.css && node_modules/.bin/terser script.js -c -m -o script.min.js",
     "audit": "npx lighthouse http://localhost:8080/index.html --quiet --chrome-flags='--headless --no-sandbox' --output=json --output-path=lh-report.json && npx @axe-core/cli http://localhost:8080/index.html --save axe-report.json",
     "test:puppeteer": "node test/puppeteer.test.js",
-    "lint": "eslint script.js scripts/*.js"
+    "lint": "eslint script.js scripts/*.js",
+    "audit:technical": "node scripts/technicalAudit.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "axe-core": "^4.10.3",
+    "chrome-launcher": "^1.1.1",
     "clean-css-cli": "^5.6.3",
     "htmlhint": "^0.16.2",
     "jsdom": "^26.1.0",
+    "lighthouse": "^13.0.0",
     "playwright": "^1.54.1",
     "puppeteer": "^24.13.0",
+    "fast-xml-parser": "^4.4.1",
+    "node-fetch": "^3.3.2",
     "terser": "^5.43.1",
     "purgecss": "^7.0.2",
     "eslint": "^8.56.0"
