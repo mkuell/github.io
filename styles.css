@@ -568,7 +568,6 @@ body.nav-open {
 
 .hero {
     position: relative;
-    background: url('assets/images/MK_background.jpg') center/cover no-repeat;
 }
 
 .hero::before {
