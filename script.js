@@ -75,11 +75,6 @@ function setNavVisibility(visible) {
   if (!navList) return;
   navList.dataset.visible = visible ? "true" : "false";
   navList.setAttribute("aria-hidden", String(!visible));
-  if (!visible && MOBILE_NAV_QUERY.matches) {
-    navList.setAttribute("hidden", "");
-  } else {
-    navList.removeAttribute("hidden");
-  }
   if (visible) {
     navList.removeAttribute("inert");
   } else {
@@ -98,7 +93,6 @@ function syncNavToViewport() {
       navToggle.classList.remove("active");
       navToggle.textContent = "☰";
       navToggle.setAttribute("aria-expanded", "false");
-      navToggle.setAttribute("aria-label", "Open navigation menu");
     }
     document.body.classList.remove("nav-open");
   }
@@ -106,18 +100,13 @@ function syncNavToViewport() {
 
 if (navToggle && navList) {
   navToggle.setAttribute("aria-expanded", "false");
-  navToggle.setAttribute("aria-label", "Open navigation menu");
-  syncNavToViewport();
-  if (MOBILE_NAV_QUERY.matches) {
-    setNavVisibility(false);
-  }
+  setNavVisibility(false);
   navToggle.addEventListener("click", () => {
     const active = !navToggle.classList.contains("active");
     navToggle.classList.toggle("active", active);
     document.body.classList.toggle("nav-open", active);
     navToggle.textContent = active ? "✖️" : "☰";
     navToggle.setAttribute("aria-expanded", String(active));
-    navToggle.setAttribute("aria-label", active ? "Close navigation menu" : "Open navigation menu");
     setNavVisibility(active);
   });
   navLinks.forEach(link => {
@@ -132,6 +121,7 @@ if (navToggle && navList) {
     });
   });
   MOBILE_NAV_QUERY.addEventListener("change", syncNavToViewport);
+  syncNavToViewport();
 } else if (navList) {
   setNavVisibility(true);
 }
@@ -195,7 +185,6 @@ function openModal(wrapper) {
   const container = modal.querySelector(".modal-video-container");
   const modalTitle = modal.querySelector("#video-modal-title");
   const closeButton = modal.querySelector(".modal-close");
-  if (!container) return;
   const src = `${wrapper.dataset.src}?autoplay=1`;
   const ratio = parseFloat(wrapper.style.getPropertyValue("--ratio")) || 16 / 9;
   const videoTitle = (wrapper.dataset.title || wrapper.querySelector(".video-title")?.textContent || "Video").trim();
