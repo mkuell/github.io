@@ -181,6 +181,7 @@ function initVideoPlaceholders() {
 function openModal(wrapper) {
   hidePreview(wrapper);
   const modal = document.getElementById("video-modal");
+  if (!modal) return;
   const container = modal.querySelector(".modal-video-container");
   const modalTitle = modal.querySelector("#video-modal-title");
   const closeButton = modal.querySelector(".modal-close");
@@ -242,7 +243,9 @@ function openModal(wrapper) {
 
 function closeModal() {
   const modal = document.getElementById("video-modal");
+  if (!modal) return;
   const container = modal.querySelector(".modal-video-container");
+  if (!container) return;
   modal.hidden = true;
   modal.setAttribute("aria-hidden", "true");
   container.innerHTML = "";
@@ -294,11 +297,24 @@ function hidePreview(wrapper) {
   if (iframe) iframe.remove();
 }
 
-document.querySelector("#video-modal .modal-close").addEventListener("click", closeModal);
-document.getElementById("video-modal").addEventListener("click", function(e) {
-  if (e.target === this) closeModal();
-});
-document.querySelector("#video-modal .modal-content").addEventListener("click", e => e.stopPropagation());
+const modalRoot = document.getElementById("video-modal");
+const modalCloseButton = document.querySelector("#video-modal .modal-close");
+const modalContent = document.querySelector("#video-modal .modal-content");
+
+if (modalCloseButton) {
+  modalCloseButton.addEventListener("click", closeModal);
+}
+
+if (modalRoot) {
+  modalRoot.addEventListener("click", function(e) {
+    if (e.target === this) closeModal();
+  });
+}
+
+if (modalContent) {
+  modalContent.addEventListener("click", e => e.stopPropagation());
+}
+
 document.addEventListener("keydown", e => {
   const modal = document.getElementById("video-modal");
   if (e.key === "Escape" && modal && !modal.hidden) closeModal();
