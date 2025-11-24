@@ -28,17 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   initVideoPlaceholders();
-
-  document.querySelectorAll(".teaser-toggle").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const section = btn.closest("section, .testimonial, .bio-card");
-      const full = section.querySelector(".teaser-full");
-      const expanded = btn.getAttribute("aria-expanded") === "true";
-      full.classList.toggle("hidden");
-      btn.textContent = expanded ? "Read More" : "Show Less";
-      btn.setAttribute("aria-expanded", String(!expanded));
-    });
-  });
+  initDisclosures();
 
   // Contact form handler (if exists)
   const contactForm = document.getElementById("contact-form");
@@ -139,6 +129,64 @@ if (navLinks.length > 0) {
     });
   }, { threshold: 0.25 });
   sections.forEach(section => observer.observe(section));
+}
+
+function initDisclosures() {
+  document.querySelectorAll(".teaser-toggle").forEach(btn => {
+    const target = findDisclosureTarget(btn);
+    if (!target) return;
+    const expanded = btn.getAttribute("aria-expanded") === "true";
+    setDisclosureState(btn, target, expanded);
+    btn.addEventListener("click", () => {
+      const isExpanded = btn.getAttribute("aria-expanded") === "true";
+      setDisclosureState(btn, target, !isExpanded);
+      if (!isExpanded) {
+        focusDisclosureContent(target);
+      } else {
+        btn.focus();
+      }
+    });
+  });
+
+  document.querySelectorAll(".teaser-collapse-all").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const scope = btn.closest("section") || document;
+      scope.querySelectorAll(".teaser-toggle[aria-expanded='true']").forEach(toggle => {
+        const target = findDisclosureTarget(toggle);
+        if (target) setDisclosureState(toggle, target, false);
+      });
+      btn.setAttribute("aria-pressed", "true");
+      setTimeout(() => btn.removeAttribute("aria-pressed"), 250);
+    });
+  });
+}
+
+function findDisclosureTarget(btn) {
+  const controlledId = btn.getAttribute("aria-controls");
+  if (controlledId) return document.getElementById(controlledId);
+  const section = btn.closest(".testimonial-card, .bio-card, section");
+  return section?.querySelector(".teaser-full");
+}
+
+function setDisclosureState(btn, target, expanded) {
+  btn.setAttribute("aria-expanded", String(expanded));
+  btn.textContent = expanded ? "Show Less" : "Read More";
+  target.hidden = !expanded;
+  target.classList.toggle("hidden", !expanded);
+}
+
+function focusDisclosureContent(target) {
+  const focusable = target.querySelector("button, [href], input, select, textarea, [tabindex]:not([tabindex='-1'])");
+  if (focusable) {
+    focusable.focus();
+    return;
+  }
+  const needsCleanup = !target.hasAttribute("tabindex");
+  target.setAttribute("tabindex", "-1");
+  target.focus();
+  if (needsCleanup) {
+    target.addEventListener("blur", () => target.removeAttribute("tabindex"), { once: true });
+  }
 }
 
 function initVideoPlaceholders() {
