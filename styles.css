@@ -57,15 +57,29 @@ body {
     font-weight: 400;
     font-size: var(--font-base);
     line-height: var(--line-height);
-    /* Fade-in effect triggered when the `.loaded` class is added in script.js */
-    opacity: 0;
     transition: opacity var(--transition-duration) ease,
                 background-color var(--transition-duration) ease,
                 color var(--transition-duration) ease;
 }
 
-/* Final state once the page has loaded */
-body.loaded {
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Fade-in effect only when JavaScript is available */
+.js body {
+    opacity: 0;
+}
+
+.js body.loaded {
     opacity: 1;
 }
 
@@ -224,13 +238,13 @@ body.nav-open {
         background-color: var(--color-muted-bg);
         flex-direction: column;
         width: 200px;
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height var(--transition-duration) ease;
+        display: none;
+        padding: 0.5rem 0;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     }
 
-    .nav-list.active {
-        max-height: 500px;
+    .nav-list[data-visible="true"] {
+        display: flex;
     }
 
     .nav-list li {
