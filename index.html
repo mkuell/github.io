@@ -457,29 +457,37 @@
   <div class="contact-content">
     <h2 id="contact-heading">Contact Me</h2>
     <p class="contact-subhead">Let’s bring your next project to life.</p>
-    <form id="contact-form" action="/api/contact" method="POST">
+    <form id="contact-form" action="/api/contact" method="POST" novalidate>
       <div class="contact-row">
         <div class="form-group">
           <label for="name">Name</label>
-          <input id="name" name="name" required>
+          <input id="name" name="name" type="text" required aria-describedby="name-error">
+          <p class="field-error" id="name-error" role="alert" hidden></p>
         </div>
         <div class="form-group">
           <label for="email">Email</label>
-          <input id="email" type="email" name="email" required>
+          <input id="email" type="email" name="email" required aria-describedby="email-error">
+          <p class="field-error" id="email-error" role="alert" hidden></p>
         </div>
       </div>
       <div class="form-group">
         <label for="phone">Phone #</label>
-        <input id="phone" type="tel" name="phone">
+        <input id="phone" type="tel" name="phone" inputmode="tel" aria-describedby="phone-error">
+        <p class="field-error" id="phone-error" role="alert" hidden></p>
       </div>
       <div class="form-group">
         <label for="message">What can I help you with?</label>
-        <textarea id="message" name="message" required></textarea>
+        <textarea id="message" name="message" required aria-describedby="message-error"></textarea>
+        <p class="field-error" id="message-error" role="alert" hidden></p>
       </div>
       <button type="submit">Send Message →</button>
     </form>
+    <div id="form-status" class="form-status" role="status" aria-live="polite" hidden></div>
     <p class="response-time">I’ll reply within 24 hours.</p>
     <div id="success-msg" hidden>Thanks! I’ll be in touch soon.</div>
+    <noscript>
+      <p class="form-noscript">JavaScript is disabled, so the form will submit using a standard page load.</p>
+    </noscript>
   </div>
 </section>
 
