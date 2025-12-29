@@ -294,6 +294,11 @@ function hidePreview(wrapper) {
   if (iframe) iframe.remove();
 }
 
+const videoModalElement = document.getElementById("video-modal");
+if (videoModalElement) {
+  videoModalElement.setAttribute("aria-hidden", "true");
+}
+
 document.querySelector("#video-modal .modal-close").addEventListener("click", closeModal);
 document.getElementById("video-modal").addEventListener("click", function(e) {
   if (e.target === this) closeModal();
