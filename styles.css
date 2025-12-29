@@ -558,6 +558,7 @@ body.nav-open {
 .cover-page {
     position: relative;
     min-height: calc(100vh - var(--nav-height));
+    background: #000 url('assets/images/MK_clay.jpg') center center / cover no-repeat;
     overflow: hidden;
     display: flex;
     justify-content: center;
@@ -576,6 +577,11 @@ body.nav-open {
     z-index: -1;
     transform: translate(-50%, -50%);
     background-size: cover;
+}
+
+.background-video.is-motion-reduced {
+    opacity: 0;
+    visibility: hidden;
 }
 
 .hero {
@@ -1010,6 +1016,12 @@ body.nav-open {
     background: rgba(0, 0, 0, 0.25);
     z-index: 1;
     animation: fadeInOverlay 2.5s ease-in-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .background-video {
+        display: none;
+    }
 }
 
 #contact .background-video {

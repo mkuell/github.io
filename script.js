@@ -1,5 +1,6 @@
 const MODAL_VIEWPORT_RATIO = 0.9;
 const MOBILE_NAV_QUERY = window.matchMedia("(max-width: 768px)");
+const PREFERS_REDUCED_MOTION = window.matchMedia("(prefers-reduced-motion: reduce)");
 let lastFocusedElement = null;
 let modalFocusTrap = null;
 
@@ -29,6 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   initVideoPlaceholders();
   initDisclosures();
+  initBackgroundVideos();
 
   // Contact form handler (if exists)
   initContactForm();
@@ -305,6 +307,74 @@ function focusDisclosureContent(target) {
   }
 }
 
+function initBackgroundVideos() {
+  const videos = Array.from(document.querySelectorAll(".background-video"));
+  if (videos.length === 0) return;
+
+  const observerSupported = typeof IntersectionObserver === "function";
+  const loadSources = video => {
+    if (video.dataset.sourcesLoaded === "true") return;
+    video.querySelectorAll("source[data-src]").forEach(source => {
+      if (!source.src) source.src = source.dataset.src;
+    });
+    video.load();
+    video.dataset.sourcesLoaded = "true";
+  };
+
+  const pauseVideo = video => {
+    if (!video.paused) video.pause();
+    video.dataset.playing = "false";
+  };
+
+  const playVideo = video => {
+    video.dataset.playing = "true";
+    video.play().catch(() => {});
+  };
+
+  const updatePlayback = (video, isVisible) => {
+    const reduceMotion = PREFERS_REDUCED_MOTION.matches;
+    video.classList.toggle("is-motion-reduced", reduceMotion);
+    if (reduceMotion) {
+      pauseVideo(video);
+      return;
+    }
+    if (isVisible) {
+      loadSources(video);
+      playVideo(video);
+    } else {
+      pauseVideo(video);
+    }
+  };
+
+  const observer = observerSupported ? new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      const video = entry.target;
+      video.dataset.visible = String(entry.isIntersecting);
+      updatePlayback(video, entry.isIntersecting);
+    });
+  }, { threshold: 0.35 }) : null;
+
+  const handleMotionChange = () => {
+    videos.forEach(video => updatePlayback(video, video.dataset.visible === "true"));
+  };
+
+  PREFERS_REDUCED_MOTION.addEventListener("change", handleMotionChange);
+
+  videos.forEach(video => {
+    video.dataset.visible = "false";
+    if (!video.hasAttribute("preload")) {
+      video.preload = "none";
+    }
+    if (observer) {
+      observer.observe(video);
+    } else {
+      updatePlayback(video, true);
+    }
+  });
+
+  handleMotionChange();
+}
+
 function initVideoPlaceholders() {
   document.querySelectorAll(".video-wrapper").forEach(wrapper => {
     const img = wrapper.querySelector("img");
@@ -439,6 +509,7 @@ function getPreviewSrc(src) {
 }
 
 function showPreview(wrapper) {
+  if (PREFERS_REDUCED_MOTION.matches) return;
   const src = getPreviewSrc(wrapper.dataset.src);
   if (!src) return;
   let iframe = wrapper.querySelector(".preview-iframe");
@@ -457,6 +528,12 @@ function hidePreview(wrapper) {
   const iframe = wrapper.querySelector(".preview-iframe");
   if (iframe) iframe.remove();
 }
+
+PREFERS_REDUCED_MOTION.addEventListener("change", event => {
+  if (event.matches) {
+    document.querySelectorAll(".preview-iframe").forEach(iframe => iframe.remove());
+  }
+});
 
 const videoModalElement = document.getElementById("video-modal");
 if (videoModalElement) {
