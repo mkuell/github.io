@@ -558,6 +558,7 @@ body.nav-open {
 .cover-page {
     position: relative;
     min-height: calc(100vh - var(--nav-height));
+    background: #000 url('assets/images/MK_clay.jpg') center center / cover no-repeat;
     overflow: hidden;
     display: flex;
     justify-content: center;
@@ -576,6 +577,11 @@ body.nav-open {
     z-index: -1;
     transform: translate(-50%, -50%);
     background-size: cover;
+}
+
+.background-video.is-motion-reduced {
+    opacity: 0;
+    visibility: hidden;
 }
 
 .hero {
@@ -1012,6 +1018,12 @@ body.nav-open {
     animation: fadeInOverlay 2.5s ease-in-out forwards;
 }
 
+@media (prefers-reduced-motion: reduce) {
+    .background-video {
+        display: none;
+    }
+}
+
 #contact .background-video {
     position: absolute;
     top: 50%;
@@ -1042,6 +1054,41 @@ body.nav-open {
     gap: 1rem;
     max-width: 600px;
     margin: 0 auto;
+}
+
+.form-status {
+    margin-top: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.form-status--success {
+    background-color: #e7f7ed;
+    color: #1b5e20;
+    border: 1px solid #1b5e20;
+}
+
+.form-status--error {
+    background-color: #fff0f0;
+    color: #b71c1c;
+    border: 1px solid #b71c1c;
+}
+
+.field-error {
+    color: #b71c1c;
+    font-size: 0.95rem;
+    margin-top: 0.35rem;
+}
+
+.input-error {
+    border-color: #b71c1c;
+    box-shadow: 0 0 0 2px rgba(183, 28, 28, 0.12);
+}
+
+.form-noscript {
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
 }
 
 .contact-row {

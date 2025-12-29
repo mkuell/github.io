@@ -1,5 +1,6 @@
 const MODAL_VIEWPORT_RATIO = 0.9;
 const MOBILE_NAV_QUERY = window.matchMedia("(max-width: 768px)");
+const PREFERS_REDUCED_MOTION = window.matchMedia("(prefers-reduced-motion: reduce)");
 let lastFocusedElement = null;
 let modalFocusTrap = null;
 
@@ -29,37 +30,154 @@ document.addEventListener("DOMContentLoaded", () => {
 
   initVideoPlaceholders();
   initDisclosures();
+  initBackgroundVideos();
 
   // Contact form handler (if exists)
-  const contactForm = document.getElementById("contact-form");
-  const successMsg = document.getElementById("success-msg");
-  if (contactForm) {
-    contactForm.addEventListener("submit", async e => {
-      e.preventDefault();
-      const data = Object.fromEntries(new FormData(contactForm).entries());
-      try {
-        const resp = await fetch(contactForm.action, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data)
-        });
-        const json = await resp.json();
-        if (resp.ok && json && json.success) {
-          contactForm.reset();
-          if (successMsg) successMsg.hidden = false;
-        } else {
-          alert("Sorry, there was a problem sending your message. Please try again later.");
-        }
-      } catch (err) {
-        alert("Sorry, there was a problem sending your message. Please try again later.");
-      }
-    });
-  }
+  initContactForm();
 });
 
 const navToggle = document.querySelector(".nav-toggle");
 const navList = document.querySelector(".nav-list");
 const navLinks = document.querySelectorAll(".nav-list a");
+
+function initContactForm() {
+  const contactForm = document.getElementById("contact-form");
+  const successMsg = document.getElementById("success-msg");
+  const formStatus = document.getElementById("form-status");
+  const submitButton = contactForm?.querySelector("button[type='submit']");
+  if (!contactForm || typeof fetch !== "function") return;
+
+  contactForm.noValidate = true;
+  let allowNativeSubmit = false;
+
+  contactForm.addEventListener("submit", async e => {
+    if (allowNativeSubmit) return;
+    e.preventDefault();
+    clearStatus(formStatus, successMsg);
+
+    const validation = validateContactForm(contactForm);
+    if (!validation.valid) {
+      if (formStatus) {
+        setStatus(formStatus, "Please fix the highlighted fields and try again.", "error");
+      }
+      validation.firstInvalid?.focus();
+      return;
+    }
+
+    const data = Object.fromEntries(new FormData(contactForm).entries());
+    toggleSubmitState(submitButton, true);
+
+    try {
+      const resp = await fetch(contactForm.action, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+      const contentType = resp.headers.get("content-type") || "";
+      const isJson = contentType.includes("application/json");
+      const json = isJson ? await resp.json().catch(() => null) : null;
+      const succeeded = resp.ok && (json?.success !== false);
+
+      if (succeeded) {
+        contactForm.reset();
+        if (successMsg) successMsg.hidden = false;
+        setStatus(formStatus, "Thanks! I’ll be in touch soon.", "success");
+      } else {
+        setStatus(formStatus, "Sorry, there was a problem sending your message. Please try again later or email michael@michaelkuell.com.", "error");
+      }
+    } catch (err) {
+      setStatus(formStatus, "We’re having trouble sending your message. Submitting using a secure page load...", "error");
+      allowNativeSubmit = true;
+      contactForm.submit();
+      return;
+    } finally {
+      toggleSubmitState(submitButton, false);
+    }
+  });
+}
+
+function validateContactForm(form) {
+  const fields = {
+    name: form.elements.namedItem("name"),
+    email: form.elements.namedItem("email"),
+    phone: form.elements.namedItem("phone"),
+    message: form.elements.namedItem("message")
+  };
+
+  const errors = {};
+  const nameVal = fields.name?.value.trim() || "";
+  const emailVal = fields.email?.value.trim() || "";
+  const phoneVal = fields.phone?.value.trim() || "";
+  const messageVal = fields.message?.value.trim() || "";
+
+  if (!nameVal || nameVal.length < 2) {
+    errors.name = "Please enter your name (at least 2 characters).";
+  }
+
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailVal || !emailPattern.test(emailVal)) {
+    errors.email = "Enter a valid email so I can reach you.";
+  }
+
+  if (phoneVal && !/[\d\s()+-]{7,}/.test(phoneVal)) {
+    errors.phone = "Phone numbers should include at least 7 digits.";
+  }
+
+  if (!messageVal || messageVal.length < 10) {
+    errors.message = "Please include a short description (10+ characters).";
+  }
+
+  const errorOrder = ["name", "email", "phone", "message"];
+  let firstInvalid = null;
+  errorOrder.forEach(key => {
+    const field = fields[key];
+    const errorMsg = errors[key];
+    setFieldError(field, errorMsg);
+    if (!firstInvalid && errorMsg && field) firstInvalid = field;
+  });
+
+  return { valid: Object.keys(errors).length === 0, firstInvalid };
+}
+
+function setFieldError(field, message) {
+  if (!field) return;
+  const errorElId = field.getAttribute("aria-describedby");
+  const errorEl = errorElId ? document.getElementById(errorElId) : null;
+  field.classList.toggle("input-error", Boolean(message));
+  field.setAttribute("aria-invalid", message ? "true" : "false");
+  if (errorEl) {
+    errorEl.textContent = message || "";
+    errorEl.hidden = !message;
+  }
+}
+
+function setStatus(statusEl, message, type = "info") {
+  if (!statusEl) return;
+  statusEl.textContent = message;
+  statusEl.hidden = false;
+  statusEl.className = `form-status form-status--${type}`;
+}
+
+function clearStatus(statusEl, successMsg) {
+  if (statusEl) {
+    statusEl.hidden = true;
+    statusEl.textContent = "";
+    statusEl.className = "form-status";
+  }
+  if (successMsg) successMsg.hidden = true;
+}
+
+function toggleSubmitState(button, isSubmitting) {
+  if (!button) return;
+  button.disabled = isSubmitting;
+  button.setAttribute("aria-busy", String(isSubmitting));
+  if (isSubmitting) {
+    button.dataset.originalText = button.dataset.originalText || button.textContent;
+    button.textContent = "Sending…";
+  } else if (button.dataset.originalText) {
+    button.textContent = button.dataset.originalText;
+  }
+}
 
 function setNavVisibility(visible) {
   if (!navList) return;
@@ -187,6 +305,74 @@ function focusDisclosureContent(target) {
   if (needsCleanup) {
     target.addEventListener("blur", () => target.removeAttribute("tabindex"), { once: true });
   }
+}
+
+function initBackgroundVideos() {
+  const videos = Array.from(document.querySelectorAll(".background-video"));
+  if (videos.length === 0) return;
+
+  const observerSupported = typeof IntersectionObserver === "function";
+  const loadSources = video => {
+    if (video.dataset.sourcesLoaded === "true") return;
+    video.querySelectorAll("source[data-src]").forEach(source => {
+      if (!source.src) source.src = source.dataset.src;
+    });
+    video.load();
+    video.dataset.sourcesLoaded = "true";
+  };
+
+  const pauseVideo = video => {
+    if (!video.paused) video.pause();
+    video.dataset.playing = "false";
+  };
+
+  const playVideo = video => {
+    video.dataset.playing = "true";
+    video.play().catch(() => {});
+  };
+
+  const updatePlayback = (video, isVisible) => {
+    const reduceMotion = PREFERS_REDUCED_MOTION.matches;
+    video.classList.toggle("is-motion-reduced", reduceMotion);
+    if (reduceMotion) {
+      pauseVideo(video);
+      return;
+    }
+    if (isVisible) {
+      loadSources(video);
+      playVideo(video);
+    } else {
+      pauseVideo(video);
+    }
+  };
+
+  const observer = observerSupported ? new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      const video = entry.target;
+      video.dataset.visible = String(entry.isIntersecting);
+      updatePlayback(video, entry.isIntersecting);
+    });
+  }, { threshold: 0.35 }) : null;
+
+  const handleMotionChange = () => {
+    videos.forEach(video => updatePlayback(video, video.dataset.visible === "true"));
+  };
+
+  PREFERS_REDUCED_MOTION.addEventListener("change", handleMotionChange);
+
+  videos.forEach(video => {
+    video.dataset.visible = "false";
+    if (!video.hasAttribute("preload")) {
+      video.preload = "none";
+    }
+    if (observer) {
+      observer.observe(video);
+    } else {
+      updatePlayback(video, true);
+    }
+  });
+
+  handleMotionChange();
 }
 
 function initVideoPlaceholders() {
@@ -323,6 +509,7 @@ function getPreviewSrc(src) {
 }
 
 function showPreview(wrapper) {
+  if (PREFERS_REDUCED_MOTION.matches) return;
   const src = getPreviewSrc(wrapper.dataset.src);
   if (!src) return;
   let iframe = wrapper.querySelector(".preview-iframe");
@@ -341,6 +528,12 @@ function hidePreview(wrapper) {
   const iframe = wrapper.querySelector(".preview-iframe");
   if (iframe) iframe.remove();
 }
+
+PREFERS_REDUCED_MOTION.addEventListener("change", event => {
+  if (event.matches) {
+    document.querySelectorAll(".preview-iframe").forEach(iframe => iframe.remove());
+  }
+});
 
 const videoModalElement = document.getElementById("video-modal");
 if (videoModalElement) {
