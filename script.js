@@ -28,17 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   initVideoPlaceholders();
-
-  document.querySelectorAll(".teaser-toggle").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const section = btn.closest("section, .testimonial, .bio-card");
-      const full = section.querySelector(".teaser-full");
-      const expanded = btn.getAttribute("aria-expanded") === "true";
-      full.classList.toggle("hidden");
-      btn.textContent = expanded ? "Read More" : "Show Less";
-      btn.setAttribute("aria-expanded", String(!expanded));
-    });
-  });
+  initDisclosures();
 
   // Contact form handler (if exists)
   const contactForm = document.getElementById("contact-form");
@@ -75,11 +65,6 @@ function setNavVisibility(visible) {
   if (!navList) return;
   navList.dataset.visible = visible ? "true" : "false";
   navList.setAttribute("aria-hidden", String(!visible));
-  if (!visible && MOBILE_NAV_QUERY.matches) {
-    navList.setAttribute("hidden", "");
-  } else {
-    navList.removeAttribute("hidden");
-  }
   if (visible) {
     navList.removeAttribute("inert");
   } else {
@@ -98,7 +83,6 @@ function syncNavToViewport() {
       navToggle.classList.remove("active");
       navToggle.textContent = "☰";
       navToggle.setAttribute("aria-expanded", "false");
-      navToggle.setAttribute("aria-label", "Open navigation menu");
     }
     document.body.classList.remove("nav-open");
   }
@@ -106,18 +90,13 @@ function syncNavToViewport() {
 
 if (navToggle && navList) {
   navToggle.setAttribute("aria-expanded", "false");
-  navToggle.setAttribute("aria-label", "Open navigation menu");
-  syncNavToViewport();
-  if (MOBILE_NAV_QUERY.matches) {
-    setNavVisibility(false);
-  }
+  setNavVisibility(false);
   navToggle.addEventListener("click", () => {
     const active = !navToggle.classList.contains("active");
     navToggle.classList.toggle("active", active);
     document.body.classList.toggle("nav-open", active);
     navToggle.textContent = active ? "✖️" : "☰";
     navToggle.setAttribute("aria-expanded", String(active));
-    navToggle.setAttribute("aria-label", active ? "Close navigation menu" : "Open navigation menu");
     setNavVisibility(active);
   });
   navLinks.forEach(link => {
@@ -132,6 +111,7 @@ if (navToggle && navList) {
     });
   });
   MOBILE_NAV_QUERY.addEventListener("change", syncNavToViewport);
+  syncNavToViewport();
 } else if (navList) {
   setNavVisibility(true);
 }
@@ -149,6 +129,64 @@ if (navLinks.length > 0) {
     });
   }, { threshold: 0.25 });
   sections.forEach(section => observer.observe(section));
+}
+
+function initDisclosures() {
+  document.querySelectorAll(".teaser-toggle").forEach(btn => {
+    const target = findDisclosureTarget(btn);
+    if (!target) return;
+    const expanded = btn.getAttribute("aria-expanded") === "true";
+    setDisclosureState(btn, target, expanded);
+    btn.addEventListener("click", () => {
+      const isExpanded = btn.getAttribute("aria-expanded") === "true";
+      setDisclosureState(btn, target, !isExpanded);
+      if (!isExpanded) {
+        focusDisclosureContent(target);
+      } else {
+        btn.focus();
+      }
+    });
+  });
+
+  document.querySelectorAll(".teaser-collapse-all").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const scope = btn.closest("section") || document;
+      scope.querySelectorAll(".teaser-toggle[aria-expanded='true']").forEach(toggle => {
+        const target = findDisclosureTarget(toggle);
+        if (target) setDisclosureState(toggle, target, false);
+      });
+      btn.setAttribute("aria-pressed", "true");
+      setTimeout(() => btn.removeAttribute("aria-pressed"), 250);
+    });
+  });
+}
+
+function findDisclosureTarget(btn) {
+  const controlledId = btn.getAttribute("aria-controls");
+  if (controlledId) return document.getElementById(controlledId);
+  const section = btn.closest(".testimonial-card, .bio-card, section");
+  return section?.querySelector(".teaser-full");
+}
+
+function setDisclosureState(btn, target, expanded) {
+  btn.setAttribute("aria-expanded", String(expanded));
+  btn.textContent = expanded ? "Show Less" : "Read More";
+  target.hidden = !expanded;
+  target.classList.toggle("hidden", !expanded);
+}
+
+function focusDisclosureContent(target) {
+  const focusable = target.querySelector("button, [href], input, select, textarea, [tabindex]:not([tabindex='-1'])");
+  if (focusable) {
+    focusable.focus();
+    return;
+  }
+  const needsCleanup = !target.hasAttribute("tabindex");
+  target.setAttribute("tabindex", "-1");
+  target.focus();
+  if (needsCleanup) {
+    target.addEventListener("blur", () => target.removeAttribute("tabindex"), { once: true });
+  }
 }
 
 function initVideoPlaceholders() {
@@ -195,7 +233,6 @@ function openModal(wrapper) {
   const container = modal.querySelector(".modal-video-container");
   const modalTitle = modal.querySelector("#video-modal-title");
   const closeButton = modal.querySelector(".modal-close");
-  if (!container) return;
   const src = `${wrapper.dataset.src}?autoplay=1`;
   const ratio = parseFloat(wrapper.style.getPropertyValue("--ratio")) || 16 / 9;
   const videoTitle = (wrapper.dataset.title || wrapper.querySelector(".video-title")?.textContent || "Video").trim();
@@ -308,24 +345,16 @@ function hidePreview(wrapper) {
   if (iframe) iframe.remove();
 }
 
-const modalRoot = document.getElementById("video-modal");
-const modalCloseButton = document.querySelector("#video-modal .modal-close");
-const modalContent = document.querySelector("#video-modal .modal-content");
-
-if (modalCloseButton) {
-  modalCloseButton.addEventListener("click", closeModal);
+const videoModalElement = document.getElementById("video-modal");
+if (videoModalElement) {
+  videoModalElement.setAttribute("aria-hidden", "true");
 }
 
-if (modalRoot) {
-  modalRoot.addEventListener("click", function(e) {
-    if (e.target === this) closeModal();
-  });
-}
-
-if (modalContent) {
-  modalContent.addEventListener("click", e => e.stopPropagation());
-}
-
+document.querySelector("#video-modal .modal-close").addEventListener("click", closeModal);
+document.getElementById("video-modal").addEventListener("click", function(e) {
+  if (e.target === this) closeModal();
+});
+document.querySelector("#video-modal .modal-content").addEventListener("click", e => e.stopPropagation());
 document.addEventListener("keydown", e => {
   const modal = document.getElementById("video-modal");
   if (e.key === "Escape" && modal && !modal.hidden) closeModal();
