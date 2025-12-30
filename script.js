@@ -415,6 +415,7 @@ function initVideoPlaceholders() {
 function openModal(wrapper) {
   hidePreview(wrapper);
   const modal = document.getElementById("video-modal");
+  if (!modal) return;
   const container = modal.querySelector(".modal-video-container");
   const modalTitle = modal.querySelector("#video-modal-title");
   const closeButton = modal.querySelector(".modal-close");
@@ -476,7 +477,9 @@ function openModal(wrapper) {
 
 function closeModal() {
   const modal = document.getElementById("video-modal");
+  if (!modal) return;
   const container = modal.querySelector(".modal-video-container");
+  if (!container) return;
   modal.hidden = true;
   modal.setAttribute("aria-hidden", "true");
   container.innerHTML = "";
