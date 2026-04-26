@@ -764,6 +764,11 @@ body.nav-open {
 }
 
 
+.bio-card .teaser-toggle {
+    margin-top: 0.5rem;
+}
+
+
 .testimonial-card {
     background-color: var(--color-muted-bg);
     padding: 2rem;
