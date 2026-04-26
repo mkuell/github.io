@@ -398,29 +398,21 @@ function initVideoPlaceholders() {
         });
       }
     }
-    const setRatio = () => {
-      const ratio = img.naturalWidth / img.naturalHeight;
-      if (ratio) wrapper.style.setProperty("--ratio", ratio);
-    };
-    img.complete ? setRatio() : img.addEventListener("load", setRatio);
     playBtn.addEventListener("click", e => {
       e.preventDefault();
       openModal(wrapper);
     });
-    wrapper.addEventListener("mouseenter", () => showPreview(wrapper));
-    wrapper.addEventListener("mouseleave", () => hidePreview(wrapper));
   });
 }
 
 function openModal(wrapper) {
-  hidePreview(wrapper);
   const modal = document.getElementById("video-modal");
   const container = modal.querySelector(".modal-video-container");
   const modalTitle = modal.querySelector("#video-modal-title");
   const closeButton = modal.querySelector(".modal-close");
   const src = `${wrapper.dataset.src}?autoplay=1`;
-  const ratio = parseFloat(wrapper.style.getPropertyValue("--ratio")) || 16 / 9;
-  const videoTitle = (wrapper.dataset.title || wrapper.querySelector(".video-title")?.textContent || "Video").trim();
+  const ratio = 16 / 9;
+  const videoTitle = (wrapper.dataset.title || "Video").trim();
   let w = MODAL_VIEWPORT_RATIO * window.innerWidth,
       h = w / ratio;
   if (h > MODAL_VIEWPORT_RATIO * window.innerHeight) {
@@ -497,44 +489,6 @@ function closeModal() {
   lastFocusedElement = null;
 }
 
-function getPreviewSrc(src) {
-  if (!src) return "";
-  if (src.includes("youtube")) {
-    const match = src.match(/embed\/(.*?)(\?|$)/);
-    const id = match ? match[1] : "";
-    return id ? `https://www.youtube.com/embed/${id}?autoplay=1&mute=1&controls=0&loop=1&start=0&end=2&playlist=${id}` : "";
-  }
-  if (src.includes("vimeo")) return `${src}?autoplay=1&muted=1&loop=1#t=0,2`;
-  return "";
-}
-
-function showPreview(wrapper) {
-  if (PREFERS_REDUCED_MOTION.matches) return;
-  const src = getPreviewSrc(wrapper.dataset.src);
-  if (!src) return;
-  let iframe = wrapper.querySelector(".preview-iframe");
-  if (!iframe) {
-    iframe = document.createElement("iframe");
-    iframe.className = "preview-iframe";
-    iframe.setAttribute("aria-hidden", "true");
-    iframe.setAttribute("tabindex", "-1");
-    iframe.allow = "autoplay; muted";
-    wrapper.appendChild(iframe);
-  }
-  iframe.src = src;
-}
-
-function hidePreview(wrapper) {
-  const iframe = wrapper.querySelector(".preview-iframe");
-  if (iframe) iframe.remove();
-}
-
-PREFERS_REDUCED_MOTION.addEventListener("change", event => {
-  if (event.matches) {
-    document.querySelectorAll(".preview-iframe").forEach(iframe => iframe.remove());
-  }
-});
-
 const videoModalElement = document.getElementById("video-modal");
 if (videoModalElement) {
   videoModalElement.setAttribute("aria-hidden", "true");
@@ -563,4 +517,3 @@ function escapeHtml(text) {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
 }
-
