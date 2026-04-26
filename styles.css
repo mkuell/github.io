@@ -316,15 +316,6 @@ body.nav-open {
     margin: 0;
 }
 
-.work-card__eyebrow {
-    margin: 0;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-accent);
-}
-
 .work-card__actions {
     display: flex;
     flex-wrap: wrap;
