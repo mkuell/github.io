@@ -764,6 +764,11 @@ body.nav-open {
 }
 
 
+.bio-card .teaser-toggle {
+    margin-top: 0.5rem;
+}
+
+
 .testimonial-card {
     background-color: var(--color-muted-bg);
     padding: 2rem;
@@ -885,6 +890,10 @@ body.nav-open {
     overflow: hidden;
 }
 
+.bio-section > div {
+    width: min(1200px, 100%);
+}
+
 .bio-section::before {
     content: '';
     position: absolute;
@@ -904,6 +913,7 @@ body.nav-open {
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: calc(var(--space-unit) * 2);
     max-width: 1200px;
+    width: 100%;
     margin: 0 auto;
     padding: 2rem;
 }
@@ -917,7 +927,7 @@ body.nav-open {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.bio-card h2 {
+.bio-card h3 {
     font-size: 1.8rem;
     margin-bottom: 0.8rem;
     color: var(--color-text);
@@ -979,7 +989,7 @@ body.nav-open {
     .bio-card {
         padding: 1.5rem;
     }
-    .bio-card h2 {
+    .bio-card h3 {
         font-size: 1.4rem;
     }
     .bio-card p, .bio-card ul {

@@ -281,14 +281,18 @@ function initDisclosures() {
 
 function findDisclosureTarget(btn) {
   const controlledId = btn.getAttribute("aria-controls");
-  if (controlledId) return document.getElementById(controlledId);
+  if (controlledId) {
+    const controlledEl = document.getElementById(controlledId);
+    if (!controlledEl) return null;
+    return controlledEl.classList.contains("teaser-full") ? controlledEl : controlledEl.closest(".teaser-full");
+  }
   const section = btn.closest(".testimonial-card, .bio-card, section");
   return section?.querySelector(".teaser-full");
 }
 
 function setDisclosureState(btn, target, expanded) {
   btn.setAttribute("aria-expanded", String(expanded));
-  btn.textContent = expanded ? "Show Less" : "Read More";
+  btn.textContent = expanded ? "Read Less" : "Read More";
   target.hidden = !expanded;
   target.classList.toggle("hidden", !expanded);
 }
