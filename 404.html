@@ -1,18 +1,33 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 - Page Not Found</title>
+    <meta name="robots" content="noindex">
+    <title>404 — Page Not Found | Michael Kuell</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+      .error-page {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: calc(var(--space-unit) * 5) var(--space-unit);
+        text-align: center;
+      }
+      .error-page p { margin-top: 1rem; }
+      .error-page a { color: var(--color-accent); }
+    </style>
 </head>
 <body class="loaded">
-    <header>
-        <h1>Oops! Page Not Found</h1>
-        <p>    💾💾💾💾💾 💾   Bummer.  💾💾💾💾💾💾 Please check the <strong>URL</strong> or go back to the <a href="/">home page</a>.</p>
-    </header>
-    <footer>
-        <p>&copy; 2025 Michael Kuell. All rights reserved.</p>
+    <main id="main-content" class="error-page">
+        <h1>Page not found</h1>
+        <p>The page you’re looking for doesn’t exist or has moved.</p>
+        <p><a href="/">← Return to the homepage</a></p>
+    </main>
+    <footer class="site-footer">
+        <p>&copy; <span id="current-year"></span> Michael Kuell</p>
     </footer>
+    <script>
+      document.getElementById("current-year").textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>

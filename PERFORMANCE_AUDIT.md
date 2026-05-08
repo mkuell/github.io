@@ -1,41 +1,59 @@
-# Performance and Accessibility Audit
+# Performance and Accessibility Notes
 
-This document outlines improvements made to optimize load times and accessibility.
+This document describes what's actually shipped and what's available as tooling. Keep it honest — update it when reality changes.
 
-## Automated Audits
+## Currently shipped in production
 
-`npm run audit` will run Lighthouse and axe-core against a local development server. Both tools require Chrome to be available in the environment.
+- **Lazy loading on images** — divider SVGs and YouTube/Vimeo thumbnails use `loading="lazy"`.
+- **Deferred background-video loading** — IntersectionObserver in `script.js` loads video sources only when each `<video>` enters the viewport, and pauses when it leaves.
+- **Reduced-motion handling for videos** — `prefers-reduced-motion` pauses background videos and hides them via CSS.
+- **Hero video uses `preload="metadata"`** — does not pre-download the full ~20 MB clip on first paint.
+- **Keyboard-accessible video modal** — focus trap, Escape to close, focus restored on close.
+- **Disclosure pattern for "Read More"** — `aria-expanded`, `aria-controls`, focus moved to revealed content.
+- **`prefers-reduced-motion` is checked for background videos**, but `html { scroll-behavior: smooth }` and AOS animations are not yet gated on the preference.
+
+## Available but NOT currently shipped
+
+- **Minification** — `npm run build` produces `styles.min.css` and `script.min.js` via PurgeCSS, clean-css, and terser. **Production currently references the unminified `styles.css` and `script.js`** because GitHub Pages has no build step and the workflow trap (forgetting to rebuild before push) outweighs the ~5–8 KB gzipped wire savings for this site's traffic. The `.min` files are gitignored as build artifacts. To wire them up later, either add a GitHub Action that builds on push and commits the result, or run `npm run build` manually before each deploy and ship the artifacts.
+- **Critical CSS inlining** — not done. The above-the-fold styles ship in the main stylesheet via a normal blocking `<link>`.
+- **Font preloading** — fonts are loaded via Google Fonts `<link>` with `preconnect` hints, not preloaded.
+
+## Bigger fish than minification
+
+The largest remaining wins, ranked by byte savings:
+
+1. **`assets/images/MK_background.jpg` (882 KB)** is used as a `background-image` twice (`#bio`, `#contact`) with `background-attachment: fixed`. Convert to `.webp`/`.avif` (~60 KB) and consider dropping `fixed` on small screens — `fixed` forces full-area repaints on scroll.
+2. **`assets/images/MK_clay.jpg` (229 KB)** — hero poster. Compress to ~80 KB as `.webp`.
+3. **Self-host AOS** — currently loaded from `unpkg.com`, costing a fresh DNS lookup + TLS handshake. AOS is ~14 KB; bundle it into the repo.
+4. **Background videos (~20 MB each, two clips)** — re-encode at lower bitrate. A 1080p hero loop should be 3–5 MB, not 20 MB. Consider serving a much smaller mobile-specific clip via `<source media="...">`.
+
+## Tooling
 
 ```bash
+# Run a local server
+npx http-server -p 8080
+
+# Lighthouse + axe (requires Chrome)
 npm run audit
+
+# HTML validation
+npm test
+
+# Puppeteer feature checks
+npm run test:puppeteer
+
+# Technical audit (custom)
+npm run audit:technical
+
+# Build the (currently unshipped) min files
+npm run build
 ```
 
-If Chrome is not installed, the script will fail with a message similar to *Unable to connect to Chrome*.
+## Manual checks performed
 
-## Key Fixes Implemented
-
-- **Lazy Loading** – all decorative divider images and dynamically created video iframes now include `loading="lazy"`.
-- **Critical CSS** – small above-the-fold styles are inlined; main stylesheet is loaded with `media="print"` trick and preloaded to avoid render blocking.
-- **Minified Assets** – created `styles.min.css` and `script.min.js` and updated HTML pages to use the minified versions. Fonts and scripts are preloaded for faster fetch.
-- **Deferred Scripts** – third-party libraries and custom scripts now load with `defer` to prevent blocking rendering.
-
-## Manual Checks
-
-Keyboard navigation was tested for all major interactive components. The video modal and accordion announce state changes via ARIA attributes and provide focus outlines.
-
-## Running Audits Locally
-
-1. Install dependencies:
-   ```bash
-   npm install
-   ```
-2. Start a local server:
-   ```bash
-   npx http-server -p 8080
-   ```
-3. In another terminal, run:
-   ```bash
-   npm run audit
-   ```
-
-The resulting Lighthouse and axe reports provide metrics for First Contentful Paint, Largest Contentful Paint, cumulative layout shift, and accessibility violations.
+Keyboard navigation has been verified for:
+- Skip-to-main link
+- Site nav (open, close, ESC, focus retention)
+- Video modal (open, focus trap, ESC, close, focus restoration)
+- Disclosure toggles (Read More / Read Less)
+- Contact form (validation, error focus, submission state)

@@ -9,6 +9,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const yearEl = document.getElementById("current-year");
   if (yearEl) yearEl.textContent = (new Date).getFullYear();
 
+  const ts = document.getElementById("form-timestamp");
+  if (ts) ts.value = String(Date.now());
+
   // Choose correct logo selector
   const logo = document.getElementById("logo-link") || document.querySelector(".logo");
   if (logo) {
@@ -29,7 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   initVideoPlaceholders();
-  initDisclosures();
   initBackgroundVideos();
 
   // Contact form handler (if exists)
@@ -47,7 +49,6 @@ function initContactForm() {
   const submitButton = contactForm?.querySelector("button[type='submit']");
   if (!contactForm || typeof fetch !== "function") return;
 
-  contactForm.noValidate = true;
   let allowNativeSubmit = false;
 
   contactForm.addEventListener("submit", async e => {
@@ -249,68 +250,6 @@ if (navLinks.length > 0) {
   sections.forEach(section => observer.observe(section));
 }
 
-function initDisclosures() {
-  document.querySelectorAll(".teaser-toggle").forEach(btn => {
-    const target = findDisclosureTarget(btn);
-    if (!target) return;
-    const expanded = btn.getAttribute("aria-expanded") === "true";
-    setDisclosureState(btn, target, expanded);
-    btn.addEventListener("click", () => {
-      const isExpanded = btn.getAttribute("aria-expanded") === "true";
-      setDisclosureState(btn, target, !isExpanded);
-      if (!isExpanded) {
-        focusDisclosureContent(target);
-      } else {
-        btn.focus();
-      }
-    });
-  });
-
-  document.querySelectorAll(".teaser-collapse-all").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const scope = btn.closest("section") || document;
-      scope.querySelectorAll(".teaser-toggle[aria-expanded='true']").forEach(toggle => {
-        const target = findDisclosureTarget(toggle);
-        if (target) setDisclosureState(toggle, target, false);
-      });
-      btn.setAttribute("aria-pressed", "true");
-      setTimeout(() => btn.removeAttribute("aria-pressed"), 250);
-    });
-  });
-}
-
-function findDisclosureTarget(btn) {
-  const controlledId = btn.getAttribute("aria-controls");
-  if (controlledId) {
-    const controlledEl = document.getElementById(controlledId);
-    if (!controlledEl) return null;
-    return controlledEl.classList.contains("teaser-full") ? controlledEl : controlledEl.closest(".teaser-full");
-  }
-  const section = btn.closest(".testimonial-card, .bio-card, section");
-  return section?.querySelector(".teaser-full");
-}
-
-function setDisclosureState(btn, target, expanded) {
-  btn.setAttribute("aria-expanded", String(expanded));
-  btn.textContent = expanded ? "Read Less" : "Read More";
-  target.hidden = !expanded;
-  target.classList.toggle("hidden", !expanded);
-}
-
-function focusDisclosureContent(target) {
-  const focusable = target.querySelector("button, [href], input, select, textarea, [tabindex]:not([tabindex='-1'])");
-  if (focusable) {
-    focusable.focus();
-    return;
-  }
-  const needsCleanup = !target.hasAttribute("tabindex");
-  target.setAttribute("tabindex", "-1");
-  target.focus();
-  if (needsCleanup) {
-    target.addEventListener("blur", () => target.removeAttribute("tabindex"), { once: true });
-  }
-}
-
 function initBackgroundVideos() {
   const videos = Array.from(document.querySelectorAll(".background-video"));
   if (videos.length === 0) return;
@@ -390,16 +329,6 @@ function initVideoPlaceholders() {
       const captionTitle = card.querySelector(".work-card__title");
       if (title && captionTitle && !captionTitle.textContent.trim()) {
         captionTitle.textContent = title;
-      }
-      const cardButton = card.querySelector(".work-card__cta");
-      if (cardButton) {
-        const buttonLabel = title ? `Play ${title}` : "Play video";
-        cardButton.setAttribute("aria-label", buttonLabel);
-        cardButton.textContent = title ? `Watch “${title}”` : "Watch video";
-        cardButton.addEventListener("click", e => {
-          e.preventDefault();
-          openModal(wrapper);
-        });
       }
     }
     playBtn.addEventListener("click", e => {
@@ -496,17 +425,15 @@ function closeModal() {
 const videoModalElement = document.getElementById("video-modal");
 if (videoModalElement) {
   videoModalElement.setAttribute("aria-hidden", "true");
+  videoModalElement.querySelector(".modal-close")?.addEventListener("click", closeModal);
+  videoModalElement.addEventListener("click", e => {
+    if (e.target === videoModalElement) closeModal();
+  });
+  videoModalElement.querySelector(".modal-content")?.addEventListener("click", e => e.stopPropagation());
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape" && !videoModalElement.hidden) closeModal();
+  });
 }
-
-document.querySelector("#video-modal .modal-close").addEventListener("click", closeModal);
-document.getElementById("video-modal").addEventListener("click", function(e) {
-  if (e.target === this) closeModal();
-});
-document.querySelector("#video-modal .modal-content").addEventListener("click", e => e.stopPropagation());
-document.addEventListener("keydown", e => {
-  const modal = document.getElementById("video-modal");
-  if (e.key === "Escape" && modal && !modal.hidden) closeModal();
-});
 
 function getFocusableElements(container) {
   return Array.from(container.querySelectorAll('a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'))
