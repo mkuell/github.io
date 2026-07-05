@@ -10,5 +10,6 @@ jobs:
         with:
           node-version: '20.x'
       - run: npm ci
+      - run: npx browser-driver-manager install chrome
       - run: npx http-server -p 8080 &
       - run: npm run audit
