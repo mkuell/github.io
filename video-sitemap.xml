@@ -4,6 +4,22 @@
   <url>
     <loc>https://michaelkuell.com/</loc>
     <video:video>
+      <video:player_loc>https://www.youtube-nocookie.com/embed/zZLAUAPX044</video:player_loc>
+      <video:thumbnail_loc>https://img.youtube.com/vi/zZLAUAPX044/hqdefault.jpg</video:thumbnail_loc>
+      <video:title>AI Sizzle Reel</video:title>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://michaelkuell.com/</loc>
+    <video:video>
+      <video:player_loc>https://www.youtube-nocookie.com/embed/ABl3Gv-LD64</video:player_loc>
+      <video:thumbnail_loc>https://img.youtube.com/vi/ABl3Gv-LD64/hqdefault.jpg</video:thumbnail_loc>
+      <video:title>Interviews : Capturing Authentic Expertise</video:title>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://michaelkuell.com/</loc>
+    <video:video>
       <video:player_loc>https://player.vimeo.com/video/1078827186</video:player_loc>
       <video:thumbnail_loc>https://vumbnail.com/1078827186.jpg</video:thumbnail_loc>
       <video:title>A Ronin Story</video:title>
@@ -31,6 +47,14 @@
       <video:player_loc>https://player.vimeo.com/video/231089330</video:player_loc>
       <video:thumbnail_loc>https://vumbnail.com/231089330.jpg</video:thumbnail_loc>
       <video:title>Bear Spot Farm Project</video:title>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://michaelkuell.com/</loc>
+    <video:video>
+      <video:player_loc>https://www.youtube-nocookie.com/embed/fYFGi8RpYJ0</video:player_loc>
+      <video:thumbnail_loc>https://img.youtube.com/vi/fYFGi8RpYJ0/hqdefault.jpg</video:thumbnail_loc>
+      <video:title>Orvis Spec Ad :Abby</video:title>
     </video:video>
   </url>
   <url>

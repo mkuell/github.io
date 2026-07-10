@@ -25,7 +25,9 @@ function extractFromFile(filePath, baseUrl) {
   const dom = new JSDOM(html);
   const document = dom.window.document;
 
-  const wrappers = Array.from(document.querySelectorAll('[data-src^="https://player.vimeo.com/video/"]'));
+  const wrappers = Array.from(document.querySelectorAll(
+    '[data-src^="https://player.vimeo.com/video/"], [data-src^="https://www.youtube-nocookie.com/embed/"], [data-src^="https://www.youtube.com/embed/"]'
+  ));
   return wrappers.map(wrapper => {
     const playerUrl = wrapper.getAttribute('data-src');
     const img = wrapper.querySelector('img');
