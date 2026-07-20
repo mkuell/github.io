@@ -301,7 +301,11 @@ function initBackgroundVideos() {
     videos.forEach(video => updatePlayback(video, video.dataset.visible === "true"));
   };
 
-  PREFERS_REDUCED_MOTION.addEventListener("change", handleMotionChange);
+  if (typeof PREFERS_REDUCED_MOTION.addEventListener === "function") {
+    PREFERS_REDUCED_MOTION.addEventListener("change", handleMotionChange);
+  } else if (typeof PREFERS_REDUCED_MOTION.addListener === "function") {
+    PREFERS_REDUCED_MOTION.addListener(handleMotionChange);
+  }
 
   videos.forEach(video => {
     video.dataset.visible = "false";
@@ -343,7 +347,7 @@ function openModal(wrapper) {
   const container = modal.querySelector(".modal-video-container");
   const modalTitle = modal.querySelector("#video-modal-title");
   const closeButton = modal.querySelector(".modal-close");
-  const src = `${wrapper.dataset.src}?autoplay=1`;
+  const src = buildAutoplayUrl(wrapper.dataset.src);
   const ratio = 16 / 9;
   const videoTitle = (wrapper.dataset.title || "Video").trim();
   let w = MODAL_VIEWPORT_RATIO * window.innerWidth,
@@ -447,4 +451,15 @@ function escapeHtml(text) {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
+}
+
+function buildAutoplayUrl(src) {
+  try {
+    const url = new URL(src, window.location.href);
+    url.searchParams.set("autoplay", "1");
+    return url.toString();
+  } catch (err) {
+    const separator = String(src).includes("?") ? "&" : "?";
+    return `${src}${separator}autoplay=1`;
+  }
 }
