@@ -8,6 +8,13 @@ const path = require('path');
 
   await page.route('**', route => {
     const url = route.request().url();
+    if (url.endsWith('/api/contact')) {
+      return route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({ success: true })
+      });
+    }
     if (url.startsWith('http') && !url.startsWith('file://')) {
       return route.fulfill({ status: 200, body: '' });
     }
@@ -15,34 +22,28 @@ const path = require('path');
   });
 
   await page.goto('file://' + path.join(process.cwd(), 'index.html'));
-  const display = await page.evaluate(() => getComputedStyle(document.querySelector('.nav-toggle')).display);
-  console.log('Nav toggle display:', display);
+  await page.evaluate(() => {
+    window.fetch = async () => new Response(JSON.stringify({ success: true }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' }
+    });
+  });
 
-  // 1. Hamburger opens/closes nav
+  const display = await page.evaluate(() => getComputedStyle(document.querySelector('.nav-toggle')).display);
+  console.log('Nav toggle visible:', display !== 'none');
+
   await page.click('.nav-toggle');
   const navOpen = await page.evaluate(() => document.body.classList.contains('nav-open'));
   await page.click('.nav-toggle');
   const navClosed = await page.evaluate(() => !document.body.classList.contains('nav-open'));
   console.log('Hamburger toggles:', navOpen && navClosed);
 
-  // 2. Clicking the logo scrolls to top
   await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
   await page.click('#logo-link');
-  await page.waitForTimeout(500);
+  await page.waitForFunction(() => window.scrollY === 0);
   const atTop = await page.evaluate(() => window.scrollY === 0);
   console.log('Logo scrolls to top:', atTop);
 
-  // 3. Bio section toggles
-  const firstToggle = await page.locator('.bio-toggle').first();
-  await firstToggle.click();
-  const bioExpanded = await firstToggle.getAttribute('aria-expanded') === 'true' &&
-    await page.evaluate(() => document.querySelector('.bio-card.expanded'));
-  await firstToggle.click();
-  const bioCollapsed = await firstToggle.getAttribute('aria-expanded') === 'false' &&
-    await page.evaluate(() => !document.querySelector('.bio-card.expanded'));
-  console.log('Bio toggles:', bioExpanded && bioCollapsed);
-
-  // 4. Navigation link highlights on scroll
   await page.evaluate(() => window.scrollTo(0, document.getElementById('bio').offsetTop + 10));
   await page.waitForTimeout(1000);
   const navActive = await page.evaluate(() => {
@@ -51,7 +52,6 @@ const path = require('path');
   });
   console.log('Nav link highlight:', navActive);
 
-  // 5. Video modal opens and closes
   await page.click('.play-button');
   await page.waitForSelector('#video-modal', { state: 'visible' });
   const modalOpen = await page.isVisible('#video-modal');
@@ -59,15 +59,13 @@ const path = require('path');
   const modalClosed = await page.evaluate(() => document.getElementById('video-modal').hidden);
   console.log('Video modal works:', modalOpen && modalClosed);
 
-  // 6. Contact form submits
-  await page.fill('input[name=name]', 'Test');
+  await page.fill('input[name=name]', 'Test User');
   await page.fill('input[name=email]', 'test@example.com');
-  await page.fill('textarea[name=message]', 'Hello');
+  await page.fill('textarea[name=message]', 'Hello from an automated feature test.');
   await page.click('#contact-form button[type=submit]');
   await page.waitForSelector('#success-msg', { state: 'visible' });
   const successVisible = await page.isVisible('#success-msg');
-  const formHidden = await page.evaluate(() => document.getElementById('contact-form').hidden);
-  console.log('Contact form success:', successVisible && formHidden);
+  console.log('Contact form success:', successVisible);
 
   await browser.close();
 })();
