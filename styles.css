@@ -98,11 +98,17 @@ body {
     font-weight: 400;
     font-size: var(--font-base);
     line-height: var(--line-height);
-    /* Fade-in effect triggered when the `.loaded` class is added in script.js */
-    opacity: 0;
-    transition: opacity var(--transition-duration) ease,
-                background-color var(--transition-duration) ease,
+    /* CSS-only page fade-in. Ends at opacity:1 with no JS dependency,
+       so a blocked/failed script never leaves the page invisible. */
+    opacity: 1;
+    animation: page-fade-in var(--transition-duration) ease both;
+    transition: background-color var(--transition-duration) ease,
                 color var(--transition-duration) ease;
+}
+
+@keyframes page-fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
 
 .visually-hidden {
@@ -117,7 +123,8 @@ body {
     border: 0;
 }
 
-/* Final state once the page has loaded */
+/* Legacy hook — the CSS animation above already lands body at opacity:1
+   without JS. This kept as a harmless no-op backstop. */
 body.loaded {
     opacity: 1;
 }

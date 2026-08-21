@@ -5,7 +5,6 @@ let lastFocusedElement = null;
 let modalFocusTrap = null;
 
 document.addEventListener("DOMContentLoaded", () => {
-  document.body.classList.add("loaded");
   const yearEl = document.getElementById("current-year");
   if (yearEl) yearEl.textContent = (new Date).getFullYear();
 
