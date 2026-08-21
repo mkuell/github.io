@@ -199,7 +199,6 @@ function syncNavToViewport() {
     setNavVisibility(true);
     if (navToggle) {
       navToggle.classList.remove("active");
-      navToggle.textContent = "☰";
       navToggle.setAttribute("aria-expanded", "false");
     }
     document.body.classList.remove("nav-open");
@@ -213,7 +212,6 @@ if (navToggle && navList) {
     const active = !navToggle.classList.contains("active");
     navToggle.classList.toggle("active", active);
     document.body.classList.toggle("nav-open", active);
-    navToggle.textContent = active ? "✖️" : "☰";
     navToggle.setAttribute("aria-expanded", String(active));
     setNavVisibility(active);
   });
@@ -222,7 +220,6 @@ if (navToggle && navList) {
       if (MOBILE_NAV_QUERY.matches && navToggle.classList.contains("active")) {
         navToggle.classList.remove("active");
         document.body.classList.remove("nav-open");
-        navToggle.textContent = "☰";
         navToggle.setAttribute("aria-expanded", "false");
         setNavVisibility(false);
       }

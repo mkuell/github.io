@@ -110,7 +110,12 @@
 
             <!-- Mobile Navigation Toggle -->
             <button class="nav-toggle" aria-label="Toggle Navigation Menu" aria-controls="primary-navigation" aria-expanded="false">
-                ☰
+                <svg class="nav-toggle__icon nav-toggle__icon--open" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+                    <path d="M3 6h18M3 12h18M3 18h18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+                </svg>
+                <svg class="nav-toggle__icon nav-toggle__icon--close" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+                    <path d="M5 5l14 14M19 5L5 19" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+                </svg>
             </button>
 
             <!-- Navigation Links -->
@@ -420,7 +425,11 @@
     <div class="modal-content" role="document">
     <h2 id="video-modal-title" class="visually-hidden">Video player</h2>
     <div class="modal-video-container"></div>
-    <button class="modal-close" type="button" aria-label="Close video player">×</button>
+    <button class="modal-close" type="button" aria-label="Close video player">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+            <path d="M5 5l14 14M19 5L5 19" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/>
+        </svg>
+    </button>
     </div>
   </div>
 

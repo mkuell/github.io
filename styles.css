@@ -283,8 +283,25 @@ ul, ol {
     background: none;
     border: none;
     color: var(--color-text);
-    font-size: 1.5rem;
     cursor: pointer;
+    padding: 0.25rem;
+    line-height: 0;
+}
+
+.nav-toggle__icon {
+    display: block;
+}
+
+.nav-toggle__icon--close {
+    display: none;
+}
+
+.nav-toggle.active .nav-toggle__icon--open {
+    display: none;
+}
+
+.nav-toggle.active .nav-toggle__icon--close {
+    display: block;
 }
 
 /* Prevent background scrolling when mobile nav is open */
@@ -595,12 +612,13 @@ body.nav-open {
     background: transparent;
     border: none;
     color: var(--color-bg);
-    font-size: 1.5rem;
     cursor: pointer;
     min-width: 44px;
     min-height: 44px;
     padding: 0.5rem;
-    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Responsive Adjustments for Portfolio */
